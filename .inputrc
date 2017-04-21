@@ -1,1 +1,5 @@
+# Makes sure arrow keys work
+"\e[1;5C": forward-word   # ctrl + right
+"\e[1;5D": backward-word  # ctrl + left 
+
 set bell-style visible
