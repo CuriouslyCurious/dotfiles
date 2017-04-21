@@ -1,0 +1,14 @@
+#!/bin/bash
+volume=$(pamixer --get-volume)
+label=""
+if [ $volume -gt 50 ]; then
+	label=""
+else
+	label=""
+fi
+is_mute=$(pamixer --get-mute)
+if [ $is_mute = true ]; then
+	label=""
+	volume="0"
+fi
+echo "$label $volume%"

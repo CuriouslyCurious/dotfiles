@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/afs/ludd.ltu.se/users/c/curious/.config/dconf'
+let g:netrw_dirhist_2='/afs/ludd.ltu.se/users/c/curious/.config/gnome-session'
+let g:netrw_dirhist_3='/afs/ludd.ltu.se/users/c/curious/.config/gnome-session/saved-session'
+let g:netrw_dirhist_4='/afs/ludd.ltu.se/users/c/curious/.config/pulse'
+let g:netrw_dirhist_5='/afs/ludd.ltu.se/users/c/curious/yesterday/.config/xfce4/xfconf/xfce-perchannel-xml'
+let g:netrw_dirhist_6='/afs/ludd.ltu.se/users/c/curious/yesterday/.config/menus/applications-merged'
+let g:netrw_dirhist_7='/afs/ludd.ltu.se/users/c/curious/yesterday/.xinput.d'
+let g:netrw_dirhist_8='/afs/ludd.ltu.se/users/c/curious/.dircolors'
+let g:netrw_dirhist_9='/afs/ludd.ltu.se/users/c/curious/.i3'

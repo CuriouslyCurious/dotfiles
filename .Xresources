@@ -1,0 +1,151 @@
+! To reread your .Xresources file, and throw away your old resources:
+! xrdb ~/.Xresources
+! To reread your .Xresources file, and keep your old resources:
+! xrdb -merge ~/.Xresources
+
+! ----------------
+! Xft settings
+! ----------------
+Xft.antialias:             		true
+Xft.autohint:              		false
+Xft.hinting:               		true
+Xft.hintstyle:             		hintslight
+Xft.dpi:                   		96
+Xft.rgba:                  		rgb
+Xft.lcdfilter:             		lcdlight
+
+! ---------------
+! URxvt
+! ---------------
+URxvt.keysym.Control-Up:        \033[1;5A
+URxvt.keysym.Control-Down:      \033[1;5B
+URxvt.keysym.Control-Left:      \033[1;5D
+URxvt.keysym.Control-Right:     \033[1;5C
+
+
+URxvt*termName:            		rxvt-unicode-256color
+URxvt*loginShell:          		true
+URxvt*scrollBar:           		false
+URxvt.scrollStyle: 				plain
+URxvt.secondaryScroll: 			true
+URxvt*cursorBlink:         		true
+! URxvt*font:                 	xft:Hack:size=9:antialias=true
+! URxvt*font:                 	-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*
+URxvt*font:                     xft:DejaVuSansMono:size=10
+
+URxvt*saveLines:           		4096
+! URxvt.perl-ext-common: 			default,clipboard,url-select,keyboard-select
+! URxvt.url-select.launcher: 		firefox
+URxvt.url-select.underline: 	true
+URxvt.url-select.button: 		1
+URxvt*colorUL: 					yellow
+! URxvt*clipboard.copycmd:   		xsel -ib
+! URxvt*clipboard.pastecmd:  		xsel -0b
+! URxvt*letterSpace:         		-4
+
+URxvt*urlLLauncher:             firefox
+
+URxvt*transparent:              true
+URxvt*shading:                  15
+
+! Molokai
+! Source: https://github.com/aswen/dotfiles/blob/master/Xresources
+#define Molokai_black        #1B1D1E
+#define Molokai_red          #B60050
+#define Molokai_red2         #FF0000
+#define Molokai_green        #88BB22
+#define Molokai_brown        #C47F2C
+#define Molokai_blue         #30309B
+#define Molokai_purple       #7E40A5
+#define Molokai_cyan         #4699AF
+#define Molokai_light_grey   #9999AA
+#define Molokai_dark_grey    #303030
+#define Molokai_light_red    #F92672
+#define Molokai_light_green  #80FF00
+#define Molokai_yellow       #FFBA68
+#define Molokai_light_blue   #7070F0
+#define Molokai_light_purple #BB88DD
+#define Molokai_light_cyan   #66D9EF
+#define Molokai_white        #F8F8F2
+
+!URxvt Molokai
+!URxvt*background  : Molokai_black
+!URxvt*foreground  : Molokai_white
+!URxvt*cursorColor : Molokai_white
+!URxvt*color0      : Molokai_black
+!URxvt*color1      : Molokai_red
+!URxvt*color2      : Molokai_green
+!URxvt*color3      : Molokai_brown
+!URxvt*color4      : Molokai_blue
+!URxvt*color5      : Molokai_purple
+!URxvt*color6      : Molokai_cyan
+!URxvt*color7      : Molokai_light_grey
+!URxvt*color8      : Molokai_dark_grey
+!URxvt*color9      : Molokai_light_red
+!URxvt*color10     : Molokai_light_green
+!URxvt*color11     : Molokai_yellow
+!URxvt*color12     : Molokai_light_blue
+!URxvt*color13     : Molokai_light_purple
+!URxvt*color14     : Molokai_light_cyan
+!URxvt*color15     : Molokai_white
+
+
+! Molokai theme
+!urxvt*background: #101010
+!urxvt*foreground: #d0d0d0
+!urxvt*cursorColor: #d0d0d0
+!urxvt*color0: #101010
+!urxvt*color1: #960050
+!urxvt*color2: #66aa11
+!urxvt*color3: #c47f2c
+!urxvt*color4: #30309b
+!urxvt*color5: #7e40a5
+!urxvt*color6: #3579a8
+!urxvt*color7: #9999aa
+!urxvt*color8: #303030
+!urxvt*color9: #ff0090
+!urxvt*color10: #80ff00
+!urxvt*color11: #ffba68
+!urxvt*color12: #5f5fee
+!urxvt*color13: #bb88dd
+!urxvt*color14: #4eb4fa
+!urxvt*color15: #d0d0d0
+
+! Molokai from terminal.sexy
+! special
+*.foreground:   #f1ebeb
+*.background:   #272822
+*.cursorColor:  #f1ebeb
+
+! black
+*.color0:       #48483e
+*.color8:       #76715e
+
+! red
+*.color1:       #dc2566
+*.color9:       #fa2772
+
+! green
+*.color2:       #8fc029
+*.color10:      #a7e22e
+
+! yellow
+*.color3:       #d4c96e
+*.color11:      #e7db75
+
+! blue
+*.color4:       #55bcce
+*.color12:      #66d9ee
+
+! magenta
+*.color5:       #9358fe
+*.color13:      #ae82ff
+
+! cyan
+*.color6:       #56b7a5
+*.color14:      #66efd5
+
+! white
+*.color7:       #acada1
+*.color15:      #cfd0c2
+
