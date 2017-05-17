@@ -1,5 +1,3 @@
-export PATH="/afs/ludd.ltu.se/users/c/curious/local/bin:$PATH"
-
 #if [ "$TERM" != "dumb" ]; then
 #[ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
 #[ -e "$DIR_COLORS" ] || DIR_COLORS=""

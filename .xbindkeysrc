@@ -1,0 +1,16 @@
+# Volume control
+"amixer set Master 1dB+"
+    XF86AudioRaiseVolume
+
+"amixer set Master 1dB-"
+    XF86AudioLowerVolume
+
+"amixer set Master toggle"
+    XF86AudioMute
+
+# Brightness control
+"xbacklight -inc 5"
+    XF86MonBrightnessUp
+
+"xbacklight -dec 5"
+    XF86MonBrightnessDown
