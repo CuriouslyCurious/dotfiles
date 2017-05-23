@@ -37,6 +37,7 @@ let g:molokai_original=1
 " let g:rehash256=1
 "highlight Normal ctermfg=#F1EBEB ctermbg=#272822
 
+highlight Normal ctermbg=none
 highlight ColorColumn ctermbg=7
 highlight ColorColumn guibg=Gray
 set t_Co=256
