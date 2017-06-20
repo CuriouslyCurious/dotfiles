@@ -22,4 +22,5 @@ set bell-style none
 # Alias
 alias ls="ls --color=auto"
 alias i3lock="~/.i3/i3lock/lock.sh"
+alias vim="nvim"
 alias weather="curl http://wttr.in/lulea"
