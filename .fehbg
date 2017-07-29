@@ -1,0 +1,2 @@
+#!/bin/sh
+feh  --bg-scale '/home/curious/.config/wall.png' 
