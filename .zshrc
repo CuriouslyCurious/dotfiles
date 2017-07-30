@@ -19,8 +19,49 @@ esac
 
 set bell-style none
 
-# Alias
+# -- Antigen --
+source $HOME/.config/zsh/antigen.zsh
+
+antigen use oh-my-zsh
+# Default bundles
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load the theme.
+#antigen theme robbyrussell
+#antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-train
+#antigen theme https://github.com/halfo/lambda-mod-zsh-theme/ lambda-mod
+antigen theme https://github.com/denysdovhan/spaceship-zsh-theme spaceship
+
+# Tell Antigen that you're done.
+antigen apply
+# -- End Antigen --
+
+# Aliases #
+# Colors
 alias ls="ls --color=auto"
-alias i3lock="~/.i3/i3lock/lock.sh"
-alias vim="nvim"
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+# ls
+alias l="ls -la"
+alias la="ls -la"
+# Git
+alias ga="git add"
+alias gaa="git add -all"
+alias gc="git commit"
+alias gca="git commit -a"
+alias gp="git push"
+alias gpom="git push origin master"
+alias gb="git branch"
+# Programs
+alias pyxeledit="wine ~/.wine/drive_c/Program\ Files/PyxelEdit/PyxelEdit.exe"
+# Misc
 alias weather="curl http://wttr.in/lulea"
+alias vim="nvim"
+alias c="clear"
