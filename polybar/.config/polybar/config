@@ -39,11 +39,7 @@ monitor =
 
 modules-left = i3
 modules-center = 
-<<<<<<< HEAD:.config/polybar/config
-modules-right = wireless-network network volume backlight cpu temperature memory battery date powermenu 
-=======
 modules-right = wireless-network network volume backlight cpu memory battery date powermenu 
->>>>>>> laptop:home/.config/polybar/config
 width = 100%
 height = 25
 
