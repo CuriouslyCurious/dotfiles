@@ -1,0 +1,191 @@
+set $mod Mod4
+#font pango:Hack, FontAwesome 10
+#font '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*', FontAwesome 10
+
+font pango:DejaVu Sans Mono 10, FontAwesome 10
+
+floating_modifier $mod
+bindsym $mod+Return exec termite
+#bindsym $mod+Return exec urxvt
+bindsym $mod+q kill
+
+bindsym Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
+
+#bindsym $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
+#bindsym $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85" 
+bindsym $mod+d exec rofi -show run 
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+g split h
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+set $w1 "1: 1 "
+set $w2 "2: 2 "
+set $w3 "3: 3 "
+#set $w3 "3: 3  fa-folder-open"
+set $w4 "4: 4 "
+set $w5 "5: 5 "
+set $w6 "6: 6"
+set $w7 "7: 7"
+set $w8 "8: 8 "
+set $w9 "9: 9 "
+set $w0 "10: 10 "
+
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
+bindsym $mod+4 workspace $w4
+bindsym $mod+5 workspace $w5
+bindsym $mod+6 workspace $w6
+bindsym $mod+7 workspace $w7
+bindsym $mod+8 workspace $w8
+bindsym $mod+9 workspace $w9
+bindsym $mod+0 workspace $w0
+
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+minus move scratchpad
+bindsym $mod+plus scratchpad show
+bindsym $mod+Shift+s sticky toggle
+bindsym $mod+n exec --no-startup-id thunar
+
+bindsym $mod+Shift+1 move container to workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3
+bindsym $mod+Shift+4 move container to workspace $w4
+bindsym $mod+Shift+5 move container to workspace $w5
+bindsym $mod+Shift+6 move container to workspace $w6
+bindsym $mod+Shift+7 move container to workspace $w7
+bindsym $mod+Shift+8 move container to workspace $w8
+bindsym $mod+Shift+9 move container to workspace $w9
+bindsym $mod+Shift+0 move container to workspace $w0
+
+#bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+#bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit' 
+
+bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | rofi -i -p "Really exit i3 X session?" = "YES" ] && i3-msg-exit' 
+
+#bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -f DejaVu -t warning -m 'Do you want to exit i3 ?' -b 'Yes' 'i3-msg exit'"
+
+bindsym $mod+Shift+I exec /usr/bin/locker
+
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+################### CUSTOM SETTINGS ################### 
+#workspace_auto_back_and_forth yes
+#hide_edge_borders both
+
+for_window [class="^.*"] border pixel 1
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Organizer"] floating enable
+for_window [class="Navigator"] floating enable
+for_window [class="^URxvt$" instance="^irssi$"] floating enable, resize grow up 180 px, resize grow down 200 px
+for_window [class="^URxvt$" instance="^visualizer$"] floating enable, resize grow up 185 px, resize shrink down 238 px
+for_window [class="^URxvt$" instance="^playlist$"] floating enable, resize grow down 200 px, resize shrink up 235 px
+
+# Colors
+set        $fg #d6d1cc
+set        $bg #2b2b2b
+set     $black #282a2e
+set       $red #cb555a
+set     $green #85cb55
+set    $yellow #e6cc63
+set      $blue #53a5ad
+set   $magenta #a84466
+set      $cyan #7bc3bd
+set     $white #e6e1dc
+
+set   $primary #CB555A
+set $secondary #a84466
+set    $bar_bg #49535800
+set    $bar_bg #222222
+set $bar_black #A6A6A6 #757575 #666666
+
+                      # Border      Background      Text        Indicator
+client.focused          $black      $primary        $bg         $primary
+client.focused_inactive $black      $bg             $fg         $bg
+client.unfocused        $black      $black          $fg         $black
+client.urgent           $black      $white          $fg         $white
+
+#bar {
+#    strip_workspace_numbers yes
+#    status_command i3blocks -c ~/.i3/i3blocks.conf
+#    #i3bar_command i3bar -t
+#    colors {
+#        background $bar_bg
+#        statusline #888888
+#                              # Border      Background      Text
+#        focused_workspace       $bar_bg         $bar_bg     $primary
+#        active_workspace        $bar_bg         $bar_bg     $bar_black
+#        inactive_workspace      $bar_bg         $bar_bg     $bar_black
+#    }
+#    tray_output no
+#	position top
+#	#font pango:  Hack, FontAwesome 10
+#	font '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*'
+#}
+
+# i3-gaps
+#gaps inner 10
+#gaps outer 20
+
+#workspace 2 gaps inner 0
+#workspace 2 gaps outer 0
+
+#workspace 3 gaps inner 0
+#workspace 3 gaps outer 0
+
+## Monitor arrangement
+#set $monL HDMI-1
+#set $monR DVI-D-1
+#
+## Set workspaces default monitors
+#workspace $w1 output $monL
+#workspace $w2 output $monL
+
+
+# ON START-UP
+
+# Set keyboard layout
+exec setxkbmap -layout se
+
+# Beautify my desktop
+exec always --no-startup-id xrdb -load ~/.Xresources
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id compton -b # straight outta compton
+exec --no-startup-id feh --bg-scale $HOME/.config/wall.png 
+
+# Misc.
+exec --no-startup-id redshift
+exec --no-startup-id i3-msg 'workspace $w1; exec termite; \
+                             workspace $w2; exec firefox; \
+                             workspace $w9; exec urxvt; \
+                             workspace $w1;'
