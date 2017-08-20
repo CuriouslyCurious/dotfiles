@@ -21,10 +21,14 @@ Plugin 'Valloric/YouCompleteMe'
 
 " Highlighting
 Plugin 'tikhomirov/vim-glsl'
+Plugin 'vim-syntastic/syntastic'
 
 " Latex
 "Plugin 'xuhdev/vim-latex-live-preview'
 "Plugin 'nichtleiter/vim-live-latex-preview'
+
+" Linting
+Plugin 'nvie/vim-flake8'
 
 " Themes
 Plugin 'vim-airline/vim-airline'
@@ -52,15 +56,15 @@ set enc=utf8
 set background=dark
 set autoindent
 
-" Theme
-colorscheme vimbrant
+" space-vim-dark Theme
+let g:space_vim_dark_background=233
+colorscheme space-vim-dark
+
+" Molokai
 "let g:molokai_original=1
 " let g:rehash256=1
 "highlight Normal ctermfg=#F1EBEB ctermbg=#272822
 
-highlight Normal ctermbg=none
-"highlight ColorColumn ctermbg=7
-"highlight ColorColumn guibg=Gray
 set t_Co=256
 
 let g:airline#extensions#tabline#enabled=1
@@ -158,3 +162,6 @@ nmap <silent> <F7> :call ToggleSpell()<CR>
 
 " vim-glsl
 autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
+
+" Flake8
+autocmd BufWritePost *.py call Flake8()
