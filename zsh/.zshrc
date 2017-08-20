@@ -68,6 +68,12 @@ alias gp="git push"
 alias gpom="git push origin master"
 alias gb="git branch"
 alias gs="git status"
+alias gl="git log"
+# Power
+alias hibernate="systemctl hibernate"
+alias shutdown="systemctl shutdown"
+alias sleep="systemctl suspend"
+alias suspend="systemctl suspend"
 # Misc
 alias weather="curl http://wttr.in/lulea"
 alias vim="nvim"
