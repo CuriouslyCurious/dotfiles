@@ -61,7 +61,7 @@ alias l="ls -la"
 alias la="ls -la"
 # Git
 alias ga="git add"
-alias gaa="git add -all"
+alias gaa="git add --all"
 alias gc="git commit -v"
 alias gca="git commit -av"
 alias gp="git push"
