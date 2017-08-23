@@ -9,8 +9,8 @@
     XF86AudioMute
 
 # Brightness control
-"xbacklight -inc 5"
+"xbacklight -inc 3"
     XF86MonBrightnessUp
 
-"xbacklight -dec 5"
+"xbacklight -dec 3"
     XF86MonBrightnessDown
