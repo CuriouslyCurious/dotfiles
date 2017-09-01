@@ -71,13 +71,17 @@ alias gs="git status"
 alias gl="git log"
 # Power
 alias hibernate="systemctl hibernate"
-alias shutdown="systemctl shutdown"
 alias sleep="systemctl suspend"
 alias suspend="systemctl suspend"
+# vim
+alias vim="nvim"
+alias vi="nvim"
+alias v="nvim"
+# Pacman
+alias pacman="sudo pacman"
+alias Syu="sudo pacman -Syu"
 # Misc
 alias weather="curl http://wttr.in/lulea"
-alias vim="nvim"
 alias c="clear"
 alias se="sudoedit"
 alias x="exit"
-alias Syu="sudo pacman -Syu"

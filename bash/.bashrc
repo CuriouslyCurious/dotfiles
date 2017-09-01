@@ -16,12 +16,9 @@ esac
 
 set bell-style none
 
-# Alias
-alias ls="ls --color=auto"
-alias grep="grep --color=auto"
-alias diff="diff --color=auto"
-# alias i3lock="~/.i3/i3lock/lock.sh"
-alias weather="curl http://wttr.in/lulea"
-alias vim="nvim"
-# alias i3lock="i3lock -i ~/.i3/i3lock/i3lock.png"
-alias pyxeledit="wine ~/.wine/drive_c/Program\ Files/PyxelEdit/PyxelEdit.exe"
+# Load aliases
+if [ -f $HOME/.bash_aliases ]; then
+    source $HOME/.bash_aliases
+fi
+
+
