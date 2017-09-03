@@ -5,7 +5,6 @@ let localleader = "\<space>"
 let g:mapleader = "\<space>"
 let maplocalleader = "\<space>"
 
-
 " Vundle configuration
 set nocompatible
 filetype off
@@ -15,9 +14,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'lervag/vimtex'
+Plugin 'scrooloose/nerdtree'
 
 " Coding
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'tmhedberg/SimpylFold'
 
 " Highlighting
 Plugin 'tikhomirov/vim-glsl'
@@ -72,10 +73,11 @@ set laststatus=2
 
 " Tab settings
 set tabstop=4
-set softtabstop=0
+set softtabstop=4
 set expandtab
 set shiftwidth=4
 set smarttab
+
 
 set backspace=2
 set guioptions-=T
@@ -94,9 +96,25 @@ set clipboard=unnamed
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+" Split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
-" Automatic bracket settings
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+nnoremap <space> za
+let g:SimpylFold_docstring_preview=1
 
+" Python settings
+" Bad whitespace
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" Python tab settings
+au BufNewFile,BufRead *.py
+    \ set textwidth=79
+    \ set fileformat=unix
 
 " Latex settings
 let g:tex_flavor='latex'
@@ -132,7 +150,6 @@ augroup reload_vimrc
     autocmd!
     autocmd bufwritepost ~/.vimrc nested source ~/.vimrc
 augroup END
-
 
 "au FileType tex set spell
 "au BufWritePost *.tex silent call Tex_RunLaTeX()
