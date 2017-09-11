@@ -88,7 +88,6 @@ bindsym $mod+Shift+8 move container to workspace $w8
 bindsym $mod+Shift+9 move container to workspace $w9
 bindsym $mod+Shift+0 move container to workspace $w0
 
-#bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 #bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit' 
@@ -121,6 +120,8 @@ for_window [class="Navigator"] floating enable
 for_window [class="^URxvt$" instance="^irssi$"] floating enable, resize grow up 180 px, resize grow down 200 px
 for_window [class="^URxvt$" instance="^visualizer$"] floating enable, resize grow up 185 px, resize shrink down 238 px
 for_window [class="^URxvt$" instance="^playlist$"] floating enable, resize grow down 200 px, resize shrink up 235 px
+for_window [class="syncsim-SyncSim"] floatin enable
+#for_window [class="sun-awt-X11-XFramePeer"] floating enable
 
 # Colors
 set        $fg #d6d1cc

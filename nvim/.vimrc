@@ -105,7 +105,8 @@ nnoremap <C-H> <C-W><C-H>
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
-nnoremap <space> za
+nnoremap <space> zc
+vnoremap <space> zo
 let g:SimpylFold_docstring_preview=1
 
 " Python settings

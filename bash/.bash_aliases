@@ -32,3 +32,5 @@ alias weather="curl http://wttr.in/lulea"
 alias c="clear"
 alias se="sudoedit"
 alias x="exit"
+# Java is dumb
+alias syncsim="wmname LG3D && exec $HOME/scripts/syncsim"
