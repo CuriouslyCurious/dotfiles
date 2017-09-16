@@ -16,6 +16,8 @@ alias gpom="git push origin master"
 alias gb="git branch"
 alias gs="git status"
 alias gl="git log"
+alias gfm="git pull"
+alias gd="git diff"
 # Power
 alias hibernate="systemctl hibernate"
 alias sleep="systemctl suspend"

@@ -13,7 +13,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'lervag/vimtex'
 Plugin 'scrooloose/nerdtree'
 
 " Coding
@@ -25,8 +24,7 @@ Plugin 'tikhomirov/vim-glsl'
 Plugin 'vim-syntastic/syntastic'
 
 " Latex
-"Plugin 'xuhdev/vim-latex-live-preview'
-"Plugin 'nichtleiter/vim-live-latex-preview'
+Plugin 'lervag/vimtex'
 
 " Linting
 Plugin 'nvie/vim-flake8'

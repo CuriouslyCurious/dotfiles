@@ -120,7 +120,7 @@ for_window [class="Navigator"] floating enable
 for_window [class="^URxvt$" instance="^irssi$"] floating enable, resize grow up 180 px, resize grow down 200 px
 for_window [class="^URxvt$" instance="^visualizer$"] floating enable, resize grow up 185 px, resize shrink down 238 px
 for_window [class="^URxvt$" instance="^playlist$"] floating enable, resize grow down 200 px, resize shrink up 235 px
-for_window [class="syncsim-SyncSim"] floatin enable
+for_window [class="syncsim-SyncSim"] floating enable
 #for_window [class="sun-awt-X11-XFramePeer"] floating enable
 
 # Colors
