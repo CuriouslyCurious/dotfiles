@@ -12,11 +12,18 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+
+" tpope magic
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-sensible'
+
 Plugin 'scrooloose/nerdtree'
 
-" Coding
+" Auto-completion
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'Raimondi/delimitMate'
+" Code-folding
 Plugin 'tmhedberg/SimpylFold'
 
 " Highlighting
@@ -27,7 +34,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'lervag/vimtex'
 
 " Linting
-Plugin 'nvie/vim-flake8'
+"Plugin 'nvie/vim-flake8'
 
 " Themes
 Plugin 'vim-airline/vim-airline'
@@ -120,7 +127,6 @@ let g:tex_flavor='latex'
 
 autocmd FileType tex setl updatetime=1000
 let g:livepreview_previewer='zathura'
-
 " Spacebar as leader
 
 "let no_tex_maps=1
@@ -180,7 +186,7 @@ nmap <silent> <F7> :call ToggleSpell()<CR>
 autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 " Flake8
-autocmd BufWritePost *.py call Flake8()
+"autocmd BufWritePost *.py call Flake8()
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
@@ -203,3 +209,10 @@ let g:ycm_filetype_blacklist={
             \ 'objc' : 1,
             \ 'mail' : 1
 \}
+
+" Templates
+if has ("autocmd")
+    augroup templates
+        autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+    augroup END
+endif

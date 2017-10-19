@@ -14,3 +14,12 @@
 
 "xbacklight -dec 3"
     XF86MonBrightnessDown
+
+# Power control
+"systemctl hibernate"
+    XF86Sleep
+
+#"sytemctl sleep"
+#    m:0x10 + c:77
+#    Mod2 + Num_Lock
+
