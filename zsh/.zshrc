@@ -44,6 +44,7 @@ antigen apply
 # -- End Antigen --
 
 export EDITOR=/usr/bin/nvim
+export TERM=xterm-256color
 
 # Functions #
 function chpwd() {

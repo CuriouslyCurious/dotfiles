@@ -34,6 +34,7 @@ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
   exec startx
 fi
 
+exec i3
 
 # start some nice programs
 
@@ -44,4 +45,3 @@ fi
 # unset f
 #fi
 
-exec i3
