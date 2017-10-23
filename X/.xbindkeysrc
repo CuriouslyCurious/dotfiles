@@ -1,3 +1,17 @@
+# Media control
+# Pause
+"mpc toggle"
+    XF86AudioPlay
+
+# Previous song
+"mpc prev"
+    XF86AudioPrev
+
+# Next song
+"mpc next"
+    XF86AudioNext
+
+
 # Volume control
 "amixer set Master 1%+"
     XF86AudioRaiseVolume
@@ -7,6 +21,7 @@
 
 "amixer set Master toggle"
     XF86AudioMute
+
 
 # Brightness control
 "xbacklight -inc 3"
@@ -18,8 +33,4 @@
 # Power control
 "systemctl hibernate"
     XF86Sleep
-
-#"sytemctl sleep"
-#    m:0x10 + c:77
-#    Mod2 + Num_Lock
 
