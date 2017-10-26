@@ -1,60 +1,43 @@
-set visualbell
+call plug#begin('~/.config/nvim/plugged')
+" tpope magic
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sensible'
 
+Plug 'scrooloose/nerdtree'
+
+" Auto-completion
+Plug 'Valloric/YouCompleteMe'
+Plug 'Raimondi/delimitMate'
+" Code-folding
+Plug 'tmhedberg/SimpylFold'
+
+" Highlighting
+Plug 'tikhomirov/vim-glsl'
+Plug 'vim-syntastic/syntastic'
+
+" Latex
+Plug 'lervag/vimtex'
+
+" Linting
+"Plug 'nvie/vim-flake8'
+
+" Themes
+Plug 'vim-airline/vim-airline'
+Plug 'tomasr/molokai'
+Plug 'nanotech/jellybeans.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'vim-scripts/CycleColor'
+call plug#end()
+filetype plugin indent on
+syntax enable
+
+set visualbell
 let mapleader   = "\<space>"
 let localleader = "\<space>"
 let g:mapleader = "\<space>"
 let maplocalleader = "\<space>"
 
-" Vundle configuration
-set nocompatible
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-
-" tpope magic
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-sensible'
-
-Plugin 'scrooloose/nerdtree'
-
-" Auto-completion
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'Raimondi/delimitMate'
-" Code-folding
-Plugin 'tmhedberg/SimpylFold'
-
-" Highlighting
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'vim-syntastic/syntastic'
-
-" Latex
-Plugin 'lervag/vimtex'
-
-" Linting
-"Plugin 'nvie/vim-flake8'
-
-" Themes
-Plugin 'vim-airline/vim-airline'
-Plugin 'tomasr/molokai'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'vim-scripts/CycleColor'
-call vundle#end()
-filetype plugin indent on
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just
-" :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to
-" auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-syntax on
 set number
 set relativenumber
 set wrap
