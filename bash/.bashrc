@@ -15,6 +15,10 @@ esac
 # Ensure no shenanigans when sshing
 export TERM=xterm-256color
 
+# Colors in less
+export LESS="-R"
+export LESSOPEN="|$HOME/scripts/lessfilter"
+
 # set -g default-terminal "screen-256color"
 
 set bell-style none
