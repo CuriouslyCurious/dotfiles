@@ -22,6 +22,8 @@ Plug 'lervag/vimtex'
 " Linting
 "Plug 'nvie/vim-flake8'
 
+Plug 'rust-lang/rust.vim'
+
 " Themes
 Plug 'vim-airline/vim-airline'
 Plug 'tomasr/molokai'

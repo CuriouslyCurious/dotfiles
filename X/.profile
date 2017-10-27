@@ -6,3 +6,5 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 eval "$(dircolors ~/.dircolors/dircolors.ansi-universal)"
+
+export PATH="$HOME/.cargo/bin:$PATH"
