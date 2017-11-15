@@ -22,6 +22,10 @@ Plug 'lervag/vimtex'
 " Linting
 "Plug 'nvie/vim-flake8'
 
+" Undo trees
+Plug 'sjl/gundo.vim'
+
+" Rust
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'racer-rust/vim-racer'
@@ -181,6 +185,10 @@ function ToggleSpell()
     echo "Language: " g:langList[b:lang]
 endfunction
 nmap <silent> <F7> :call ToggleSpell()<CR>
+
+" Gundo
+nnoremap <leader>u :GundoToggle<CR>
+let g:gundo_prefer_python3 = 1
 
 " vim-glsl
 autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
