@@ -62,6 +62,10 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval "$(<~/.ssh/agent-thing)"
 fi
 
+# Export rustup to PATH if it exists
+if [ -f $HOME/.cargo/env ]; then
+    export PATH="$HOME/.cargo/bin:$PATH" 
+fi
 
 # Load aliases
 if [ -f $HOME/.bash_aliases ]; then

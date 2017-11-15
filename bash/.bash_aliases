@@ -20,7 +20,6 @@ alias gfm="git pull"
 alias gd="git diff"
 # Power
 alias hibernate="systemctl hibernate"
-alias sleep="systemctl suspend"
 alias suspend="systemctl suspend"
 # vim
 alias vim="nvim"
@@ -29,10 +28,13 @@ alias v="nvim"
 # Pacman
 alias pacman="sudo pacman"
 alias Syu="sudo pacman -Syu"
+# Configs
+alias cvim="vim $HOME/.vimrc"
 # Misc
 alias weather="curl http://wttr.in/lulea"
 alias c="clear"
 alias se="sudoedit"
 alias x="exit"
+alias top="htop"
 # Java is dumb
 alias syncsim="wmname LG3D && exec $HOME/scripts/syncsim"

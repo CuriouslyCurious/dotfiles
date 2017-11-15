@@ -23,9 +23,13 @@ export LESSOPEN="|$HOME/scripts/lessfilter"
 
 set bell-style none
 
+# Export rustup to PATH if it exists
+if [ -f $HOME/.cargo/env ]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 # Load aliases
 if [ -f $HOME/.bash_aliases ]; then
     source $HOME/.bash_aliases
 fi
-
 

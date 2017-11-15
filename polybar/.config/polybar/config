@@ -24,7 +24,7 @@ secondary = #F3F3BA
 
 
 [bar/example]
-monitor = ${env:MONITOR:HDMI-1}
+;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 30
 offset-x = 0%
@@ -343,13 +343,17 @@ margin-bottom = 5
 
 [module/pkg]
 type = custom/script
-interval = 1200
+; 5 mins
+interval = 600
 format = <label>
 format-background=${colors.background}
 format-underline = #dc322f
 label = "%output:0:30%"
 exec = $HOME/.config/polybar/pkg.sh
+; Only run if we can ping Google's DNS
 exec-if = "ping -q -w 2 -c 1 8.8.8.8 > /dev/null"
 
+; Refresh on click
+click-left = $HOME/.config/polybar/pkg.sh
 
 

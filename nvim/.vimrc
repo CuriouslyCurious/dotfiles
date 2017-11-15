@@ -23,6 +23,10 @@ Plug 'lervag/vimtex'
 "Plug 'nvie/vim-flake8'
 
 Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+Plug 'racer-rust/vim-racer'
+
+Plug 'suan/vim-instant-markdown'
 
 " Themes
 Plug 'vim-airline/vim-airline'
@@ -91,6 +95,17 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Persistent undo 
+if has('persistent_undo')
+    if !isdirectory("/tmp/vim-undo")
+        call mkdir("/tmp/.vim-undo", "", 0700)
+    endif
+    set undodir=/tmp/vim-undo
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
+endif
 
 " Enable folding
 set foldmethod=indent
@@ -195,9 +210,15 @@ let g:ycm_filetype_blacklist={
             \ 'mail' : 1
 \}
 
+" vim-racer
+set hidden
+let g:racer_cmd = "$HOME/.cargo/bin/racer"
+let g:racer_experimental_completer = 1
+
 " Templates
 if has ("autocmd")
     augroup templates
         autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+        autocmd BufNewFile *.tex 0r ~/.vim/templates/skeleton.tex
     augroup END
 endif

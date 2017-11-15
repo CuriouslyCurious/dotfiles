@@ -193,7 +193,8 @@ bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | rofi -i -p "Really exit i
 
 #bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -f DejaVu -t warning -m 'Do you want to exit i3 ?' -b 'Yes' 'i3-msg exit'"
 
-bindsym $mod+Shift+I exec /usr/bin/locker
+# Requires chjj's slock
+bindsym $mod+Shift+I exec /usr/local/bin/slock
 
 # https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
 # Multi-screen screenshots with scrot
