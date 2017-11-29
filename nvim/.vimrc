@@ -102,7 +102,7 @@ nnoremap <C-H> <C-W><C-H>
 
 " Persistent undo 
 if has('persistent_undo')
-    if !isdirectory("/tmp/vim-undo")
+    if !isdirectory("/tmp/.vim-undo")
         call mkdir("/tmp/.vim-undo", "", 0700)
     endif
     set undodir=/tmp/vim-undo
@@ -170,6 +170,9 @@ augroup END
 "augroup END
 
 " Key maps
+" Visual movement
+" map k gk 
+map j gj
 
 " Spell check
 let b:lang=0

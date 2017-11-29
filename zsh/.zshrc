@@ -46,6 +46,8 @@ antigen apply
 export EDITOR=/usr/bin/nvim
 export TERM=xterm-256color
 
+setopt extendedglob
+
 # Functions #
 function chpwd() {
     emulate -L zsh

@@ -3,9 +3,10 @@
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias diff="diff --color=auto"
-# ls
-alias l="ls -la"
-alias la="ls -la"
+# Configs
+alias cvim="vim $HOME/.vimrc"
+# Editor
+alias e="$EDITOR"
 # Git
 alias ga="git add"
 alias gaa="git add --all"
@@ -20,6 +21,13 @@ alias gs="git status"
 alias gl="git log"
 alias gfm="git pull"
 alias gd="git diff"
+alias gt="git tag"
+# ls
+alias l="ls -la"
+alias la="ls -la"
+# Pacman
+alias pacman="sudo pacman"
+alias Syu="sudo pacman -Syu"
 # Power
 alias hibernate="systemctl hibernate"
 alias suspend="systemctl suspend"
@@ -27,11 +35,7 @@ alias suspend="systemctl suspend"
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
-# Pacman
-alias pacman="sudo pacman"
-alias Syu="sudo pacman -Syu"
-# Configs
-alias cvim="vim $HOME/.vimrc"
+
 # Misc
 alias weather="curl http://wttr.in/lulea"
 alias c="clear"
