@@ -1,9 +1,9 @@
 # Monitors 
-exec --no-startup-id xrandr --output HDMI-1 --auto --output DVI-D-1 --left-of HDMI-1
+exec --no-startup-id xrandr --output DP-1 --auto --output HDMI-1 --right-of DP-1
 
 # Monitor arrangement
-set $monL HDMI-1
-set $monR DVI-D-1
+set $monL DP-1
+set $monR HDMI-1
 
 # Set workspaces default monitors
 workspace $w1 output $monL

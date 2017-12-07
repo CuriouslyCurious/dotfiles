@@ -22,9 +22,15 @@ foreground-alt = #F3F3BA
 primary = #F3F3BA
 secondary = #F3F3BA
 
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
 
-[bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
+[bar/main]
+monitor = ${env:MONITOR}
 width = 100%
 height = 30
 offset-x = 0%
@@ -64,17 +70,55 @@ tray-maxsize = 18
 tray-detached = true
 ;tray-background = #0063ff
 
-;wm-restack = bspwm
 wm-restack = i3
 
 ;override-redirect = true
 
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
-
 ;scroll-up = i3wm-wsnext
 ;scroll-down = i3wm-wsprev
 
+[bar/secondary]
+monitor = ${env:MONITOR}
+width = 100%
+height = 30
+offset-x = 0%
+;offset-y = 10%
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = Misc Termsyn:size=8;1
+font-1 = FontAwesome:fontformat=truetype:size=12;1
+font-2 = sm4tik:pixelsize=10;1
+
+modules-left = i3
+modules-center =
+modules-right = 
+
+tray-position = hidden
+tray-padding = 11
+tray-transparent = true
+tray-offset-y = 22
+tray-offset-x = -0
+tray-maxsize = 18
+tray-detached = true
+;tray-background = #0063ff
+
+wm-restack = i3
 
 [module/weather]
 type = custom/script
@@ -326,15 +370,6 @@ menu-2-0 = power off
 menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
-
-
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-
 
 [global/wm]
 margin-top = 5
