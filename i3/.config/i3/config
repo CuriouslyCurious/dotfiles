@@ -57,14 +57,14 @@ exec setxkbmap -layout se
 
 # Beautify my desktop
 exec always --no-startup-id xrdb -load ~/.Xresources
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id compton -b # straight outta compton
 exec --no-startup-id feh --bg-fill $HOME/.config/wall.png 
 
 # Misc.
 exec --no-startup-id redshift
 exec --no-startup-id i3-msg 'workspace $w1; exec termite; \
-                             workspace $w2; exec waterfox; \
+                             workspace $w2; exec firefox; \
                              workspace $w1;'
 #bar {
 #    strip_workspace_numbers yes
@@ -193,8 +193,8 @@ bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | rofi -i -p "Really exit i
 
 #bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -f DejaVu -t warning -m 'Do you want to exit i3 ?' -b 'Yes' 'i3-msg exit'"
 
-# Requires chjj's slock
-bindsym $mod+Shift+I exec /usr/local/bin/slock
+# https://github.com/cac03/i3lock
+bindsym $mod+Shift+I exec $HOME/.config/i3/lock.sh
 
 # https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
 # Multi-screen screenshots with scrot

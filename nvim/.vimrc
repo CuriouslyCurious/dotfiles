@@ -120,11 +120,11 @@ let g:SimpylFold_docstring_preview=1
 
 " Python settings
 " Bad whitespace
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 " Python tab settings
-au BufNewFile,BufRead *.py
-    \ set textwidth=79
-    \ set fileformat=unix
+"au BufNewFile,BufRead *.py
+"    \ set textwidth=79
+"    \ set fileformat=unix
 
 " Latex settings
 let g:tex_flavor='latex'
@@ -171,8 +171,9 @@ augroup END
 
 " Key maps
 " Visual movement
-" map k gk 
-map j gj
+" https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
 " Spell check
 let b:lang=0
