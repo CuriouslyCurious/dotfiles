@@ -11,6 +11,9 @@
 "mpc next"
     XF86AudioNext
 
+# Stop
+"mpc stop"
+    XF86AudioStop
 
 # Volume control
 "amixer set Master 1%+"

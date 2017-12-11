@@ -145,11 +145,11 @@ toggle-on-foreground = #FF0000
 host = 127.0.0.1
 port = 6600
 
-format-online =  " ⁣ <label-song>  "
+format-online = <label-song>
 format-offline =
 format-stop =
 
-label-song = %artist% - %title%
+label-song = "  %artist% - %title%  "
 
 [module/i3]
 type = internal/i3
