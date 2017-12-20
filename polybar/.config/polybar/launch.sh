@@ -11,5 +11,6 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 
 MONITOR=DP-1 polybar main &
 MONITOR=HDMI-1 polybar secondary &
+MONITOR=DVI-D-1 polybar tertiary &
 
 echo "Bars launched..."

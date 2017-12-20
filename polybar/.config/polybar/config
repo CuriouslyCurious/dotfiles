@@ -9,12 +9,18 @@
 [colors]
 ;background = ${xrdb:color0:#222}
 background = #212E36
-background-alt = #3C5A46
-background-unf = #2E463E
-background-mod0 = #3C5A46
-background-mod1 = #546E53
-background-mod2 = #708963
-background-alrt = #A1BB76
+background-alt = #5c8989
+#3C5A46
+background-unf = #2d4344
+#2E463E
+background-mod0 = #3b5959
+#3C5A46
+background-mod1 = #5d526d
+#546E53
+background-mod2 = #638985
+#708963
+background-alrt = #7579ba
+#A2BB76
 
 ;foreground = ${xrdb:color7:#222}
 foreground = #F3F3BA
@@ -119,6 +125,50 @@ tray-detached = true
 ;tray-background = #0063ff
 
 wm-restack = i3
+
+[bar/tertiary]
+monitor = ${env:MONITOR}
+width = 100%
+height = 30
+offset-x = 0%
+;offset-y = 10%
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = Misc Termsyn:size=8;1
+font-1 = FontAwesome:fontformat=truetype:size=12;1
+font-2 = sm4tik:pixelsize=10;1
+
+modules-left = i3
+modules-center =
+modules-right = 
+
+tray-position = hidden
+tray-padding = 11
+tray-transparent = true
+tray-offset-y = 22
+tray-offset-x = -0
+tray-maxsize = 18
+tray-detached = true
+;tray-background = #0063ff
+
+wm-restack = i3
+
 
 [module/weather]
 type = custom/script
@@ -241,7 +291,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp0s25
+interface = enp10s0
 interval = 3.0
 
 format-connected-underline = #55aa55

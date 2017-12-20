@@ -37,6 +37,7 @@ alias vi="nvim"
 alias v="nvim"
 
 # Misc
+alias dude="du -h --exclude=./yesterday | sort -h | grep -E \"^[0-9]+(\.|,)?[0-9]*M\""
 alias weather="curl http://wttr.in/lulea"
 alias c="clear"
 alias se="sudoedit"

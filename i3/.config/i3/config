@@ -1,5 +1,5 @@
 # Monitors 
-exec --no-startup-id xrandr --output DP-1 --auto --output HDMI-1 --right-of DP-1
+exec --no-startup-id xrandr --output DP-1 --auto --output HDMI-1 --right-of DP-1 --output DVI-D-1 --left-of DP-1
 
 # Monitor arrangement
 set $monL DP-1
