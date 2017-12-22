@@ -22,11 +22,12 @@ background-mod2 = #638985
 background-alrt = #7579ba
 #A2BB76
 
-;foreground = ${xrdb:color7:#222}
 foreground = #F3F3BA
 foreground-alt = #F3F3BA
 primary = #F3F3BA
 secondary = #F3F3BA
+
+connected = #2e6b70
 
 [settings]
 screenchange-reload = true
@@ -65,7 +66,7 @@ font-2 = sm4tik:pixelsize=10;1
 
 modules-left = i3
 modules-center = mpd
-modules-right = volume weather battery wlan date pkg
+modules-right = weather battery wlan eth volume date pkg
 
 tray-position = hidden
 tray-padding = 11
@@ -274,7 +275,7 @@ interval = 3.0
 format-connected-background = ${colors.background-mod2}
 format-connected = "<ramp-signal> <label-connected>   "
 format-connected-underline = #9f78e1
-label-connected = %essid%
+label-connected = %essid% %upspeed%/%downspeed%
 
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
@@ -294,16 +295,12 @@ type = internal/network
 interface = enp10s0
 interval = 3.0
 
+format-connected-background = ${colors.background-alt}
 format-connected-underline = #55aa55
-format-connected-prefix = ""
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+label-connected = "   %upspeed%  %downspeed% %linkspeed%  "
 
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+
+format-disconnected = 
 
 
 [module/date]
