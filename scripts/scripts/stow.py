@@ -12,14 +12,21 @@ __author__ = "curious"
 
 import argparse
 import pathlib
-import sys
+import textwrap
+import shutil
 
+from sys import exit
 
 # Globals
 ignore = [".git"]
 
 parser = argparse.ArgumentParser(
-        description="A symlinking script for handling dotfiles, similar to stow.")
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=textwrap.dedent("""\
+                A symlinking script for handling dotfiles in a similar manner to stow.
+
+                WARNING: This script may crush your dreams (and files) if you are
+                not careful."""))
 parser.add_argument("-s", "--skip", dest="skip", action="store_true", default=False,
                     help="skip any conflicts")
 parser.add_argument("-N", "--NO", dest="no", action="store_true", default=False,
@@ -30,6 +37,8 @@ parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", defa
                     help="verbose mode")
 parser.add_argument("-r", "--remove", dest="remove", action="store_true", default=False,
                     help="remove all symlinks")
+parser.add_argument("-R", "--replace", dest="replace", action="store_true", default=False,
+                    help="replace all existing files (no prompt)")
 args = parser.parse_args()
 
 if args.no or args.yes:
@@ -50,51 +59,74 @@ def symlink(origin, target):
     if len(str(target).split("/")) != 2:
         target = pathlib.Path(str(target) + "/" + str(origin).split("/")[-1])
 
-    if args.verbose:
+    if args.no or args.verbose:
         print_ln(origin, target)
+        return
 
-    if not args.skip:
-        confirm = None
-        if not args.no and not args.yes:
-            while confirm is None:
-                try:
-                    confirm = prompt(origin, target)
-                except SyntaxError:
-                    continue
+    if not args.remove and (args.yes or prompt(origin, target)):
+        if not target.is_symlink():
+            if not target.is_file() and not target.is_dir():
+                target.symlink_to(origin, origin.is_dir())
+            else:
+                if args.skip or args.no:
+                    return
 
-        if not args.remove and (args.yes or confirm):
-            if not target.is_symlink:
-                origin.symlink_to(target, target.is_dir())
+                if str(target) == "/etc":
+                    print("Skipping... /etc will never be replaced by this script.")
+                    return
 
-        if args.remove and (args.yes or confirm):
-            if target.is_symlink():
-                target.unlink()
+                print("%s will be replaced!" % str(target))
+                if args.replace or prompt(origin, target, "replace"):
+                    if target.is_dir():
+                        shutil.rmtree(target)
+                    elif target.is_file():
+                        target.unlink()
+
+                    target.symlink_to(origin, origin.is_dir())
+
+    elif args.remove and (args.yes or prompt(origin, target, "remove")):
+        if str(target) == "/etc":
+            print("Skipping... /etc will never be replaced by this script.")
+            return
+
+        if target.is_symlink():
+            target.unlink()
 
 
-def prompt(origin, target):
-    if not args.remove:
-        text = """Do you wish to symlink '%s' to '%s'?
-{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(origin), str(target))
-    else:
+def prompt(origin, target, action=None):
+    if action == "remove":
         text = """Do you wish to remove '%s'?
 {y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(target))
-
-    inp = input(text)
-
-    if inp.startswith("y"):
-        return True
-    elif inp.startswith("n"):
-        return False
-    elif inp == "YES":
-        args.yes = True
-        args.verbose = True
-        return True
-    elif inp == "NO":
-        args.no = True
-        args.verbose = True
-        return False
+    elif action == "replace":
+        text = """Do you wish to replace '%s' with '%s'?
+{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(origin), str(target))
     else:
-        raise(SyntaxError)
+        text = """Do you wish to symlink '%s' to '%s'?
+{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(origin), str(target))
+
+    if target.is_dir() and (action == "replace" or action == "remove"):
+        text += "\nWARNING: This will delete all contents in the directory: "
+
+    while True:
+        inp = input(text)
+        if len(inp) == 0:
+            return True
+        elif inp.startswith("y"):
+            return True
+        elif inp.startswith("n"):
+            return False
+        elif inp == "YES":
+            args.yes = True
+            args.verbose = True
+            if action == "replace":
+                args.replace = True
+            return True
+        elif inp == "NO":
+            args.no = True
+            args.verbose = True
+            if action == "replace":
+                args.skip = True
+            return False
 
 
 def print_ln(origin, target):
@@ -109,7 +141,7 @@ if __name__ == "__main__":
     dotfiles_dir = pathlib.Path(str(home) + "/dotfiles")
 
     if not dotfiles_dir.exists():
-        sys.exit('%s is not a directory' % (str(home) + "/dotfiles"))
+        exit('%s is not a directory' % (str(home) + "/dotfiles"))
 
     for path in dotfiles_dir.iterdir():
         if path.is_dir():
