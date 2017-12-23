@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+# -*- coding: utf8 -*-
+
+"""
+An implementation of stow in Python
+"""
+
+__author__ = "curious"
+
+import argparse
+import pathlib
+import sys
+
+
+# Globals
+ignore = [".git"]
+
+parser = argparse.ArgumentParser(
+        description="A symlinking script for handling dotfiles, similar to stow.")
+parser.add_argument("-s", "--skip", dest="skip", action="store_true", default=False,
+                    help="skip any conflicts")
+parser.add_argument("-N", "--NO", dest="no", action="store_true", default=False,
+                    help="don't perform any symlinks, just print the results.")
+parser.add_argument("-Y", "--YES", dest="yes", action="store_true", default=False,
+                    help="say yes to all prompts")
+parser.add_argument("-i" "--interactive", dest="interactive", action="store_true", default=False,
+                    help="interactive mode")
+parser.add_argument("-v" "--verbose", dest="verbose", action="store_true", default=False,
+                    help="verbose mode")
+args = parser.parse_args()
+
+
+def sub_path(path, target):
+    for sub in path.iterdir():
+        if str(sub).split("/")[-1] == ".config":
+            for sub_sub in sub.iterdir():
+                target = str(target) + "/.config"
+                symlink(sub_sub, pathlib.Path(target))
+        else:
+            symlink(sub, target)
+
+
+def symlink(origin, target):
+    if len(str(target).split("/")) != 2:
+        target = pathlib.Path(str(target) + "/" + str(origin).split("/")[-1])
+
+    if args.verbose:
+        print_ln(origin, target)
+
+    if not args.skip:
+        confirm = None
+        if not args.no and not args.yes:
+            while confirm is None:
+                try:
+                    confirm = prompt(origin, target)
+                except SyntaxError:
+                    continue
+
+        if args.yes or confirm:
+            if not target.is_symlink:
+                origin.symlink_to(target, target.is_dir())
+
+
+def prompt(origin, target):
+    inp = input("""Do you wish to symlink '%s' to '%s'?
+{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(origin), str(target)))
+    print()
+    if inp.startswith("y"):
+        return True
+    elif inp.startswith("n"):
+        return False
+    elif inp == "YES":
+        args.yes = True
+        return True
+    elif inp == "NO":
+        args.no = True
+        return False
+    else:
+        raise(SyntaxError)
+
+
+def print_ln(origin, target):
+    print("ln -s %s %s" % (str(origin), str(target)))
+
+
+if __name__ == "__main__":
+    home = pathlib.Path.home()
+    dotfiles_dir = pathlib.Path(str(home) + "/dotfiles")
+
+    if not dotfiles_dir.exists():
+        sys.exit('%s is not a directory' % (str(home) + "/dotfiles"))
+
+    for path in dotfiles_dir.iterdir():
+        if path.is_dir():
+            if str(path).split("/")[-1] in ignore:
+                continue
+            elif str(path).endswith("/etc"):
+                symlink(path, pathlib.Path("/etc"))
+            else:
+                sub_path(path, home)
+
