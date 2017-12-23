@@ -6,6 +6,8 @@ An implementation of stow in Python
 
 This program assumes that the dotfiles folder is located at
 $HOME/dotfiles
+
+TODO: Ensure it properly respects non-empty directories
 """
 
 __author__ = "curious"
@@ -26,7 +28,7 @@ parser = argparse.ArgumentParser(
                 A symlinking script for handling dotfiles in a similar manner to stow.
 
                 WARNING: This script may crush your dreams (and files) if you are
-                not careful."""))
+                not careful. Read the prompts carefully."""))
 parser.add_argument("-s", "--skip", dest="skip", action="store_true", default=False,
                     help="skip any conflicts")
 parser.add_argument("-N", "--NO", dest="no", action="store_true", default=False,
@@ -41,7 +43,7 @@ parser.add_argument("-R", "--replace", dest="replace", action="store_true", defa
                     help="replace all existing files (no prompt)")
 args = parser.parse_args()
 
-if args.no or args.yes:
+if args.yes:
     args.verbose = True
 
 
@@ -56,10 +58,10 @@ def sub_path(path, target):
 
 
 def symlink(origin, target):
-    if len(str(target).split("/")) != 2:
-        target = pathlib.Path(str(target) + "/" + str(origin).split("/")[-1])
+    if len(target.parts) > 2:
+        target = target / origin.stem
 
-    if args.no or args.verbose:
+    if args.yes or args.verbose:
         print_ln(origin, target)
         return
 
@@ -75,7 +77,6 @@ def symlink(origin, target):
                     print("Skipping... /etc will never be replaced by this script.")
                     return
 
-                print("%s will be replaced!" % str(target))
                 if args.replace or prompt(origin, target, "replace"):
                     if target.is_dir():
                         shutil.rmtree(target)
@@ -93,19 +94,26 @@ def symlink(origin, target):
             target.unlink()
 
 
+def replace_in_subdirs(origin, target):
+    if origin.samefile(target):
+        return
+
+
 def prompt(origin, target, action=None):
     if action == "remove":
         text = """Do you wish to remove '%s'?
-{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(target))
+{y(es) / n(o); Y(ES) (to all) / N(O) (to all)}: """ % str(target)
     elif action == "replace":
         text = """Do you wish to replace '%s' with '%s'?
-{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(origin), str(target))
+{y(es) / n(o); Y(ES) (to all) / N(O) (to all)}: """ % (str(origin), str(target))
     else:
         text = """Do you wish to symlink '%s' to '%s'?
-{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(origin), str(target))
+{y(es) / n(o); Y(ES) (to all) / N(O) (to all)}: """ % (str(origin), str(target))
 
     if target.is_dir() and (action == "replace" or action == "remove"):
-        text += "\nWARNING: This will delete all contents in the directory: "
+        text = text.replace(": ", "") + "\nWARNING: This will delete all contents in the directory: "
+    elif target.is_file() and (action == "replace" or action == "remove"):
+        text = text.replace(": ", "") + "\nWARNING: This will delete the file: "
 
     while True:
         inp = input(text)
@@ -115,13 +123,13 @@ def prompt(origin, target, action=None):
             return True
         elif inp.startswith("n"):
             return False
-        elif inp == "YES":
+        elif inp.startswith("Y"):
             args.yes = True
             args.verbose = True
             if action == "replace":
                 args.replace = True
             return True
-        elif inp == "NO":
+        elif inp.startswith("N"):
             args.no = True
             args.verbose = True
             if action == "replace":
@@ -141,14 +149,17 @@ if __name__ == "__main__":
     dotfiles_dir = pathlib.Path(str(home) + "/dotfiles")
 
     if not dotfiles_dir.exists():
-        exit('%s is not a directory' % (str(home) + "/dotfiles"))
+        exit("ERROR: '%s' is not a directory." % (str(home) + "/dotfiles"))
 
     for path in dotfiles_dir.iterdir():
         if path.is_dir():
-            if str(path).split("/")[-1] in ignore:
+            if path.stem in ignore:
                 continue
-            elif str(path).endswith("/etc"):
-                symlink(path, pathlib.Path("/etc"))
+            elif path.stem == "etc":
+                try:
+                    symlink(path, pathlib.Path("/etc"))
+                except PermissionError:
+                    exit("Permission denied. Please run the script as root if you want to symlink to '/etc'")
             else:
                 sub_path(path, home)
 
