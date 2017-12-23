@@ -28,6 +28,8 @@ parser.add_argument("-Y", "--YES", dest="yes", action="store_true", default=Fals
                     help="say yes to all prompts")
 parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", default=False,
                     help="verbose mode")
+parser.add_argument("-r", "--remove", dest="remove", action="store_true", default=False,
+                    help="remove all symlinks")
 args = parser.parse_args()
 
 if args.no or args.yes:
@@ -60,15 +62,25 @@ def symlink(origin, target):
                 except SyntaxError:
                     continue
 
-        if args.yes or confirm:
+        if not args.remove and (args.yes or confirm):
             if not target.is_symlink:
                 origin.symlink_to(target, target.is_dir())
 
+        if args.remove and (args.yes or confirm):
+            if target.is_symlink():
+                target.unlink()
+
 
 def prompt(origin, target):
-    inp = input("""Do you wish to symlink '%s' to '%s'?
-{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(origin), str(target)))
-    print()
+    if not args.remove:
+        text = """Do you wish to symlink '%s' to '%s'?
+{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(origin), str(target))
+    else:
+        text = """Do you wish to remove '%s'?
+{y(es) / n(o); YES (to all) / NO (to all)}: """ % (str(target))
+
+    inp = input(text)
+
     if inp.startswith("y"):
         return True
     elif inp.startswith("n"):
@@ -86,7 +98,10 @@ def prompt(origin, target):
 
 
 def print_ln(origin, target):
-    print("ln -s %s %s" % (str(origin), str(target)))
+    if not args.remove:
+        print("ln -s %s %s" % (str(origin), str(target)))
+    else:
+        print("unlink %s" % str(target))
 
 
 if __name__ == "__main__":
