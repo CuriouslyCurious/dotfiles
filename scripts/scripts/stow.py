@@ -3,6 +3,9 @@
 
 """
 An implementation of stow in Python
+
+This program assumes that the dotfiles folder is located at
+$HOME/dotfiles
 """
 
 __author__ = "curious"
@@ -23,11 +26,12 @@ parser.add_argument("-N", "--NO", dest="no", action="store_true", default=False,
                     help="don't perform any symlinks, just print the results.")
 parser.add_argument("-Y", "--YES", dest="yes", action="store_true", default=False,
                     help="say yes to all prompts")
-parser.add_argument("-i" "--interactive", dest="interactive", action="store_true", default=False,
-                    help="interactive mode")
-parser.add_argument("-v" "--verbose", dest="verbose", action="store_true", default=False,
+parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", default=False,
                     help="verbose mode")
 args = parser.parse_args()
+
+if args.no or args.yes:
+    args.verbose = True
 
 
 def sub_path(path, target):
@@ -71,9 +75,11 @@ def prompt(origin, target):
         return False
     elif inp == "YES":
         args.yes = True
+        args.verbose = True
         return True
     elif inp == "NO":
         args.no = True
+        args.verbose = True
         return False
     else:
         raise(SyntaxError)
