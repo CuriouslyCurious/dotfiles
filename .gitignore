@@ -1,2 +1,8 @@
 *.swp
 **/bundle/
+
+# mpd
+**/database
+**/log
+**/pid
+**/sticker.sql
