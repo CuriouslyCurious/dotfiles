@@ -27,10 +27,10 @@
 
 
 # Brightness control
-"xbacklight -inc 3"
+"xbacklight -inc 5"
     XF86MonBrightnessUp
 
-"xbacklight -dec 3"
+"xbacklight -dec 5"
     XF86MonBrightnessDown
 
 # Power control

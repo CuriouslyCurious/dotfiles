@@ -131,9 +131,9 @@ def traverse_subdirs(origin):
             symlink(subdir, target)
             continue
 
-        if sum([1 for d in subdir.iterdir()]) == 0:  # if directory is empty
-            symlink(subdir, target)
-            continue
+        # if sum([1 for d in subdir.iterdir()]) == 0:  # if directory is empty
+        #    symlink(subdir, target)
+        #    continue
 
         for f in files:
             f = pathlib.Path(str(subdir) + "/" + f)
