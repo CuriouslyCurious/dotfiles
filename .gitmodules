@@ -1,0 +1,3 @@
+[submodule "scripts/scripts/pystow"]
+	path = scripts/scripts/pystow
+	url = git@github.com:CuriouslyCurious/pystow.git
