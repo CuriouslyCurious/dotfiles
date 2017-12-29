@@ -1,33 +1,21 @@
-;-------------------------------------------------
-;                                                ;
-;           Polybar config for Cranium           ;
-;                Hi, /r/unixporn!                ;
-;                                                ;
-;-------------------------------------------------
+;
+; ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗ 
+; ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+; ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+; ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+; ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+; ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+; Curious' polybar config
+; (with elements from 
+; * KingKobra87's Dracula (https://github.com/kingkobra87/dotfiles/blob/master/.config/polybar/config)
+; * /u/rintivdorh's Cranium (https://paste.teknik.io/Raw/DFTep)
+; )
 
+[global/wm]
+margin-top = 5
+margin-bottom = 5
 
-[colors]
-;background = ${xrdb:color0:#222}
-background = #212E36
-background-alt = #5c8989
-#3C5A46
-background-unf = #2d4344
-#2E463E
-background-mod0 = #3b5959
-#3C5A46
-background-mod1 = #5d526d
-#546E53
-background-mod2 = #638985
-#708963
-background-alrt = #7579ba
-#A2BB76
-
-foreground = #F3F3BA
-foreground-alt = #F3F3BA
-primary = #F3F3BA
-secondary = #F3F3BA
-
-connected = #2e6b70
 
 [settings]
 screenchange-reload = true
@@ -36,13 +24,38 @@ screenchange-reload = true
 ;compositing-foreground = source
 ;compositing-border = over
 
+
+[colors]
+background = #282A36
+foreground = #F8F8F2
+
+dark = #1E1F26
+medium = #474b61
+light = #E6E6E6
+
+red = #FF5555
+magenta = #FF79C6
+blue = #BD93F9
+cyan = #8BE9FD
+green = #50FA7B
+yellow = #F1FA8C
+orange = #FF9F55
+
+
 [bar/main]
+font-0 = Wuncon Siji:pixelsize=10;2
+font-1 = Terminus:size=8;2
+font-2 = FontAwesome:pixelsize=12;2
+font-3 = xos4 Terminess Powerline:size=28;4
+
 monitor = ${env:MONITOR}
+
 width = 100%
-height = 30
-offset-x = 0%
-;offset-y = 10%
+height = 26
+offset-x = 0
+offset-y = 0
 radius = 0.0
+
 fixed-center = true
 
 background = ${colors.background}
@@ -56,215 +69,84 @@ border-color = #00000000
 
 padding-left = 0
 padding-right = 0
-
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = Misc Termsyn:size=8;1
-font-1 = FontAwesome:fontformat=truetype:size=12;1
-font-2 = sm4tik:pixelsize=10;1
-
-modules-left = i3
+modules-left = i3 right_arrow xwindow
 modules-center = mpd
-modules-right = weather battery wlan eth volume date pkg
+modules-right = volume memory cpu battery wlan eth date left_arrow rofi pkg
 
-tray-position = hidden
-tray-padding = 11
+;tray-position = hidden
+tray-padding = 4
 tray-transparent = true
 tray-offset-y = 22
 tray-offset-x = -0
 tray-maxsize = 18
 tray-detached = true
-;tray-background = #0063ff
 
-wm-restack = i3
+;wm-restack = i3
 
 ;override-redirect = true
 
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
+:scroll-up = i3wm-wsnext
+:scroll-down = i3wm-wsprev
 
-[bar/secondary]
-monitor = ${env:MONITOR}
-width = 100%
-height = 30
-offset-x = 0%
-;offset-y = 10%
-radius = 0.0
-fixed-center = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 0
-line-color = #f00
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 0
-module-margin-right = 0
-
-font-0 = Misc Termsyn:size=8;1
-font-1 = FontAwesome:fontformat=truetype:size=12;1
-font-2 = sm4tik:pixelsize=10;1
-
-modules-left = i3
-modules-center =
-modules-right = 
-
-tray-position = hidden
-tray-padding = 11
-tray-transparent = true
-tray-offset-y = 22
-tray-offset-x = -0
-tray-maxsize = 18
-tray-detached = true
-;tray-background = #0063ff
-
-wm-restack = i3
-
-[bar/tertiary]
-monitor = ${env:MONITOR}
-width = 100%
-height = 30
-offset-x = 0%
-;offset-y = 10%
-radius = 0.0
-fixed-center = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 0
-line-color = #f00
-
-border-size = 0
-border-color = #00000000
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 0
-module-margin-right = 0
-
-font-0 = Misc Termsyn:size=8;1
-font-1 = FontAwesome:fontformat=truetype:size=12;1
-font-2 = sm4tik:pixelsize=10;1
-
-modules-left = i3
-modules-center =
-modules-right = 
-
-tray-position = hidden
-tray-padding = 11
-tray-transparent = true
-tray-offset-y = 22
-tray-offset-x = -0
-tray-maxsize = 18
-tray-detached = true
-;tray-background = #0063ff
-
-wm-restack = i3
-
-
-[module/weather]
-type = custom/script
-interval = 60
-
-format-background = ${colors.background-mod1}
-format = <label>
-format-prefix = " ⁣   "
-format-suffix = "  "
-format-prefix-foreground = ${colors.foreground-alt}
-#exec = python ~/.config/polybar/weather.py
-
-
-[module/mpd]
-type = internal/mpd
-
-interval = 1
-
-format-offline-background = ${colors.background}
-format-online-background = ${colors.background-mod0}
-toggle-off-foreground = #FF0000
-toggle-on-foreground = #FF0000
-
-host = 127.0.0.1
-port = 6600
-
-format-online = <label-song>
-format-offline =
-format-stop =
-
-label-song = "  %artist% - %title%  "
 
 [module/i3]
 type = internal/i3
-;
-;strip-wsnumbers = true
-;
-;label-focused-padding = 3
-;label-unfocused-padding = 3
-;
-;label-focused-background = ${colors.background-alt}
-label-unfocused-background = ${colors.background-unf}
-;
-;label-mode-padding = 0
-;label-mode-background = ${colors.background-unf}
-;
-;label-visible-underline = #555555
-;label-visible-padding = 4
+format = <label-mode><label-state>
+index-sort = true
+enable-click = true
+enable-scroll = true
+wrapping-scroll = false
 
+strip-wsnumbers = true
 
-; Available tokens:
-;   %mode%
-; Default: %mode%
+label-focused = %icon%
+label-focused-foreground = ${colors.blue}
+label-focused-background = ${colors.dark}
+label-focused-padding = 1
+
+label-unfocused = %icon%
+label-unfocused-foreground = ${colors.medium}
+label-unfocused-background = ${colors.dark}
+label-unfocused-padding = 1
+
+label-urgent = %icon%
+label-urgent-foreground = ${colors.magenta}
+label-urgent-background = ${colors.dark}
+label-urgent-padding = 1
+
+label-visible = %icon%
+label-visible-foreground = ${colors.medium}
+label-visible-background = ${colors.dark}
+label-visible-padding = 1
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10; 
+
 label-mode = %mode%
-label-mode-padding = 2
-label-mode-background = #e60053
+label-mode-padding = 3
+label-mode-background = ${colors.magenta}
+label-mode-foreground = ${colors.background}
 
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-;   %output%
-; Default: %icon%  %name%
-label-focused = %index%
-label-focused-foreground = #ffffff
-label-focused-background = ${colors.background-alt}
-label-focused-underline = #fba922
-label-focused-padding = 4
 
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-unfocused = %index%
-label-unfocused-padding = 4
+[module/xwindow]
+type = internal/xwindow
 
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-visible = %index%
-label-visible-underline = #555555
-label-visible-padding = 4
+format-foreground = ${colors.cyan}
+format-padding = 0
 
-; Available tokens:
-;   %name%
-;   %icon%
-;   %index%
-; Default: %icon%  %name%
-label-urgent = %index%
-label-urgent-foreground = #000000
-label-urgent-background = ${colors.background-alrt}
-label-urgent-padding = 4
+label = "%title%"
+label-maxlen = 40
 
 
 [module/wlan]
@@ -272,9 +154,8 @@ type = internal/network
 interface = wlp2s0b1
 interval = 3.0
 
-format-connected-background = ${colors.background-mod2}
+format-connected-background = ${colors.background}
 format-connected = "<ramp-signal> <label-connected>   "
-format-connected-underline = #9f78e1
 label-connected = %essid% %upspeed%/%downspeed%
 
 ;format-disconnected = <label-disconnected>
@@ -282,12 +163,12 @@ label-connected = %essid% %upspeed%/%downspeed%
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = "  "
-ramp-signal-1 = "  "
-ramp-signal-2 = "  "
-ramp-signal-3 = "  "
-ramp-signal-4 = "  "
-ramp-signal-foreground = ${colors.foreground-alt}
+ramp-signal-0 = " "
+ramp-signal-1 = " "
+ramp-signal-2 = " "
+ramp-signal-3 = " "
+ramp-signal-4 = " "
+ramp-signal-foreground = ${colors.foreground}
 
 
 [module/eth]
@@ -295,98 +176,167 @@ type = internal/network
 interface = enp10s0
 interval = 3.0
 
-format-connected-background = ${colors.background-alt}
+format-connected-background = ${colors.background}
 format-connected-underline = #55aa55
+format-disconnected = 
 label-connected = "   %upspeed%  %downspeed% %linkspeed%  "
 
 
-format-disconnected = 
+[module/mpd]
+type = internal/mpd
+
+interval = 1
+
+host = 127.0.0.1
+port = 6600
+
+format-online-prefix = "%{T4}%{T-}"
+format-online-prefix-foreground = ${colors.dark}
+format-online-prefix-background = ${colors.background}
+
+format-online-suffix = "%{T4} %{T-}"
+format-online-suffix-foreground = ${colors.dark} 
+format-online-suffix-background = ${colors.background}
+
+format-online = <label-song>
+format-offline =
+format-stop =
+
+label-song = %artist% - %title%
+label-song-foreground = ${colors.light}
+label-song-background = ${colors.background}
 
 
-[module/date]
-type = internal/date
-interval = 5
+[module/right_arrow]
+type = custom/text
+content = "%{T4} %{T-}"
+content-foreground = ${colors.dark} 
+content-background = ${colors.background}
 
-date = 
-date-alt = " %Y-%m-%d"
 
-time = "%a %b %d, %I:%M %p"
-time-alt = %H:%M:%S
-
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
-
-label = "  %date% %time%  "
+[module/left_arrow]
+type = custom/text
+content = "%{T4}%{T-}"
+content-foreground = ${colors.dark}
+content-background = ${colors.background}
 
 
 [module/volume]
 type = internal/volume
+mapping = true
+master-mixer = Master
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
 
-format-muted-background = ${colors.background-mod0}
-format-volume-background = ${colors.background-mod0}
-format-volume = "<label-volume> <ramp-volume>   "
-label-volume = "   %percentage%%"
-label-muted = "   MUTED    "
+format-volume = <label-volume>
 
-; Only applies if <ramp-volume> is used
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
+label-volume =  %percentage%%
+label-volume-foreground = ${colors.orange}
+
+label-muted =  Muted
+label-muted-foreground = ${colors.medium}
+
+label-volume-padding = 3
+label-muted-padding = 3
+
+
+[module/memory]
+type = internal/memory
+interval = 1
+label =  %percentage_used%%
+
+label-padding = 3
+
+label-foreground = ${colors.magenta}
+
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+label =  %percentage%%
+
+label-padding = 3
+
+label-foreground = ${colors.yellow}
 
 
 [module/battery]
 type = internal/battery
 battery = BAT0
 adapter = AC
-full-at = 97
+full-at = 99
 
-format-full-background = ${colors.background-mod2}
-format-charging-background = ${colors.background-mod1}
-format-charging = "⁣  <label-charging> <animation-charging>  "
-format-charging-underline = #ffb52a
+format-charging = <animation-charging><label-charging>
+format-discharging = <ramp-capacity><label-discharging>
+format-full = <label-full>
 
-format-discharging-background = ${colors.background-alrt}
-format-discharging = "⁣  <label-discharging> <ramp-capacity>  "
-format-discharging-underline = ${self.format-charging-underline}
+label-full =  %percentage%%
+label-charging = %percentage%%
+label-discharging = %percentage%%
 
-format-full= "⁣  <label-full> <ramp-capacity>  "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-6 = 
+ramp-capacity-7 = 
+ramp-capacity-8 = 
+ramp-capacity-9 = 
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-5 = 
+animation-charging-6 = 
+animation-charging-7 = 
+animation-charging-8 = 
+animation-charging-9 = 
+animation-charging-10 = 
+animation-charging-11 = 
+animation-charging-framerate = 350
 
-ramp-capacity-foreground = ${colors.foreground-alt}
+label-full-foreground = ${colors.blue}
+label-charging-foreground = ${colors.green}
+animation-charging-foreground = ${colors.green}
+label-discharging-foreground = ${colors.red}
+ramp-capacity-foreground = ${colors.red}
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
+; width messes up for some reason, so here's a dirty workaround
+format-full-prefix            = |
+format-full-prefix-foreground = ${colors.background}
+format-full-suffix            = |
+format-full-suffix-foreground = ${colors.background}
 
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
+format-charging-prefix            = |
+format-charging-prefix-foreground = ${colors.background}
+format-charging-suffix            = |
+format-charging-suffix-foreground = ${colors.background}
 
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
+format-discharging-prefix            = |
+format-discharging-prefix-foreground = ${colors.background}
+format-discharging-suffix            = |
+format-discharging-suffix-foreground = ${colors.background}
 
-label = %temperature%
-label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
+label-full-padding = 1
+label-charging-padding = 1
+label-discharging-padding = 1
+ramp-capacity-padding = 1
+animation-charging-padding = 1
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+date =  %I:%M %p
+date-alt =  %Y-%m-%d   %I:%M %p
+interval = 2
+
+label-foreground = ${colors.cyan}
+label-padding   =  3
 
 
 [module/powermenu]
@@ -418,9 +368,31 @@ menu-2-0-exec = sudo poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
-[global/wm]
-margin-top = 5
-margin-bottom = 5
+[module/weather]
+type = custom/script
+interval = 60
+
+format-background = ${colors.background-mod1}
+format = <label>
+format-prefix = " ⁣   "
+format-suffix = "  "
+format-prefix-foreground = ${colors.foreground-alt}
+#exec = python ~/.config/polybar/weather.py
+
+label-padding = 1
+
+
+[module/rofi]
+type = custom/script
+
+exec = echo ""
+click-left = echo "" | i3-dmenu-desktop --dmenu="rofi -dmenu -i -hide-scrollbar -location 3 -yoffset 43 -xoffset -16" &
+click-right = echo "" | rofi -show run -hide-scrollbar -location 3 -yoffset 43 -xoffset -16 &
+
+label-background = ${colors.dark}
+label-foreground = ${colors.blue}
+
+label-padding = 1
 
 
 [module/pkg]
@@ -428,8 +400,7 @@ type = custom/script
 ; 5 mins
 interval = 600
 format = <label>
-format-background=${colors.background}
-format-underline = #dc322f
+format-background=${colors.dark}
 label = "%output:0:30%"
 exec = $HOME/.config/polybar/pkg.sh
 ; Only run if we can ping Google's DNS
@@ -438,4 +409,5 @@ exec-if = "ping -q -w 2 -c 1 8.8.8.8 > /dev/null"
 ; Refresh on click
 click-left = $HOME/.config/polybar/pkg.sh
 
+label-padding = 1
 
