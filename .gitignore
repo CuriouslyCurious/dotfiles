@@ -1,10 +1,15 @@
 *.swp
 **/bundle/
+**/*history*
 
 # mpd
-**/database
-**/log
-**/pid
-**/sticker.sql
-**/state
-**/playlists
+**/mpd/database
+**/mpd/log
+**/mpd/pid
+**/mpd/sticker.sql
+**/mpd/state
+**/mpd/playlists
+
+# ranger
+**/ranger/bookmarks
+**/ranger/tagged
