@@ -7,10 +7,9 @@
 ; ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
 ;
 ; Curious' polybar config
-; (with elements from 
+; Influenced by:
 ; * KingKobra87's Dracula (https://github.com/kingkobra87/dotfiles/blob/master/.config/polybar/config)
 ; * /u/rintivdorh's Cranium (https://paste.teknik.io/Raw/DFTep)
-; )
 
 [global/wm]
 margin-top = 5
@@ -74,13 +73,13 @@ module-margin-right = 0
 
 modules-left = i3 right_arrow xwindow
 modules-center = mpd
-modules-right = volume memory cpu battery wlan eth date left_arrow rofi pkg
+modules-right = wlan eth volume memory cpu battery date left_arrow rofi pkg
 
-;tray-position = hidden
-tray-padding = 4
+tray-position = hidden
+tray-padding = 2
 tray-transparent = true
 tray-offset-y = 22
-tray-offset-x = -0
+tray-offset-x = 0
 tray-maxsize = 18
 tray-detached = true
 
@@ -155,20 +154,22 @@ interface = wlp2s0b1
 interval = 3.0
 
 format-connected-background = ${colors.background}
-format-connected = "<ramp-signal> <label-connected>   "
-label-connected = %essid% %upspeed%/%downspeed%
+format-connected = <ramp-signal> <label-connected>
+label-connected = %essid%
+;%upspeed% | %downspeed%
+format-connected-padding = 2
 
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = " "
-ramp-signal-1 = " "
-ramp-signal-2 = " "
-ramp-signal-3 = " "
-ramp-signal-4 = " "
-ramp-signal-foreground = ${colors.foreground}
+ramp-signal-0 = ""
+ramp-signal-1 = ""
+ramp-signal-2 = ""
+ramp-signal-3 = ""
+ramp-signal-4 = ""
+ramp-signal-5 = ""
 
 
 [module/eth]
@@ -180,7 +181,7 @@ format-connected-background = ${colors.background}
 format-connected-underline = #55aa55
 format-disconnected = 
 label-connected = "   %upspeed%  %downspeed% %linkspeed%  "
-
+format-connected-padding = 2
 
 [module/mpd]
 type = internal/mpd
@@ -237,8 +238,8 @@ label-volume-foreground = ${colors.orange}
 label-muted =  Muted
 label-muted-foreground = ${colors.medium}
 
-label-volume-padding = 3
-label-muted-padding = 3
+label-volume-padding = 2
+label-muted-padding = 2
 
 
 [module/memory]
@@ -246,7 +247,7 @@ type = internal/memory
 interval = 1
 label =  %percentage_used%%
 
-label-padding = 3
+label-padding = 2
 
 label-foreground = ${colors.magenta}
 
@@ -256,7 +257,7 @@ type = internal/cpu
 interval = 1
 label =  %percentage%%
 
-label-padding = 3
+label-padding = 2
 
 label-foreground = ${colors.yellow}
 
@@ -336,7 +337,7 @@ date-alt =  %Y-%m-%d   %I:%M %p
 interval = 2
 
 label-foreground = ${colors.cyan}
-label-padding   =  3
+label-padding   =  2
 
 
 [module/powermenu]
@@ -374,8 +375,8 @@ interval = 60
 
 format-background = ${colors.background-mod1}
 format = <label>
-format-prefix = " ⁣   "
-format-suffix = "  "
+format-prefix = " "
+format-suffix = 
 format-prefix-foreground = ${colors.foreground-alt}
 #exec = python ~/.config/polybar/weather.py
 
