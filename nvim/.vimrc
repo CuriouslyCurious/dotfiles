@@ -15,6 +15,7 @@ Plug 'tmhedberg/SimpylFold'
 " Highlighting
 Plug 'tikhomirov/vim-glsl'
 Plug 'vim-syntastic/syntastic'
+Plug 'PotatoesMaster/i3-vim-syntax'
 
 " Latex
 Plug 'lervag/vimtex'
