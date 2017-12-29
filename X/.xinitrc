@@ -28,6 +28,10 @@ if [ -f "$xbindkeys" ]; then
     xbindkeys
 fi
 
+if [ -f "$HOME/.fonts" ]; then
+    xset +fp /home/curious/.fonts
+    xset fp rehash
+fi
 
 # Start the window manager
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
