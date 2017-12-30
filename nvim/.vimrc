@@ -77,7 +77,6 @@ set expandtab
 set shiftwidth=4
 set smarttab
 
-
 set backspace=2
 set guioptions-=T
 set guioptions-=r
@@ -94,6 +93,9 @@ set clipboard=unnamed
 " Backups
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+
+" lower timeout length
+set timeoutlen=1000 ttimeoutlen=0
 
 " Split navigations
 nnoremap <C-J> <C-W><C-J>
