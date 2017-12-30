@@ -1,15 +1,25 @@
-# Lines configured by zsh-newuser-install
+
+#  ███████╗███████╗██╗  ██╗
+#  ╚══███╔╝██╔════╝██║  ██║
+#    ███╔╝ ███████╗███████║
+#   ███╔╝  ╚════██║██╔══██║
+#  ███████╗███████║██║  ██║
+#  ╚══════╝╚══════╝╚═╝  ╚═╝
+#                          
+# Curious' zsh config
+
+##################
+##### Basics #####
+##################
+
 HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=10000
-#bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
+
 zstyle :compinstall filename '/home/curious/.zshrc'
 
 autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+
 case "$TERM" in 
     xterm-color) color_prompt=yes;;
     xterm-256color) color_prompt=yes;;
@@ -19,10 +29,19 @@ esac
 
 set bell-style none
 
-# -- Antigen --
+export EDITOR=/usr/bin/nvim
+export TERM=xterm-256color
+
+setopt extendedglob
+
+###################
+##### Antigen #####
+###################
+
 source $HOME/.config/zsh/antigen.zsh
 
 antigen use oh-my-zsh
+
 # Default bundles
 antigen bundle git
 antigen bundle heroku
@@ -34,25 +53,68 @@ antigen bundle command-not-found
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Load the theme.
-#antigen theme robbyrussell
-#antigen theme https://github.com/caiogondim/bullet-train-oh-my-zsh-theme bullet-train
-#antigen theme https://github.com/halfo/lambda-mod-zsh-theme/ lambda-mod
 antigen theme https://github.com/denysdovhan/spaceship-zsh-theme spaceship
 
 # Tell Antigen that you're done.
 antigen apply
-# -- End Antigen --
 
-export EDITOR=/usr/bin/nvim
-export TERM=xterm-256color
+#####################
+##### Functions #####
+#####################
 
-setopt extendedglob
-
-# Functions #
+# run ls -a on entering a new directory
 function chpwd() {
     emulate -L zsh
     ls -a
 }
+
+####################
+##### Keybinds #####
+####################
+
+# vi-mode (https://github.com/ajh17/dotfiles/blob/master/.zshrc#L164)
+bindkey -v
+autoload -Uz edit-command-line
+zle -N edit-command-line
+
+bindkey -M vicmd "/" history-incremental-pattern-search-forward
+bindkey -M vicmd "?" history-incremental-pattern-search-backward
+bindkey -M vicmd '^g' what-cursor-position
+bindkey -M vicmd '^r' redo
+bindkey -M vicmd 'G' end-of-buffer-or-history
+bindkey -M vicmd 'gg' beginning-of-buffer-or-history
+bindkey -M vicmd 'u' undo
+bindkey -M vicmd '~' vi-swap-case
+bindkey -M vicmd '^v' edit-command-line
+bindkey '^?' backward-delete-char
+bindkey '^[[A' history-beginning-search-backward
+bindkey '^[[B' history-beginning-search-forward
+bindkey '^[[Z' reverse-menu-complete
+bindkey '^a' vi-insert-bol
+bindkey '^_' run-help
+bindkey '^e' vi-add-eol
+bindkey '^k' kill-line
+bindkey '^l' clear-screen
+bindkey '^n' insert-last-word
+bindkey '^r' history-incremental-search-backward
+bindkey '^s' history-incremental-search-forward
+bindkey '^u' vi-change-whole-line
+
+###################
+##### Options #####
+###################
+
+# Spacehip theme options
+ZSH_THEME="spaceship"
+SPACESHIP_BATTERY_SHOW=false
+SPACESHIP_BATTERY_PREFIX=""
+SPACESHIP_BATTERY_SUFFIX=" "
+
+SPACESHIP_VI_MODE_SHOW=true
+
+##########################
+##### Other programs #####
+##########################
 
 # Run ssh-agent
 # https://wiki.archlinux.org/index.php/SSH_keys#SSH_agents
