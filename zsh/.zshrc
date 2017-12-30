@@ -34,6 +34,10 @@ export TERM=xterm-256color
 
 setopt extendedglob
 
+# Lower timeout delay (might cause issues)
+# Default = 40
+export KEYTIMEOUT=1
+
 ###################
 ##### Antigen #####
 ###################
@@ -87,8 +91,6 @@ bindkey -M vicmd 'u' undo
 bindkey -M vicmd '~' vi-swap-case
 bindkey -M vicmd '^v' edit-command-line
 bindkey '^?' backward-delete-char
-bindkey '^[[A' history-beginning-search-backward
-bindkey '^[[B' history-beginning-search-forward
 bindkey '^[[Z' reverse-menu-complete
 bindkey '^a' vi-insert-bol
 bindkey '^_' run-help
@@ -100,17 +102,18 @@ bindkey '^r' history-incremental-search-backward
 bindkey '^s' history-incremental-search-forward
 bindkey '^u' vi-change-whole-line
 
-###################
-##### Options #####
-###################
+##########################
+##### Plugin options #####
+##########################
 
-# Spacehip theme options
+# Spacehip theme
 ZSH_THEME="spaceship"
 SPACESHIP_BATTERY_SHOW=false
 SPACESHIP_BATTERY_PREFIX=""
 SPACESHIP_BATTERY_SUFFIX=" "
 
 SPACESHIP_VI_MODE_SHOW=true
+spaceship_vi_mode_enable
 
 ##########################
 ##### Other programs #####
