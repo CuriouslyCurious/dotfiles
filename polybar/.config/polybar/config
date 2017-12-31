@@ -46,6 +46,7 @@ font-0 = Wuncon Siji:pixelsize=10;2
 font-1 = Terminus:size=8;2
 font-2 = FontAwesome:pixelsize=12;2
 font-3 = xos4 Terminess Powerline:size=28;4
+font-4 = Noto Sans Mono CJK SC:size=8;1
 
 monitor = ${env:MONITOR}
 
@@ -144,7 +145,8 @@ type = internal/xwindow
 format-foreground = ${colors.cyan}
 format-padding = 0
 
-label = "%title%"
+label = %title%
+label-font = 5
 label-maxlen = 40
 
 
@@ -191,21 +193,22 @@ interval = 1
 host = 127.0.0.1
 port = 6600
 
-format-online-prefix = "%{T4}%{T-}"
-format-online-prefix-foreground = ${colors.dark}
-format-online-prefix-background = ${colors.background}
+icon-prev = "%{T4}%{T-}"
+icon-prev-foreground = ${colors.dark}
+icon-prev-foreground ${colors.background}
 
-format-online-suffix = "%{T4} %{T-}"
-format-online-suffix-foreground = ${colors.dark} 
-format-online-suffix-background = ${colors.background}
+icon-next = "%{T4} %{T-}"
+icon-next-foreground = ${colors.dark} 
+icon-next-background = ${colors.background}
 
-format-online = <label-song>
+format-online = <icon-prev><label-song><icon-next>
 format-offline =
 format-stop =
 
 label-song = %artist% - %title%
+label-song-font = 5
 label-song-foreground = ${colors.light}
-label-song-background = ${colors.background}
+label-song-background = ${colors.dark}
 
 
 [module/right_arrow]
