@@ -53,7 +53,7 @@ antigen bundle pip
 antigen bundle lein
 antigen bundle command-not-found
 
-# Syntax highlighting bundle.
+# Syntax highlighting
 antigen bundle zsh-users/zsh-syntax-highlighting
 
 # Auto suggestions
@@ -136,6 +136,9 @@ spaceship_vi_mode_enable
 ##########################
 ##### Other programs #####
 ##########################
+
+# Set .dircolors
+eval $(dircolors -b $HOME/.dircolors)
 
 # Run ssh-agent
 # https://wiki.archlinux.org/index.php/SSH_keys#SSH_agents

@@ -34,7 +34,7 @@ if [ -f "$HOME/.fonts" ]; then
 fi
 
 if [ -f "/usr/bin/unclutter" ]; then
-    unclutter
+    unclutter &
 fi
 
 # Start the window manager
