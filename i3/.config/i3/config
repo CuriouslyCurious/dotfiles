@@ -1,4 +1,4 @@
-
+#
 #  ██╗   ██████╗     ██╗   ██╗███╗   ███╗
 #  ██║   ╚════██╗    ██║   ██║████╗ ████║
 #  ██║    █████╔╝    ██║   ██║██╔████╔██║
@@ -11,6 +11,12 @@
 # - tmplt
 # - KingKobra87 (https://github.com/kingkobra87/dotfiles/blob/master/.i3/config)
 
+###################
+##### General #####
+###################
+
+font pango:DejaVu Sans Mono 10, FontAwesome 10
+
 # Monitors 
 exec --no-startup-id xrandr --output DP-1 --auto --output HDMI-1 --right-of DP-1 --output DVI-D-1 --left-of DP-1
 
@@ -22,14 +28,18 @@ set $monR HDMI-1
 workspace $ws1 output $monL
 workspace $ws2 output $monL
 
+# The border around windows
+new_window pixel 2
+new_float pixel 2
+
 #workspace_auto_back_and_forth yes
 #hide_edge_borders both
 
+# Program settings
 assign [class="Gimp"] 5
 for_window [title="GIMP Startup"] move workspace 5
 for_window [window_role="gimp-toolbox"] floating disable; layout stacking; move left; resize shrink right 31px or 31 ppt
 
-for_window [class="^.*"] border pixel 1
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="Organizer"] floating enable
@@ -37,6 +47,19 @@ for_window [class="Navigator"] floating enable
 for_window [class="^URxvt$" instance="^irssi$"] floating enable, resize grow up 180 px, resize grow down 200 px
 for_window [class="^URxvt$" instance="^visualizer$"] floating enable, resize grow up 185 px, resize shrink down 238 px
 for_window [class="^URxvt$" instance="^playlist$"] floating enable, resize grow down 200 px, resize shrink up 235 px
+
+# https://github.com/ValveSoftware/steam-for-linux/issues/1040
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+
+for_window [title="^Steam Keyboard$"] floating enable
 
 #####################
 ###### COLOURS ######
@@ -64,34 +87,10 @@ client.placeholder      $green      $green      $green      $green      $green
 
 client.background $bg
 
-new_window pixel 2
-new_float pixel 2
+####################
+##### Start-up #####
+####################
 
-#set        $fg #d6d1cc
-#set        $bg #2b2b2b
-#set     $black #282a2e
-#set       $red #cb555a
-#set     $green #85cb55
-#set    $yellow #e6cc63
-#set      $blue #53a5ad
-#set   $magenta #a84466
-#set      $cyan #7bc3bd
-#set     $white #e6e1dc
-#
-#set   $primary #CB555A
-#set $secondary #a84466
-#set    $bar_bg #49535800
-#set    $bar_bg #222222
-#set $bar_black #A6A6A6 #757575 #666666
-
-
-#                      # Border      Background      Text        Indicator
-#client.focused          $black      $primary        $bg         $primary
-#client.focused_inactive $black      $bg             $fg         $bg
-#client.unfocused        $black      $black          $fg         $black
-#client.urgent           $black      $white          $fg         $white
-
-# ON START-UP
 # Set keyboard layout
 exec setxkbmap -layout se
 
@@ -127,32 +126,67 @@ exec --no-startup-id i3-msg 'workspace $ws1; exec termite; \
 #	font '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*'
 #}
 
-# i3-gaps
-#gaps inner 10
-#gaps outer 20
+###################
+##### i3-gaps #####
+###################
+smart_borders on
+smart_gaps on
+gaps inner 16
+gaps outer 0
 
-#workspace 2 gaps inner 0
-#workspace 2 gaps outer 0
+# adjust gaps on-the-fly
+set $mode_gaps Gaps: (O)uter, (I)nner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
 
-#workspace 3 gaps inner 0
-#workspace 3 gaps outer 0
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
 
-# Keybinds
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 1
+        bindsym minus gaps inner current minus 1
+        bindsym 0     gaps inner current set 0
+
+        bindsym Shift+plus  gaps inner all plus 1
+        bindsym Shift+minus gaps inner all minus 1
+        bindsym Shift+0 gaps inner all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 1
+        bindsym minus gaps outer current minus 1
+        bindsym 0 gaps outer current set 0
+
+        bindsym Shift+plus  gaps outer all plus 1
+        bindsym Shift+minus gaps outer all minus 1
+        bindsym Shift+0 gaps outer all set 0
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+
+####################
+##### Keybinds #####
+####################
 set $mod Mod4
-#font pango:Hack, FontAwesome 10
-#font '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*', FontAwesome 10
-
-font pango:DejaVu Sans Mono 10, FontAwesome 10
 
 floating_modifier $mod
 bindsym $mod+Return exec termite
-#bindsym $mod+Return exec urxvt
 bindsym $mod+q kill
 
 #bindsym $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
 #bindsym $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85" 
 bindsym $mod+d exec rofi -show run 
 
+# vi-like movement
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
@@ -163,8 +197,21 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-bindsym $mod+g split h
-bindsym $mod+v split v
+# Cursor key movement
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+b split h;exec notify-send 'tile horizontally'
+# split in vertical orientation
+bindsym $mod+v split v;exec notify-send 'tile vertically'
 
 bindsym $mod+f fullscreen
 
@@ -175,6 +222,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
+# Workspace stuff
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -185,18 +233,6 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws0 "10"
-
-#set $ws1 "1: 1 "
-#set $ws2 "2: 2 "
-#set $ws3 "3: 3 "
-#set $ws3 "3: 3  fa-folder-open"
-#set $ws4 "4: 4 "
-#set $ws5 "5: 5 "
-#set $ws6 "6: 6"
-#set $ws7 "7: 7"
-#set $ws8 "8: 8 "
-#set $ws9 "9: 9 "
-#set $ws0 "10: 10 "
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -226,24 +262,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws0
 
-bindsym $mod+Shift+r restart
-
-#bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit' 
-
-bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | rofi -i -p "Really exit i3 X session?") = "YES" ] && i3-msg-exit' 
-
-#bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -f DejaVu -t warning -m 'Do you want to exit i3 ?' -b 'Yes' 'i3-msg exit'"
-
-# https://github.com/cac03/i3lock
-bindsym $mod+Shift+I exec $HOME/.config/i3/lock.sh
-
-# https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
-# Multi-screen screenshots with scrot
-bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # All screens
-
-# OSX-like area selection screenshots
-bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # Area selection
-
+# Resize mode
 bindsym $mod+r mode "resize"
 mode "resize" {
         bindsym h resize shrink width 10 px or 10 ppt
@@ -254,68 +273,20 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-################### CUSTOM SETTINGS ################### 
-#workspace_auto_back_and_forth yes
-#hide_edge_borders both
+# Restart the i3 instance
+bindsym $mod+Shift+r restart
 
-for_window [class="^.*"] border pixel 1
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="Organizer"] floating enable
-for_window [class="Navigator"] floating enable
-for_window [class="^URxvt$" instance="^irssi$"] floating enable, resize grow up 180 px, resize grow down 200 px
-for_window [class="^URxvt$" instance="^visualizer$"] floating enable, resize grow up 185 px, resize shrink down 238 px
-for_window [class="^URxvt$" instance="^playlist$"] floating enable, resize grow down 200 px, resize shrink up 235 px
-for_window [class="syncsim-SyncSim"] floating enable
-#for_window [class="sun-awt-X11-XFramePeer"] floating enable
+# Exit prompt
+bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit' 
 
-# https://github.com/ValveSoftware/steam-for-linux/issues/1040
-for_window [class="^Steam$" title="^Friends$"] floating enable
-for_window [class="^Steam$" title="Steam - News"] floating enable
-for_window [class="^Steam$" title=".* - Chat"] floating enable
-for_window [class="^Steam$" title="^Settings$"] floating enable
-for_window [class="^Steam$" title=".* - event started"] floating enable
-for_window [class="^Steam$" title=".* CD key"] floating enable
-for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
-for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
-for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+# https://github.com/cac03/i3lock
+bindsym $mod+Shift+I exec $HOME/.config/i3/lock.sh
 
-for_window [title="^Steam Keyboard$"] floating enable
+# https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
+# Multi-screen screenshots with scrot
+bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # All screens
 
-#bar {
-#    strip_workspace_numbers yes
-#    status_command i3blocks -c ~/.i3/i3blocks.conf
-#    #i3bar_command i3bar -t
-#    colors {
-#        background $bar_bg
-#        statusline #888888
-#                              # Border      Background      Text
-#        focused_workspace       $bar_bg         $bar_bg     $primary
-#        active_workspace        $bar_bg         $bar_bg     $bar_black
-#        inactive_workspace      $bar_bg         $bar_bg     $bar_black
-#    }
-#    tray_output no
-#	position top
-#	#font pango:  Hack, FontAwesome 10
-#	font '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*'
-#}
-
-# i3-gaps
-#gaps inner 10
-#gaps outer 20
-
-#workspace 2 gaps inner 0
-#workspace 2 gaps outer 0
-
-#workspace 3 gaps inner 0
-#workspace 3 gaps outer 0
-
-## Monitor arrangement
-#set $monL HDMI-1
-#set $monR DVI-D-1
-#
-## Set workspaces default monitors
-#workspace $ws1 output $monL
-#workspace $ws2 output $monL
+# OSX-like area selection screenshots
+bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # Area selection
 
 
