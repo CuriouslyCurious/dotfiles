@@ -1,4 +1,4 @@
-
+#
 #  ███████╗███████╗██╗  ██╗
 #  ╚══███╔╝██╔════╝██║  ██║
 #    ███╔╝ ███████╗███████║
@@ -56,6 +56,9 @@ antigen bundle command-not-found
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
+# Auto suggestions
+antigen bundle zsh-users/zsh-autosuggestions
+
 # Load the theme.
 antigen theme https://github.com/denysdovhan/spaceship-zsh-theme spaceship
 
@@ -101,6 +104,21 @@ bindkey '^n' insert-last-word
 bindkey '^r' history-incremental-search-backward
 bindkey '^s' history-incremental-search-forward
 bindkey '^u' vi-change-whole-line
+
+# vi-mode is dumb, so this needs to be added
+# start typing + [Up-Arrow] - fuzzy find history forward
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+  autoload -U up-line-or-beginning-search
+  zle -N up-line-or-beginning-search
+  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+# start typing + [Down-Arrow] - fuzzy find history backward
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+  autoload -U down-line-or-beginning-search
+  zle -N down-line-or-beginning-search
+  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
+
 
 ##########################
 ##### Plugin options #####
