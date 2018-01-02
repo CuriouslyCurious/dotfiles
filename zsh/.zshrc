@@ -105,6 +105,9 @@ bindkey '^r' history-incremental-search-backward
 bindkey '^s' history-incremental-search-forward
 bindkey '^u' vi-change-whole-line
 
+bindkey "^[OH" beginning-of-line
+bindkey "^[OF" end-of-line
+
 # vi-mode is dumb, so this needs to be added
 # start typing + [Up-Arrow] - fuzzy find history forward
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
