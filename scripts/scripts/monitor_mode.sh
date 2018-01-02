@@ -15,14 +15,18 @@ fi
 if [ $monitor_mode = "all" ]; then
         monitor_mode="EXTERNAL"
         xrandr --output $INTERNAL_OUTPUT --off --output $EXTERNAL_OUTPUT --auto
+        $HOME/.fehbg
 elif [ $monitor_mode = "EXTERNAL" ]; then
         monitor_mode="INTERNAL"
         xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --off
+        $HOME/.fehbg
 elif [ $monitor_mode = "INTERNAL" ]; then
         monitor_mode="CLONES"
         xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --auto --same-as $INTERNAL_OUTPUT
+        $HOME/.fehbg
 else
         monitor_mode="all"
         xrandr --output $INTERNAL_OUTPUT --auto --output $EXTERNAL_OUTPUT --auto --left-of $INTERNAL_OUTPUT
+        $HOME/.fehbg
 fi
 echo "${monitor_mode}" > /tmp/monitor_mode.dat
