@@ -182,7 +182,7 @@ interval = 3.0
 format-connected-background = ${colors.background}
 format-connected-underline = #55aa55
 format-disconnected = 
-label-connected = "   %upspeed%  %downspeed% %linkspeed%  "
+label-connected = "%linkspeed%  %upspeed%  %downspeed%"
 format-connected-padding = 2
 
 [module/mpd]
