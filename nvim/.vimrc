@@ -39,7 +39,12 @@ Plug 'tomasr/molokai'
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'vim-scripts/CycleColor'
+Plug 'liuchengxu/space-vim-dark'
 call plug#end()
+
+""""""""""""""""""""""""""""
+""""" General Settings """""
+"""""""""""""""""""""""""""" 
 filetype plugin indent on
 syntax enable
 
@@ -56,9 +61,15 @@ set enc=utf8
 set background=dark
 set autoindent
 
+" Make .tex files run faster
+" https://stackoverflow.com/questions/8300982/vim-running-slow-with-latex-files
+au FileType tex setlocal nocursorline
+au FileType tex :NoMatchParen
+
 " space-vim-dark Theme
 let g:space_vim_dark_background=233
 colorscheme space-vim-dark
+hi Comment cterm=italic
 
 " Molokai
 "let g:molokai_original=1
