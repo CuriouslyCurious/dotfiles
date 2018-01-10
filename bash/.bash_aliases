@@ -35,7 +35,8 @@ alias suspend="systemctl suspend"
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
-
+# Java is dumb
+alias syncsim="wmname LG3D && exec $HOME/scripts/syncsim"
 # Misc
 alias dude="du -h --exclude=./yesterday | sort -h | grep -E \"^[0-9]+(\.|,)?[0-9]*M\""
 alias weather="curl http://wttr.in/lulea"
@@ -43,5 +44,8 @@ alias c="clear"
 alias se="sudoedit"
 alias x="exit"
 alias top="htop"
-# Java is dumb
-alias syncsim="wmname LG3D && exec $HOME/scripts/syncsim"
+# Passes all files in current directory to sxiv
+function _comic() {ls -v . | sxiv -i -f -Z -p -t ;}
+alias comic="_comic"
+
+
