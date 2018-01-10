@@ -65,6 +65,8 @@ set autoindent
 " https://stackoverflow.com/questions/8300982/vim-running-slow-with-latex-files
 au FileType tex setlocal nocursorline
 au FileType tex :NoMatchParen
+" https://github.com/vim/vim/issues/727
+autocmd FileType tex set regexpengine=1
 
 " space-vim-dark Theme
 let g:space_vim_dark_background=233
