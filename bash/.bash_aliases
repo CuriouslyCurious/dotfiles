@@ -45,7 +45,7 @@ alias se="sudoedit"
 alias x="exit"
 alias top="htop"
 # Passes all files in current directory to sxiv
-function _comic() {ls -v . | sxiv -i -f -Z -p -t ;}
+function _comic() {find $@ -type f -exec file {} \; | awk -F: '{if ($2 ~/image/) print $1}' | sxiv -i -f -Z -p -t ;}
 alias comic="_comic"
 
 
