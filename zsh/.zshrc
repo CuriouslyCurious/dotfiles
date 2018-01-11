@@ -171,7 +171,7 @@ fi
 # Set editor
 if [ -e /usr/bin/nvim ]; then
     export EDITOR=/usr/bin/nvim
-elif [ -e /usr/bin/bim ]; then
+elif [ -e /usr/bin/vim ]; then
     export EDITOR=/usr/bin/vim
 else
     export EDITOR=/usr/bin/nano
