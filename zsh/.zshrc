@@ -27,10 +27,9 @@ case "$TERM" in
     screen-256color) color_prompt=yes;;
 esac
 
-set bell-style none
-
-export EDITOR=/usr/bin/nvim
 export TERM=xterm-256color
+
+set bell-style none
 
 setopt extendedglob
 
@@ -169,3 +168,11 @@ if [ -f $HOME/.bash_aliases ]; then
     source $HOME/.bash_aliases
 fi
 
+# Set editor
+if [ -e /usr/bin/nvim ]; then
+    export EDITOR=/usr/bin/nvim
+elif [ -e /usr/bin/bim ]; then
+    export EDITOR=/usr/bin/vim
+else
+    export EDITOR=/usr/bin/nano
+fi
