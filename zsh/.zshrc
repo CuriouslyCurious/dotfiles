@@ -174,5 +174,5 @@ if [ -e /usr/bin/nvim ]; then
 elif [ -e /usr/bin/vim ]; then
     export EDITOR=/usr/bin/vim
 else
-    export EDITOR=/usr/bin/nano
+    export EDITOR=/bin/nano
 fi
