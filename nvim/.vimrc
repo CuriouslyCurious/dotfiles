@@ -38,12 +38,17 @@ Plug 'tikhomirov/vim-glsl'
     autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 Plug 'vim-syntastic/syntastic'
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_python_checkers=['flake8']
+    let g:syntastic_python_flake8_args='--ignore=E501,E225'   
+    let g:syntastic_check_on_wq = 0
+
 Plug 'PotatoesMaster/i3-vim-syntax'
 
 " Latex
 Plug 'lervag/vimtex'
-    let g:tex_flavor='latex'
-
     let g:vimtex_fold_enabled = 1
     let g:vimtex_view_method = 'zathura'
     let g:vimtex_compiler_latexmk = {
