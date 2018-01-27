@@ -33,3 +33,11 @@ if [ -f $HOME/.bash_aliases ]; then
     source $HOME/.bash_aliases
 fi
 
+# Set editor
+if [ -e /usr/bin/nvim ]; then
+    export EDITOR=/usr/bin/nvim
+elif [ -e /usr/bin/vim ]; then
+    export EDITOR=/usr/bin/vim
+else
+    export EDITOR=/bin/nano
+fi
