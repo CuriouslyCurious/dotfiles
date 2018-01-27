@@ -22,7 +22,7 @@ alias gl="git log"
 alias gfm="git pull"
 alias gd="git diff"
 alias gt="git tag"
-alias gicl="git clone --recursive -j8"
+alias gcl="git clone --recursive -j8"
 alias gsu="git submodule update --recursive"
 # ls
 alias l="ls -la"
