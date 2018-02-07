@@ -283,9 +283,16 @@ bindsym $mod+Shift+I exec $HOME/.config/i3/lock.sh
 
 # https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
 # Multi-screen screenshots with scrot
-bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # All screens
+#bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # All screens
 
 # OSX-like area selection screenshots
-bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # Area selection
+#bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # Area selection
 
+# Screenshot everything and send it to the clipboard
+bindsym --release $mod+Shift+Print exec maim ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
 
+# Screenshot current active window and send that picture to the clipboard
+bindsym --release Print exec maim -i $(xdotool getactivewindow) ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
+
+# Area selection screenshot and copy it to the clipboard
+bindsym --release Shift+Print exec maim -s ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
