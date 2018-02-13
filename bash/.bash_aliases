@@ -22,8 +22,8 @@ alias gl="git log"
 alias gfm="git pull"
 alias gd="git diff"
 alias gt="git tag"
-alias gicl="git clone --recursive -j8"
-alias gsu="git submodule update --recursive"
+alias gcl="git clone --recursive -j8"
+alias gsu="git submodule update --remote --merge"
 # ls
 alias l="ls -la"
 alias la="ls -la"
@@ -47,7 +47,7 @@ alias se="sudoedit"
 alias x="exit"
 alias top="htop"
 # Passes all files in current directory to sxiv
-function _comic() {ls -v . | sxiv -i -f -Z -p -t ;}
+function _comic() {find $@ -type f -exec file {} \; | awk -F: '{if ($2 ~/image/) print $1}' | sxiv -i -f -Z -p -t ;}
 alias comic="_comic"
 
 
