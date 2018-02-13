@@ -77,6 +77,11 @@ Plug 'racer-rust/vim-racer'
     let g:racer_cmd = "$HOME/.cargo/bin/racer"
     let g:racer_experimental_completer = 1
 
+" R Markdown
+Plug 'vim-pandoc/vim-rmarkdown'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+
 Plug 'suan/vim-instant-markdown'
 
 " Themes
