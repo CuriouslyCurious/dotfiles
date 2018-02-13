@@ -34,9 +34,8 @@ alias Syu="sudo pacman -Syu"
 alias hibernate="systemctl hibernate"
 alias suspend="systemctl suspend"
 # vim
-alias vim="nvim"
-alias vi="nvim"
-alias v="nvim"
+alias vi="vim"
+alias v="vim"
 # Java is dumb
 alias syncsim="wmname LG3D && exec $HOME/scripts/syncsim"
 # Misc
