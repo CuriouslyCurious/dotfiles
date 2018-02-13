@@ -34,4 +34,4 @@ set recolor                     "true"
 # if it is false, it'll just be black and white
 set recolor-keephue             "true"
 
-
+set selection-clipboard clipboard
