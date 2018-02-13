@@ -90,9 +90,6 @@ client.background $bg
 ##### Start-up #####
 ####################
 
-# Set keyboard layout
-exec setxkbmap -layout se
-
 # Beautify my desktop
 exec_always --no-startup-id xrdb -load ~/.Xresources
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
