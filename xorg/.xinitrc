@@ -1,10 +1,15 @@
 #!/bin/sh
-
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 xbindkeys=$HOME/.xbindkeysrc
+
+# Set typematic delay
+xset r rate 300 35
+
+# Set keyboard layout
+setxkbmap -layout se
 
 # merge in defaults and keymaps
 
@@ -43,13 +48,4 @@ if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
 fi
 
 exec i3
-
-# start some nice programs
-
-#if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-# for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
-#  [ -x "$f" ] && . "$f"
-# done
-# unset f
-#fi
 
