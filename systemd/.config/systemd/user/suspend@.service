@@ -1,13 +1,1 @@
-[Unit]
-Description=lock on suspend
-After=sleep.target
-
-[Service]
-User=%i
-Type=forking
-Environment=DISPLAY=:0
-ExecStart=/home/curious/.config/i3/lock.sh
-ExecStartPost=/bin/sleep 1
-
-[Install]
-WantedBy=sleep.target
+/home/curious/dotfiles/systemd/.config/systemd/user/suspend@.service
