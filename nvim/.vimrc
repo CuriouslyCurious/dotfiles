@@ -6,6 +6,9 @@ Plug 'tpope/vim-sensible'
 
 Plug 'scrooloose/nerdtree'
 
+" gitgutter
+Plug 'airblade/vim-gitgutter'
+
 " Auto-completion
 Plug 'Valloric/YouCompleteMe'
     let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
@@ -86,11 +89,6 @@ Plug 'suan/vim-instant-markdown'
 
 " Themes
 Plug 'vim-airline/vim-airline'
-"Plug 'tomasr/molokai'
-"    let g:molokai_original=1
-"    let g:rehash256=1
-"    highlight Normal ctermfg=#F1EBEB ctermbg=#272822
-
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'vim-scripts/CycleColor'
@@ -107,6 +105,16 @@ filetype plugin indent on
 syntax enable
 
 colorscheme space-vim-dark
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" Terminal colors
+set t_Co=256
+set termguicolors
+
+" Airline
+let g:airline#extensions#tabline#enabled=1
+set laststatus=2
 
 set visualbell
 set number
@@ -126,13 +134,6 @@ au FileType tex :NoMatchParen
 " https://github.com/vim/vim/issues/727
 autocmd FileType tex set regexpengine=1
 
-" Terminal colors
-set t_Co=256
-
-" Airline
-let g:airline#extensions#tabline#enabled=1
-set laststatus=2
-
 " Tab settings
 set tabstop=4
 set softtabstop=4
@@ -151,7 +152,7 @@ set grepprg=grep\ -nH\ $*
 set hlsearch
 set incsearch
 
-set clipboard=unnamed
+set clipboard+=unnamedplus
 
 " Backups
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -236,6 +237,11 @@ augroup reload_vimrc
     autocmd!
     autocmd bufwritepost ~/.vimrc nested source ~/.vimrc
 augroup END
+
+" Jump to last known position on re-open
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
 
 " Templates
 if has ("autocmd")
