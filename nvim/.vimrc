@@ -92,9 +92,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'vim-scripts/CycleColor'
-Plug 'liuchengxu/space-vim-dark'
-    let g:space_vim_dark_background=233
-
+"Plug 'liuchengxu/space-vim-dark'
+"    let g:space_vim_dark_background=234
+Plug 'skielbasa/vim-material-monokai'
+    let g:airline_theme='materialmonokai'
+    let g:materialmonokai_italic=1
+    let g:materialmonokai_subtle_spell=1
 call plug#end()
 
 
@@ -104,13 +107,17 @@ call plug#end()
 filetype plugin indent on
 syntax enable
 
-colorscheme space-vim-dark
+
+" Terminal colors
+"set t_Co=256
+set background=dark
+set termguicolors
+colorscheme material-monokai
+hi Normal guibg=NONE ctermbg=NONE
+
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-" Terminal colors
-set t_Co=256
-set termguicolors
 
 " Airline
 let g:airline#extensions#tabline#enabled=1
@@ -121,7 +128,6 @@ set number
 set relativenumber
 set wrap
 set enc=utf8
-set background=dark
 set autoindent
 
 " Enable italics

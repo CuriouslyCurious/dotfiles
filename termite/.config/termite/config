@@ -1,23 +1,43 @@
 [colors]
-background = rgba(18, 18, 18, 0.95)
-cursor = "#bbbbbb"
-foreground = "#bbbbbb"
-color0 =  #121212
-color1 = #fa2573
-color2 = #98e123
-color3 = #dfd460
-color4 = #1080d0
-color5 = #8700ff
-color6 = #43a8d0
-color7 = #bbbbbb
-color8 = #555555
-color9 = #f6669d
-color10 = #b1e05f
-color11 = #fff26d
-color12 = #00afff
-color13 = #af87ff
-color14 = #51ceff
+
+# special
+foreground      = #e7ebed
+foreground_bold = #e7ebed
+cursor          = #e7ebed
+background      = #1d262a
+
+# black
+color0  = #435b67
+color8  = #a1b0b8
+
+# red
+color1  = #fc3841
+color9  = #fc746d
+
+# green
+color2  = #5cf19e
+color10 = #adf7be
+
+# yellow
+color3  = #fed032
+color11 = #fee16c
+
+# blue
+color4  = #37b6ff
+color12 = #70cfff
+
+# magenta
+color5  = #fc226e
+color13 = #fc669b
+
+# cyan
+color6  = #59ffd1
+color14 = #9affe6
+
+# white
+color7  = #ffffff
 color15 = #ffffff
+
 
 [options]
 font = DejaVu Sans Mono 10
