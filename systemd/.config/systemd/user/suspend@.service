@@ -1,13 +1,11 @@
 [Unit]
-Description=lock on suspend
-After=sleep.target
+Description=i3lock
+Before=sleep.target
 
 [Service]
-User=%i
+User=curious
 Type=forking
-Environment=DISPLAY=:0
-ExecStart=/home/curious/.config/i3/lock.sh
-ExecStartPost=/bin/sleep 1
+ExecStart=/usr/bin/i3lock
 
 [Install]
 WantedBy=sleep.target

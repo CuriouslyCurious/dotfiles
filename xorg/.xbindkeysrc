@@ -34,6 +34,6 @@
     XF86MonBrightnessDown
 
 # Power control
-"systemctl hibernate"
+"systemctl suspend"
     XF86Sleep
 

@@ -40,5 +40,5 @@ color15 = #ffffff
 
 
 [options]
-font = DejaVu Sans Mono 10
+font = DejaVu Sans Mono 8
 clickable_url = true

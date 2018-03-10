@@ -60,6 +60,9 @@ for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
 
+assign [class="^Telegram$"] 10
+for_window [title="^Telegram$"] move workspace 10
+
 #####################
 ###### COLOURS ######
 #####################
@@ -99,10 +102,11 @@ exec --no-startup-id feh --bg-fill $HOME/.config/wall.png
 # Misc.
 exec --no-startup-id mpd
 exec --no-startup-id redshift
+exec --no-startup-id xautolock -time 20 -detectsleep -locker "$HOME/scripts/suspend.sh"
 exec --no-startup-id i3-msg 'workspace $ws1; exec termite; \
                              workspace $ws2; exec firefox; \
                              workspace $ws9; exec discord; \
-                             workspace $ws0; exec Telegram; \
+                             workspace $ws0; exec telegram-desktop; \
                              workspace $ws1;'
 #bar {
 #    strip_workspace_numbers yes
@@ -181,6 +185,9 @@ bindsym $mod+q kill
 #bindsym $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
 #bindsym $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85" 
 bindsym $mod+d exec rofi -show run 
+
+# https://github.com/carnager/rofi-pass
+bindsym $mod+shift+d exec rofi-pass -show run
 
 # vi-like movement
 bindsym $mod+h focus left
@@ -277,6 +284,9 @@ bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p
 
 # https://github.com/cac03/i3lock
 bindsym $mod+Shift+I exec $HOME/.config/i3/lock.sh
+
+# Switch monitor mode (enter presentation mode)
+bindsym $mod+P exec $HOME/scripts/monitor_mode.sh
 
 # https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
 # Multi-screen screenshots with scrot

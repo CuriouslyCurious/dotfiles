@@ -86,6 +86,7 @@ Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 
 Plug 'suan/vim-instant-markdown'
+Plug 'mzlogin/vim-markdown-toc'
 
 " Themes
 Plug 'vim-airline/vim-airline'
@@ -161,8 +162,8 @@ set incsearch
 set clipboard+=unnamedplus
 
 " Backups
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupdir=~/.vim-tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,/var/tmp,/tmp
 
 " lower timeout length
 set timeoutlen=1000 ttimeoutlen=0
@@ -184,6 +185,9 @@ set foldlevel=99
 nnoremap <space> zc
 vnoremap <space> zo
 let g:SimpylFold_docstring_preview=1
+
+" NERDtree
+map <C-n> :NERDTreeToggle<CR>
 
 " Python settings
 " Bad whitespace
