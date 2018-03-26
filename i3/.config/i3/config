@@ -60,8 +60,14 @@ for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
 for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
 for_window [title="^Steam Keyboard$"] floating enable
 
+# Telegram
 assign [class="^Telegram$"] 10
 for_window [title="^Telegram$"] move workspace 10
+
+# Discord
+assign [class="^Discord$"] 9
+for_window [title="^Discord Updater$"] move workspace 9
+for_window [title="^Discord$"] move workspace 9
 
 #####################
 ###### COLOURS ######
@@ -105,7 +111,8 @@ exec --no-startup-id redshift
 exec --no-startup-id xautolock -time 20 -detectsleep -locker "$HOME/scripts/suspend.sh"
 exec --no-startup-id i3-msg 'workspace $ws1; exec termite; \
                              workspace $ws2; exec firefox; \
-                             workspace $ws9; exec discord; \
+                             workspace $ws8; exec termite -e ncmpcpp; \
+                             workspace $ws9; exec discord; exec termite -e irssi; \
                              workspace $ws0; exec telegram-desktop; \
                              workspace $ws1;'
 #bar {
