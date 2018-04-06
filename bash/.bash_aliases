@@ -15,7 +15,6 @@ alias gca="git commit -av"
 alias gp="git push"
 alias gpom="git push origin master"
 alias gpo="git push origin"
-alias gpao="git push --all origin"
 alias gb="git branch"
 alias gs="git status"
 alias gl="git log"
@@ -36,6 +35,19 @@ alias suspend="systemctl suspend"
 # vim
 alias vi="vim"
 alias v="vim"
+# taskwarrior
+alias t="task"
+# pass
+alias p="pass"
+alias pg="pass git"
+alias pga="pass git add"
+alias pgaa="pass git add --all"
+alias pgc="pass git commic -v"
+alias pgca="pass git commic -av"
+alias pgp="pass git push"
+alias pgpom="pass git push origin master"
+alias pgpo="pass git push origin"
+alias pgfm="pass git pull"
 # Java is dumb
 alias syncsim="wmname LG3D && exec $HOME/scripts/syncsim"
 # Misc
