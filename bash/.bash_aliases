@@ -24,8 +24,8 @@ alias gt="git tag"
 alias gcl="git clone --recursive -j8"
 alias gsu="git submodule update --remote --merge"
 # ls
-alias l="ls -la"
-alias la="ls -la"
+alias l="ls -lah"
+alias la="ls -lah"
 # Pacman
 alias pacman="sudo pacman"
 alias Syu="sudo pacman -Syu"
