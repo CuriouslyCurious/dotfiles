@@ -69,6 +69,10 @@ assign [class="^Discord$"] 9
 for_window [title="^Discord Updater$"] move workspace 9
 for_window [title="^Discord$"] move workspace 9
 
+# Octave
+# To prevent Octave from ruining the graphs
+for_window [title="Figure *"] floating enable
+
 #####################
 ###### COLOURS ######
 #####################
@@ -138,7 +142,7 @@ exec --no-startup-id i3-msg 'workspace $ws1; exec termite; \
 ###################
 smart_borders on
 smart_gaps on
-gaps inner 16
+gaps inner 8
 gaps outer 0
 
 # adjust gaps on-the-fly
