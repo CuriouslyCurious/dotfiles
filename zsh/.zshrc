@@ -139,6 +139,8 @@ spaceship_vi_mode_enable
 ##### Other programs #####
 ##########################
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Set .dircolors
 eval $(dircolors -b $HOME/.dircolors)
 
