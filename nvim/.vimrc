@@ -16,6 +16,7 @@ Plug 'Valloric/YouCompleteMe'
     let g:ycm_collect_identifiers_from_tags_files = 1
     let g:ycm_autoclose_preview_window_after_insertion = 1
     let g:ycm_autoclose_preview_window_after_completion = 1
+    let g:ycm_rust_src_path = '/usr/local/rust/rust-1.26.0/src'
     let g:ycm_filetype_blacklist={
                 \ 'vim' : 1,
                 \ 'tagbar' : 1,
