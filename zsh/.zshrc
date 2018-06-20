@@ -92,6 +92,7 @@ bindkey -M vicmd 'gg' beginning-of-buffer-or-history
 bindkey -M vicmd 'u' undo
 bindkey -M vicmd '~' vi-swap-case
 bindkey -M vicmd '^v' edit-command-line
+bindkey -a '^[[3~' delete-char
 bindkey '^?' backward-delete-char
 bindkey '^[[Z' reverse-menu-complete
 bindkey '^a' vi-insert-bol
@@ -103,6 +104,8 @@ bindkey '^n' insert-last-word
 bindkey '^r' history-incremental-search-backward
 bindkey '^s' history-incremental-search-forward
 bindkey '^u' vi-change-whole-line
+[[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
+[[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
 
 bindkey "^[OH" beginning-of-line
 bindkey "^[OF" end-of-line
