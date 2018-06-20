@@ -108,6 +108,7 @@ exec_always --no-startup-id xrdb -load ~/.Xresources
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id compton -b  # straight outta compton
 exec --no-startup-id feh --bg-fill $HOME/.config/wall.png 
+exec --no-startup-id unclutter
 
 # Misc.
 exec --no-startup-id mpd
@@ -142,7 +143,7 @@ exec --no-startup-id i3-msg 'workspace $ws1; exec termite; \
 ###################
 smart_borders on
 smart_gaps on
-gaps inner 8
+gaps inner 16
 gaps outer 0
 
 # adjust gaps on-the-fly
@@ -279,10 +280,10 @@ bindsym $mod+Shift+0 move container to workspace $ws0
 # Resize mode
 bindsym $mod+r mode "resize"
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 4 px
+        bindsym j resize grow height 4 px
+        bindsym k resize shrink height 4 px
+        bindsym l resize grow width 4 px
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
