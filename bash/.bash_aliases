@@ -7,6 +7,10 @@ alias diff="diff --color=auto"
 alias cvim="vim $HOME/.vimrc"
 # Editor
 alias e="$EDITOR"
+# vim
+alias vim="$EDITOR"
+alias vi="$EDITOR"
+alias v="$EDITOR"
 # Git
 alias ga="git add"
 alias gaa="git add --all"
@@ -32,11 +36,9 @@ alias Syu="sudo pacman -Syu"
 # Power
 alias hibernate="systemctl hibernate"
 alias suspend="systemctl suspend"
-# vim
-alias vi="vim"
-alias v="vim"
 # taskwarrior
 alias t="task"
+alias tw="task"
 # pass
 alias p="pass"
 alias pg="pass git"

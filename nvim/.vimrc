@@ -161,7 +161,7 @@ set grepprg=grep\ -nH\ $*
 set hlsearch
 set incsearch
 
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 
 " Backups
 set backupdir=~/.vim-tmp,/var/tmp,/tmp
