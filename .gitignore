@@ -13,3 +13,6 @@
 # ranger
 **/ranger/bookmarks
 **/ranger/tagged
+
+# nixos
+hardware-configuration.nix
