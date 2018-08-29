@@ -16,7 +16,7 @@ HISTFILE=~/.histfile
 HISTSIZE=5000
 SAVEHIST=10000
 
-zstyle :compinstall filename '/home/curious/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 
 autoload -Uz compinit
 
@@ -59,7 +59,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme.
-antigen theme https://github.com/denysdovhan/spaceship-zsh-theme spaceship
+antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
 
 # Tell Antigen that you're done.
 antigen apply
@@ -136,7 +136,6 @@ SPACESHIP_BATTERY_PREFIX=""
 SPACESHIP_BATTERY_SUFFIX=" "
 
 SPACESHIP_VI_MODE_SHOW=true
-spaceship_vi_mode_enable
 
 ##########################
 ##### Other programs #####
@@ -145,7 +144,9 @@ spaceship_vi_mode_enable
 export PATH="$HOME/.local/bin:$PATH"
 
 # Set .dircolors
-eval $(dircolors -b $HOME/.dircolors)
+if [ -f $HOME/.dircolors ]; then
+    eval $(dircolors -b $HOME/.dircolors)
+fi
 
 # Run ssh-agent
 # https://wiki.archlinux.org/index.php/SSH_keys#SSH_agents
@@ -168,16 +169,21 @@ if [ -d $HOME/go/bin ]; then
     export PATH="$GOPATH:$PATH"
 fi
 
+# Automatically execute direnv file
+if [ -e $(which direnv) ]; then
+    eval "$(direnv hook zsh)"
+fi
+
 # Load aliases
 if [ -f $HOME/.bash_aliases ]; then
     source $HOME/.bash_aliases
 fi
 
 # Set editor
-if [ -e /usr/bin/nvim ]; then
-    export EDITOR=/usr/bin/nvim
-elif [ -e /usr/bin/vim ]; then
-    export EDITOR=/usr/bin/vim
+if [ -f $(which nvim) ]; then
+    export EDITOR=$(which nvim)
+elif [ -f $(which vim) ]; then
+    export EDITOR=$(which vim)
 else
-    export EDITOR=/bin/nano
+    export EDITOR=$(which nano)
 fi
