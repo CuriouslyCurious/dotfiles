@@ -8,9 +8,8 @@ alias cvim="vim $HOME/.vimrc"
 # Editor
 alias e="$EDITOR"
 # vim
-alias vim="$EDITOR"
-alias vi="$EDITOR"
-alias v="$EDITOR"
+alias vim="vim"
+alias vi="vim"
 # Git
 alias ga="git add"
 alias gaa="git add --all"
