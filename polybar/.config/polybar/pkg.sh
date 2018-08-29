@@ -1,10 +1,23 @@
 #!/bin/bash
-pac=$(checkupdates | wc -l)
-#aur=$(cower -u | wc -l)
 
-#check=$((pac + aur))
-check=$((pac))
-if [[ "$check" != "0" ]]
+OS="$(cat /etc/*release | grep -w NAME | awk '{split($0,a,"="); print a[2]}')"
+
+if [ $OS -eq "Arch Linux" ]
 then
-    echo "$pac %{F#5b5b5b}%{F-} $aur"
+    pac=$(checkupdates | wc -l)
+    #aur=$(cower -u | wc -l)
+
+    #check=$((pac + aur))
+    check=$((pac))
+    if [[ "$check" != "0" ]]
+    then
+        echo "$pac %{F#5b5b5b}%{F-} $aur"
+    fi
+elif [ $OS -eq "NixOS" ]
+then
+    :
+else
+    :
 fi
+
+
