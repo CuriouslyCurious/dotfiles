@@ -53,11 +53,10 @@ alias pgfm="pass git pull"
 alias syncsim="wmname LG3D && exec $HOME/scripts/syncsim"
 # Misc
 alias dude="du -h --exclude=./yesterday | sort -h | grep -E \"^[0-9]+(\.|,)?[0-9]*M\""
-alias weather="curl http://wttr.in/lulea"
+alias weather="curl wttr.in/lulea"
 alias c="clear"
 alias se="sudoedit"
 alias x="exit"
 alias top="htop"
 # Comic mode using sxiv
 alias comic="ls -v | sxiv -i -f -Z -p -t"
-

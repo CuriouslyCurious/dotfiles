@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 OS="$(cat /etc/*release | grep -w NAME | awk '{split($0,a,"="); print a[2]}')"
 

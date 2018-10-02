@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # https://faq.i3wm.org/question/5312/how-to-toggle-onoff-external-and-internal-monitors.1.html
 EXTERNAL_OUTPUT="VGA1"
 INTERNAL_OUTPUT="LVDS1"
