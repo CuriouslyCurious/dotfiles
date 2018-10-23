@@ -17,16 +17,18 @@
 
 font pango:DejaVu Sans Mono 10, FontAwesome 10
 
-# Monitors 
-exec --no-startup-id xrandr --output DP-1 --auto --output HDMI-1 --right-of DP-1 --output DVI-D-1 --left-of DP-1
-
 # Monitor arrangement
-set $monL DP-1
-set $monR HDMI-1
+set $monC DisplayPort-0
+set $monR HDMI-0
+set $monL DVI-0
 
 # Set workspaces default monitors
-workspace $ws1 output $monL
-workspace $ws2 output $monL
+workspace $ws1 output $monC
+workspace $ws2 output $monR
+workspace $ws3 output $monL
+#workspace $ws4 output $monC
+#workspace $ws5 output $monC
+#workspace $ws0 output $monC
 
 # The border around windows
 new_window pixel 2
@@ -111,6 +113,7 @@ exec --no-startup-id feh --bg-fill $HOME/.config/wall.png
 exec --no-startup-id unclutter
 
 # Misc.
+exec --no-startup-id "setxbkmap -option grp:alt_shift_toggle -layout se,us,ru"
 exec --no-startup-id xbindkeys
 exec --no-startup-id mpd
 exec --no-startup-id redshift
