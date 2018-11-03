@@ -187,3 +187,6 @@ elif [ -f $(which vim) ]; then
 else
     export EDITOR=$(which nano)
 fi
+
+# OPAM configuration
+. /home/curious/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

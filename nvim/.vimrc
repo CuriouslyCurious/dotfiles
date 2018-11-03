@@ -110,6 +110,8 @@ call plug#end()
 filetype plugin indent on
 syntax enable
 
+set list
+set listchars=tab:\┊\ ,eol:¬,trail:·,extends:→,precedes:←
 
 " Terminal colors
 "set t_Co=256

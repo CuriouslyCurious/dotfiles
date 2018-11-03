@@ -41,6 +41,8 @@ new_float pixel 2
 assign [class="Gimp"] 5
 for_window [title="GIMP Startup"] move workspace 5
 for_window [window_role="gimp-toolbox"] floating disable; layout stacking; move left; resize shrink right 31px or 31 ppt
+assign [class="Pyxel Edit 0.4.8"] 5
+for_window [title="Pyxel Edit 0.4.8"] move workspace 5
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
