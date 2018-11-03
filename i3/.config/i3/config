@@ -24,11 +24,11 @@ set $monL DVI-0
 
 # Set workspaces default monitors
 workspace $ws1 output $monC
-workspace $ws2 output $monR
+workspace $ws2 output $monC
 workspace $ws3 output $monL
-#workspace $ws4 output $monC
-#workspace $ws5 output $monC
-#workspace $ws0 output $monC
+workspace $ws4 output $monC
+workspace $ws5 output $monR
+workspace $ws0 output $monC
 
 # The border around windows
 new_window pixel 2
