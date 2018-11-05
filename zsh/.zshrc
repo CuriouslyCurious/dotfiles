@@ -13,7 +13,7 @@
 ##################
 
 HISTFILE=~/.histfile
-HISTSIZE=5000
+HISTSIZE=10000
 SAVEHIST=10000
 
 zstyle :compinstall filename '$HOME/.zshrc'
@@ -129,7 +129,11 @@ fi
 ##### Plugin options #####
 ##########################
 
+# Load in .zfunc
+fpath+=~/.zfunc
+
 # Spacehip theme
+autoload -Uz promptinit; promptinit
 ZSH_THEME="spaceship"
 SPACESHIP_BATTERY_SHOW=false
 SPACESHIP_BATTERY_PREFIX=""
@@ -144,7 +148,7 @@ SPACESHIP_VI_MODE_SHOW=true
 export PATH="$HOME/.local/bin:$PATH"
 
 # Set .dircolors
-if [ -f $HOME/.dircolors ]; then
+if [[ -f $HOME/.dircolors ]]; then
     eval $(dircolors -b $HOME/.dircolors)
 fi
 
@@ -159,30 +163,30 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
 fi
 
 # Export rustup to $PATH if it exists
-if [ -f $HOME/.cargo/env ]; then
+if [[ -f $HOME/.cargo/env ]]; then
     export PATH="$HOME/.cargo/bin:$PATH" 
 fi
 
 # Export go/bin to $GOPATH if it exists and then export to $PATH
-if [ -d $HOME/go/bin ]; then
+if [[ -d $HOME/go/bin ]]; then
     export GOPATH="$HOME/go/bin"
     export PATH="$GOPATH:$PATH"
 fi
 
 # Automatically execute direnv file
-if [ -e $(which direnv) ]; then
+if [[ -e $(which direnv) ]]; then
     eval "$(direnv hook zsh)"
 fi
 
 # Load aliases
-if [ -f $HOME/.bash_aliases ]; then
+if [[ -f $HOME/.bash_aliases ]]; then
     source $HOME/.bash_aliases
 fi
 
 # Set editor
-if [ -f $(which nvim) ]; then
+if [[ -f $(which nvim) ]]; then
     export EDITOR=$(which nvim)
-elif [ -f $(which vim) ]; then
+elif [[ -f $(which vim) ]]; then
     export EDITOR=$(which vim)
 else
     export EDITOR=$(which nano)
