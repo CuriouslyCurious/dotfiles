@@ -1,5 +1,4 @@
 [colors]
-
 # special
 foreground      = #e7ebed
 foreground_bold = #e7ebed
@@ -42,3 +41,4 @@ color15 = #ffffff
 [options]
 font = DejaVu Sans Mono 9
 clickable_url = true
+scrollback_lines = 10000
