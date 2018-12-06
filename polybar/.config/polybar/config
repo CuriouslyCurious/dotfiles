@@ -432,20 +432,43 @@ label-foreground = ${colors.blue}
 
 label-padding = 1
 
+;[module/pkg]
+;type = custom/script
+;; 5 mins
+;interval = 600
+;format = <label>
+;format-background=${colors.dark}
+;label = "%output:0:30%"
+;exec = $HOME/.config/polybar/pkg.sh
+;; Only run if we can ping Google's DNS
+;exec-if = "ping -q -w 2 -c 1 8.8.8.8 > /dev/null"
+;
+;; Refresh on click
+;click-left = $HOME/.config/polybar/pkg.sh
+;
+;label-padding = 1
 
-[module/pkg]
-type = custom/script
-; 5 mins
-interval = 600
-format = <label>
-format-background=${colors.dark}
-label = "%output:0:30%"
-exec = $HOME/.config/polybar/pkg.sh
-; Only run if we can ping Google's DNS
-exec-if = "ping -q -w 2 -c 1 8.8.8.8 > /dev/null"
+[module/keyboard]
+type = internal/xkeyboard
 
-; Refresh on click
-click-left = $HOME/.config/polybar/pkg.sh
+; Available tags:
+;   <label-layout> (default)
+;   <label-indicator> (default)
+format = <label-layout> <label-indicator>
+format-spacing = 0
 
-label-padding = 1
+; Available tokens:
+;   %layout%
+;   %name%
+;   %number%
+; Default: %layout%
+label-layout = %layout%
+label-layout-padding = 2
+label-layout-foreground = #fff
 
+; Available tokens:
+;   %name%
+; Default: %name%
+label-indicator = %name%
+label-indicator-padding = 2
+label-indicator-background = #8139e8

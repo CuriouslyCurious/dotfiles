@@ -33,6 +33,10 @@ set bell-style none
 
 setopt extendedglob
 
+# Disable Software Flow Control 
+# https://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator#72092
+stty -ixon
+
 # Lower timeout delay (might cause issues)
 # Default = 40
 export KEYTIMEOUT=1

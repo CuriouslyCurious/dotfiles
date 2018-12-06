@@ -111,7 +111,7 @@ client.background $bg
 exec_always --no-startup-id xrdb -load ~/.Xresources
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id compton -b  # straight outta compton
-exec --no-startup-id feh --bg-fill $HOME/.config/wall.png 
+exec --no-startup-id feh --bg-fill $HOME/.config/wall.png
 exec --no-startup-id unclutter
 
 # Misc.
@@ -201,8 +201,8 @@ bindsym $mod+Return exec termite
 bindsym $mod+q kill
 
 #bindsym $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
-#bindsym $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85" 
-bindsym $mod+d exec rofi -show run 
+#bindsym $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85"
+bindsym $mod+d exec rofi -show run
 
 # https://github.com/carnager/rofi-pass
 bindsym $mod+shift+d exec rofi-pass -show run
@@ -298,7 +298,7 @@ mode "resize" {
 bindsym $mod+Shift+r restart
 
 # Exit prompt
-bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit' 
+bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit'
 
 # https://github.com/cac03/i3lock
 bindsym $mod+Shift+I exec $HOME/.config/i3/lock.sh
