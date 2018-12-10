@@ -13,7 +13,7 @@
 ##################
 
 HISTFILE=~/.histfile
-HISTSIZE=5000
+HISTSIZE=10000
 SAVEHIST=10000
 
 zstyle :compinstall filename '$HOME/.zshrc'
@@ -115,7 +115,11 @@ fi
 ##### Plugin options #####
 ##########################
 
+# Load in .zfunc
+fpath+=~/.zfunc
+
 # Spacehip theme
+autoload -Uz promptinit; promptinit
 ZSH_THEME="spaceship"
 SPACESHIP_BATTERY_SHOW=false
 SPACESHIP_BATTERY_PREFIX=""

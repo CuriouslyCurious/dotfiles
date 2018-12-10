@@ -8,6 +8,7 @@ base = (with stable; [
     bc
     binutils
     curl
+    dhcpcd
     file
     htop
     imagemagick
@@ -89,11 +90,14 @@ extra = (with stable; [
     xbindkeys
     xautolock
 
+    # torrent
+    deluge
+
     powerline-fonts
 
-    # games
-    #wine
-    #winetricks
+    # wine is not an emulator
+    wine
+    winetricks
     ]);
 
 development = (with stable; [
@@ -115,8 +119,12 @@ development = (with stable; [
     # C++/C
     gcc
 
+    # virtualization
+    docker
+
     # python
     python3
+    vagrant
 
     # go
     go
@@ -127,6 +135,19 @@ development = (with stable; [
     # java
     gradle
     android-studio
+
+    # ocaml
+    #gnome2.gtksourceview
+    #gnome2.gtk
+    #opam
+    #ocaml
+    #coq
+    #m4
+    #perl
+
+    # databases
+    mariadb
+    mysql-workbench
 
     # editors (and plugin stuff)
     python36Packages.neovim
@@ -142,6 +163,9 @@ development = (with stable; [
     openssl
     traceroute
 
+    # virtualisation
+    qemu
+    vde2
     ]);
 
 in
@@ -187,8 +211,8 @@ in
         # https://github.com/NixOS/nixpkgs/blob/fde2012519999145c541547bce310f327080e997/pkgs/applications/misc/polybar/default.nix#L32
         polybar = pkgs.polybar.override {
             i3GapsSupport = true;
-            githubSupport = true;
-            iwSupport = true;
+            #githubSupport = true;
+            #iwSupport = true;
             mpdSupport = true;
         };
 
