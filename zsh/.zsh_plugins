@@ -1,0 +1,11 @@
+# If I forget I have aliases
+djui/alias-tips
+
+# Fish-like stuff
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+zsh-users/zsh-history-substring-search
+
+# Theme
+denysdovhan/spaceship-prompt
