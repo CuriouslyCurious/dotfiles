@@ -1,5 +1,5 @@
 ;
-; ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗ 
+; ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
 ; ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
 ; ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
 ; ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
@@ -142,7 +142,7 @@ ws-icon-9 = 10;
 ;ws-icon-6 = 7;
 ;ws-icon-7 = 8;
 ;ws-icon-8 = 9;
-;ws-icon-9 = 10; 
+;ws-icon-9 = 10;
 
 label-mode = %mode%
 label-mode-padding = 3
@@ -158,7 +158,7 @@ format-padding = 0
 
 label = %title%
 label-font = 5
-label-maxlen = 35 
+label-maxlen = 35
 
 
 [module/wlan]
@@ -192,7 +192,7 @@ interval = 3.0
 
 format-connected-background = ${colors.background}
 format-connected-underline = #55aa55
-format-disconnected = 
+format-disconnected =
 label-connected = "%linkspeed%  %upspeed%  %downspeed%"
 format-connected-padding = 2
 
@@ -209,7 +209,7 @@ icon-prev-foreground = ${colors.dark}
 icon-prev-foreground ${colors.background}
 
 icon-next = "%{T4} %{T-}"
-icon-next-foreground = ${colors.dark} 
+icon-next-foreground = ${colors.dark}
 icon-next-background = ${colors.background}
 
 format-online = <icon-prev><label-song><icon-next>
@@ -225,7 +225,7 @@ label-song-background = ${colors.dark}
 [module/right_arrow]
 type = custom/text
 content = "%{T4} %{T-}"
-content-foreground = ${colors.dark} 
+content-foreground = ${colors.dark}
 content-background = ${colors.background}
 
 
@@ -390,7 +390,7 @@ interval = 60
 format-background = ${colors.background-mod1}
 format = <label>
 format-prefix = " "
-format-suffix = 
+format-suffix =
 format-prefix-foreground = ${colors.foreground-alt}
 #exec = python ~/.config/polybar/weather.py
 
@@ -448,27 +448,27 @@ label-padding = 1
 ;
 ;label-padding = 1
 
-[module/keyboard]
-type = internal/xkeyboard
-
-; Available tags:
-;   <label-layout> (default)
-;   <label-indicator> (default)
-format = <label-layout> <label-indicator>
-format-spacing = 0
-
-; Available tokens:
-;   %layout%
-;   %name%
-;   %number%
-; Default: %layout%
-label-layout = %layout%
-label-layout-padding = 2
-label-layout-foreground = #fff
+;[module/keyboard]
+;;type = internal/xkeyboard
+;
+;; Available tags:
+;;   <label-layout> (default)
+;;   <label-indicator> (default)
+;format = <label-layout> <label-indicator>
+;format-spacing = 0
+;
+;; Available tokens:
+;;   %layout%
+;;   %name%
+;;   %number%
+;; Default: %layout%
+;label-layout = %layout%
+;label-layout-padding = 2
+;label-layout-foreground = #fff
 
 ; Available tokens:
 ;   %name%
 ; Default: %name%
-label-indicator = %name%
-label-indicator-padding = 2
-label-indicator-background = #8139e8
+;label-indicator = %name%
+;label-indicator-padding = 2
+;label-indicator-background = #8139e8

@@ -26,7 +26,6 @@ alias gd="git diff"
 alias gt="git tag"
 alias gcl="git clone --recursive -j8"
 alias gsu="git submodule update --remote --merge"
-alias gitstat()
 gitstat() {
     echo "$1's git statistics:"
     git log --numstat --no-merges --find-renames --pretty="%H" --author="$1" | awk 'NF==1 {commits+=1} NF==3 {files+=1; inserted+=$1; deleted+=$2} END {print "commits:", commits, "* files changed:", files, "* insertions(+):", inserted, "* deletions(-):", deleted}'

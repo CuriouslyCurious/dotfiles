@@ -57,7 +57,7 @@ antibody bundle < $HOME/.zsh_plugins
 # run ls -a on entering a new directory
 function chpwd() {
     emulate -L zsh
-    ls -a
+    ls -a --color=auto
 }
 
 ####################
@@ -134,7 +134,7 @@ SPACESHIP_VI_MODE_SHOW=true
 export PATH="$HOME/.local/bin:$PATH"
 
 # Set .dircolors
-if [[ -f $HOME/.dircolors ]]; then
+if [[ -e $HOME/.dircolors ]]; then
     eval $(dircolors -b $HOME/.dircolors)
 fi
 
@@ -149,7 +149,7 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
 fi
 
 # Export rustup to $PATH if it exists
-if [[ -f $HOME/.cargo/env ]]; then
+if [[ -e $HOME/.cargo/env ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
@@ -165,7 +165,7 @@ if [[ -e $(which direnv) ]]; then
 fi
 
 # Load aliases
-if [[ -f $HOME/.bash_aliases ]]; then
+if [[ -e $HOME/.bash_aliases ]]; then
     source $HOME/.bash_aliases
 fi
 
