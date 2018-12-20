@@ -12,7 +12,7 @@ jack_control dps rate 48000		# set sample rate
 jack_control dps nperiods 3		# set number of periods
 jack_control dps period 512		# set period size
 
-/home/curious/Downloads/Renoise_3_1_0_Demo_x86_64/renoise $1	# start renoise
+/home/curious/.local/bin/Renoise_3_1_0_Demo_x86_64/renoise $1	# start renoise
 #renoise $1				# you don't need the path if renoise is installed system wide
 
 jack_control exit			# stop jackdbus after you exit renoise

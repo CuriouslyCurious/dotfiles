@@ -301,7 +301,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit'
 
 # https://github.com/cac03/i3lock
-bindsym $mod+Shift+I exec $HOME/.config/i3/lock.sh
+bindsym $mod+Shift+I exec $HOME/scripts/lock.sh
 
 # Switch monitor mode (enter presentation mode)
 bindsym $mod+P exec $HOME/scripts/monitor_mode.sh
