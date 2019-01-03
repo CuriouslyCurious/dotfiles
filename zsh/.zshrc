@@ -96,6 +96,12 @@ bindkey '^u' vi-change-whole-line
 bindkey "^[OH" beginning-of-line
 bindkey "^[OF" end-of-line
 
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
 # vi-mode is dumb, so this needs to be added
 # start typing + [Up-Arrow] - fuzzy find history forward
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
@@ -132,8 +138,6 @@ SPACESHIP_VI_MODE_SHOW=true
 ##### Other programs #####
 ##########################
 
-export PATH="$HOME/.local/bin:$PATH"
-
 # Set .dircolors
 if [[ -e $HOME/.dircolors ]]; then
     eval $(dircolors -b $HOME/.dircolors)
@@ -149,6 +153,8 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval "$(<~/.ssh/agent-thing)"
 fi
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Export rustup to $PATH if it exists
 if [[ -e $HOME/.cargo/env ]]; then
     export PATH="$HOME/.cargo/bin:$PATH"
@@ -158,6 +164,16 @@ fi
 if [[ -d $HOME/go/bin ]]; then
     export GOPATH="$HOME/go/bin"
     export PATH="$GOPATH:$PATH"
+fi
+
+# Export gem path to $PATH if it exists
+if [[ -d "$HOME/.gem/ruby/2.5.0/bin" ]]; then
+    export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
+fi
+
+# Export dotfile's script dir to $PATH if it exists
+if [[ -d "$HOME/scripts" ]]; then
+    export PATH="$HOME/scripts:$PATH"
 fi
 
 # Automatically execute direnv file
