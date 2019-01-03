@@ -6,7 +6,7 @@ jack_control start			# start jackdbus
 jack_control eps realtime true		# enable realtime privilidges for it
 
 jack_control ds alsa			# select driver
-jack_control dps device iec958		# select alsa device
+jack_control dps device hw:0    # select alsa device
 
 jack_control dps rate 48000		# set sample rate
 jack_control dps nperiods 3		# set number of periods
@@ -16,5 +16,5 @@ jack_control dps period 512		# set period size
 #renoise $1				# you don't need the path if renoise is installed system wide
 
 jack_control exit			# stop jackdbus after you exit renoise
-
+#
 killall jackd				# in case renoise starts legacy jackd
