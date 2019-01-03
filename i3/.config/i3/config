@@ -73,6 +73,10 @@ assign [class="^Discord$"] 9
 for_window [title="^Discord Updater$"] move workspace 9
 for_window [title="^Discord$"] move workspace 9
 
+# Renoise
+assign [class="^Renoise$"] 5
+for_window [title="^Renoise$"] move workspace 5
+
 # Octave
 # To prevent Octave from ruining the graphs
 for_window [title="Figure *"] floating enable
