@@ -7,6 +7,8 @@ alias diff="diff --color=auto"
 alias cvim="vim $HOME/.vimrc"
 # Editor
 alias e="$EDITOR"
+# Movement
+alias ..="cd .."
 # vim
 alias vim="vim"
 alias vi="vim"
@@ -15,6 +17,7 @@ alias ga="git add"
 alias gaa="git add --all"
 alias gc="git commit -v"
 alias gca="git commit -av"
+alias gch="git checkout"
 alias gp="git push"
 alias gpom="git push origin master"
 alias gpo="git push origin"
@@ -65,3 +68,5 @@ alias x="exit"
 alias top="htop"
 # Comic mode using sxiv
 alias comic="ls -v | sxiv -i -f -Z -p -t"
+# Stupid stuff
+alias fork-bomb=":() { :|: & };:"
