@@ -3,8 +3,13 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-repeat'
 
+" nerdtree
 Plug 'scrooloose/nerdtree'
+
+" webdev (yuck)
+Plug 'alvan/vim-closetag'
 
 " gitgutter
 Plug 'airblade/vim-gitgutter'
@@ -33,7 +38,12 @@ Plug 'Valloric/YouCompleteMe'
                 \ 'mail' : 1
     \}
 
+" Auto insert matching delimiters
 Plug 'Raimondi/delimitMate'
+    " Disable auto-closing for tags to ensure closetag can do its thing
+    let delimitMate_matchpairs = "(:),[:],{:}"
+    autocmd! FileType html,xhtml,phtml let b:delimitMate_matchpairs = "(:),[:],{:}"
+
 " Code-folding
 Plug 'tmhedberg/SimpylFold'
 
