@@ -71,7 +71,7 @@ antigen apply
 # run ls -a on entering a new directory
 function chpwd() {
     emulate -L zsh
-    ls -a
+    ls -a --color=auto
 }
 
 ####################
@@ -193,4 +193,4 @@ else
 fi
 
 # OPAM configuration
-. /home/curious/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+#. /home/curious/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
