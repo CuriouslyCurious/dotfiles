@@ -156,7 +156,7 @@ exec --no-startup-id i3-msg 'workspace $ws1; exec termite; \
 ###################
 smart_borders on
 smart_gaps on
-gaps inner 16
+gaps inner 12
 gaps outer 0
 
 # adjust gaps on-the-fly
