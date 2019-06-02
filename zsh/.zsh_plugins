@@ -9,3 +9,8 @@ zsh-users/zsh-syntax-highlighting
 
 # Theme
 denysdovhan/spaceship-prompt
+
+# The name says it all
+MichaelAquilina/zsh-autoswitch-virtualenv
+
+
