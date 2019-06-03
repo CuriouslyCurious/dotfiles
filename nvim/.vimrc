@@ -10,6 +10,8 @@ Plug 'scrooloose/nerdtree'
 
 " webdev (yuck)
 Plug 'alvan/vim-closetag'
+    let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.liquid'
+    let g:closetag_filetypes = '*.html,*.xhtml,*.phtml,*.liquid'
 
 " gitgutter
 Plug 'airblade/vim-gitgutter'
@@ -42,7 +44,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'Raimondi/delimitMate'
     " Disable auto-closing for tags to ensure closetag can do its thing
     let delimitMate_matchpairs = "(:),[:],{:}"
-    autocmd! FileType html,xhtml,phtml let b:delimitMate_matchpairs = "(:),[:],{:}"
+    autocmd! FileType html,xhtml,phtml,liquid let b:delimitMate_matchpairs = "(:),[:],{:}"
 
 " Code-folding
 Plug 'tmhedberg/SimpylFold'
@@ -272,5 +274,6 @@ if has ("autocmd")
     augroup templates
         autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
         autocmd BufNewFile *.tex 0r ~/.vim/templates/skeleton.tex
+        autocmd BufNewFile *.html,*.liquid 0r ~/.vim/templates/skeleton.html
     augroup END
 endif
