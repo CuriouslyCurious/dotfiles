@@ -39,8 +39,11 @@ new_float pixel 2
 
 # Program settings
 assign [class="Gimp"] 5
-for_window [title="GIMP Startup"] move workspace 5
-for_window [window_role="gimp-toolbox"] floating disable; layout stacking; move left; resize shrink right 31px or 31 ppt
+for_window [title="GIMP Startup"] move workspace $ws5
+for_window [class="Gimp"] move workspace $ws5
+for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
+for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
+
 assign [class="Pyxel Edit 0.4.8"] 5
 for_window [title="Pyxel Edit 0.4.8"] move workspace 5
 
@@ -72,6 +75,10 @@ for_window [title="^Telegram$"] move workspace 10
 assign [class="^Discord$"] 9
 for_window [title="^Discord Updater$"] move workspace 9
 for_window [title="^Discord$"] move workspace 9
+
+# Renoise
+assign [class="^Renoise$"] 5
+for_window [title="^Renoise$"] move workspace 5
 
 # Octave
 # To prevent Octave from ruining the graphs
@@ -111,7 +118,7 @@ client.background $bg
 exec_always --no-startup-id xrdb -load ~/.Xresources
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec --no-startup-id compton -b  # straight outta compton
-exec --no-startup-id feh --bg-fill $HOME/.config/wall.png 
+exec --no-startup-id feh --bg-fill $HOME/.config/wall.png
 exec --no-startup-id unclutter
 
 # Misc.
@@ -149,7 +156,7 @@ exec --no-startup-id i3-msg 'workspace $ws1; exec termite; \
 ###################
 smart_borders on
 smart_gaps on
-gaps inner 16
+gaps inner 12
 gaps outer 0
 
 # adjust gaps on-the-fly
@@ -201,8 +208,8 @@ bindsym $mod+Return exec termite
 bindsym $mod+q kill
 
 #bindsym $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
-#bindsym $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85" 
-bindsym $mod+d exec rofi -show run 
+#bindsym $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85"
+bindsym $mod+d exec rofi -show run
 
 # https://github.com/carnager/rofi-pass
 bindsym $mod+shift+d exec rofi-pass -show run
@@ -298,10 +305,10 @@ mode "resize" {
 bindsym $mod+Shift+r restart
 
 # Exit prompt
-bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit' 
+bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit'
 
 # https://github.com/cac03/i3lock
-bindsym $mod+Shift+I exec $HOME/.config/i3/lock.sh
+bindsym $mod+Shift+I exec $HOME/scripts/lock.sh
 
 # Switch monitor mode (enter presentation mode)
 bindsym $mod+P exec $HOME/scripts/monitor_mode.sh

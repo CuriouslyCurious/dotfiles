@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # https://faq.i3wm.org/question/5312/how-to-toggle-onoff-external-and-internal-monitors.1.html
-EXTERNAL_OUTPUT="VGA1"
-INTERNAL_OUTPUT="LVDS1"
+EXTERNAL_OUTPUT="VGA-1"
+INTERNAL_OUTPUT="LVDS-1"
 
 # if we don't have a file, start at zero
 if [ ! -f "/tmp/monitor_mode.dat" ] ; then

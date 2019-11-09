@@ -15,11 +15,24 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
+    # Enable libvirt
+    boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+    virtualisation.libvirtd.enable = true;
+
     boot.cleanTmpDir = true;
 
     networking.hostName = "ThinkingPad"; # Define your hostname.
     #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networking.networkmanager.enable = true;
+
+    networking.localCommands =
+        ''
+          ${pkgs.vde2}/bin/vde_switch -tap tap0 -mod 660 -group kvm -daemon
+          ip addr add 10.0.2.1/24 dev tap0
+          ip link set dev tap0 up
+          ${pkgs.procps}/sbin/sysctl -w net.ipv4.ip_forward=1
+          ${pkgs.iptables}/sbin/iptables -t nat -A POSTROUTING -s 10.0.2.0/24 -j MASQUERADE
+        '';
 
     # Select internationalisation properties.
     #i18n = {
@@ -127,7 +140,8 @@
     #    };
     #    wantedBy = [ "sleep.target" "suspend.target" "default.target" ];
     #};
-
+    services.mysql.package = pkgs.mariadb;
+    services.mysql.enable = true;
     systemd.services.lock.enable = true;
 
     # Enable the KDE Desktop Environment.
@@ -140,6 +154,9 @@
     #   uid = 1000;
     # };
 
+    # Enable docker
+    virtualisation.docker.enable = true;
+
     # This value determines the NixOS release with which your system is to be
     # compatible, in order to avoid breaking some software such as database
     # servers. You should change this only after NixOS release notes say you
@@ -149,7 +166,7 @@
         users.extraUsers.curious = {
             isNormalUser = true;
             uid = 1000;
-            extraGroups = [ "wheel" "networkmanager" ];
+            extraGroups = [ "wheel" "networkmanager" "docker" ];
             createHome = true;
             home = "/home/curious";
             shell = "/run/current-system/sw/bin/zsh";

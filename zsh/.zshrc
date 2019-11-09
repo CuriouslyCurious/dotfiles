@@ -5,7 +5,7 @@
 #   ███╔╝  ╚════██║██╔══██║
 #  ███████╗███████║██║  ██║
 #  ╚══════╝╚══════╝╚═╝  ╚═╝
-#                          
+#
 # Curious' zsh config
 
 ##################
@@ -20,49 +20,35 @@ zstyle :compinstall filename '$HOME/.zshrc'
 
 autoload -Uz compinit
 
-case "$TERM" in 
+case "$TERM" in
     xterm-color) color_prompt=yes;;
     xterm-256color) color_prompt=yes;;
     rxvt-unicode-256color) color_prompt=yes;;
     screen-256color) color_prompt=yes;;
 esac
 
+# Termite rarely plays well with ssh and such
 export TERM=xterm-256color
 
+# Stupid bell
 set bell-style none
 
 setopt extendedglob
+
+# Disable Software Flow Control
+# https://unix.stackexchange.com/questions/72086/ctrl-s-hang-terminal-emulator#72092
+stty -ixon
 
 # Lower timeout delay (might cause issues)
 # Default = 40
 export KEYTIMEOUT=1
 
-###################
-##### Antigen #####
-###################
+####################
+##### Antibody #####
+####################
 
-source $HOME/.config/zsh/antigen.zsh
-
-antigen use oh-my-zsh
-
-# Default bundles
-antigen bundle git
-antigen bundle heroku
-antigen bundle pip
-antigen bundle lein
-antigen bundle command-not-found
-
-# Syntax highlighting
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Auto suggestions
-antigen bundle zsh-users/zsh-autosuggestions
-
-# Load the theme.
-antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
-
-# Tell Antigen that you're done.
-antigen apply
+source <(antibody init)
+antibody bundle < $HOME/.zsh_plugins
 
 #####################
 ##### Functions #####
@@ -110,6 +96,12 @@ bindkey '^u' vi-change-whole-line
 bindkey "^[OH" beginning-of-line
 bindkey "^[OF" end-of-line
 
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
 # vi-mode is dumb, so this needs to be added
 # start typing + [Up-Arrow] - fuzzy find history forward
 if [[ "${terminfo[kcuu1]}" != "" ]]; then
@@ -124,6 +116,7 @@ if [[ "${terminfo[kcud1]}" != "" ]]; then
   bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
 
+bindkey "^ " autosuggest-accept
 
 ##########################
 ##### Plugin options #####
@@ -145,10 +138,8 @@ SPACESHIP_VI_MODE_SHOW=true
 ##### Other programs #####
 ##########################
 
-export PATH="$HOME/.local/bin:$PATH"
-
 # Set .dircolors
-if [[ -f $HOME/.dircolors ]]; then
+if [[ -e $HOME/.dircolors ]]; then
     eval $(dircolors -b $HOME/.dircolors)
 fi
 
@@ -162,9 +153,11 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval "$(<~/.ssh/agent-thing)"
 fi
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Export rustup to $PATH if it exists
-if [[ -f $HOME/.cargo/env ]]; then
-    export PATH="$HOME/.cargo/bin:$PATH" 
+if [[ -e $HOME/.cargo/env ]]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # Export go/bin to $GOPATH if it exists and then export to $PATH
@@ -173,13 +166,23 @@ if [[ -d $HOME/go/bin ]]; then
     export PATH="$GOPATH:$PATH"
 fi
 
+# Export gem path to $PATH if it exists
+if [[ -d "$HOME/.gem/ruby/2.5.0/bin" ]]; then
+    export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
+fi
+
+# Export dotfile's script dir to $PATH if it exists
+if [[ -d "$HOME/scripts" ]]; then
+    export PATH="$HOME/scripts:$PATH"
+fi
+
 # Automatically execute direnv file
 if [[ -e $(which direnv) ]]; then
     eval "$(direnv hook zsh)"
 fi
 
 # Load aliases
-if [[ -f $HOME/.bash_aliases ]]; then
+if [[ -e $HOME/.bash_aliases ]]; then
     source $HOME/.bash_aliases
 fi
 
@@ -193,4 +196,10 @@ else
 fi
 
 # OPAM configuration
+<<<<<<< HEAD
 #. /home/curious/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+=======
+if [[ -d "$HOME/.opam" ]]; then
+    . /home/curious/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+fi
+>>>>>>> ae9175997628cce25ac6f28f9b593e86e79116c5

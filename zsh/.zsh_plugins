@@ -1,0 +1,16 @@
+# If I forget I have aliases
+djui/alias-tips
+
+# Fish-like stuff
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-syntax-highlighting
+
+# Theme
+denysdovhan/spaceship-prompt
+
+# The name says it all
+MichaelAquilina/zsh-autoswitch-virtualenv
+
+

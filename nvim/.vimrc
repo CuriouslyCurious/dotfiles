@@ -58,7 +58,7 @@ Plug 'vim-syntastic/syntastic'
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 1
     let g:syntastic_python_checkers=['flake8']
-    let g:syntastic_python_flake8_args='--ignore=E501,E225'   
+    let g:syntastic_python_flake8_args='--ignore=E501,E225'
     let g:syntastic_check_on_wq = 0
     let g:syntastic_tex_checkers = ['lacheck']
 
@@ -118,7 +118,7 @@ call plug#end()
 
 """"""""""""""""""""""""""""
 """"" General Settings """""
-"""""""""""""""""""""""""""" 
+""""""""""""""""""""""""""""
 filetype plugin indent on
 syntax enable
 
@@ -184,7 +184,7 @@ set directory=~/.vim-tmp,/var/tmp,/tmp
 " lower timeout length
 set timeoutlen=1000 ttimeoutlen=0
 
-" Persistent undo 
+" Persistent undo
 if has('persistent_undo')
     if !isdirectory("/tmp/.vim-undo")
         call mkdir("/tmp/.vim-undo", "", 0700)
@@ -268,6 +268,17 @@ augroup END
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
+
+" Remove trailing whitespaces
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+" Call the remove trailing whitespaces on write
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " Templates
 if has ("autocmd")

@@ -8,7 +8,7 @@ killall -q polybar
 while pgrep -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar1 and bar2
-DISPLAY1="$(xrandr -q | grep 'DisplayPort-0\|DP-1\|LVDS1\|VGA-1' | cut -d ' ' -f1 | head -n 1)"
+DISPLAY1="$(xrandr -q | grep 'DisplayPort-0\|DP-1\|LVDS1\|LVDS-1\|VGA-1' | cut -d ' ' -f1 | head -n 1)"
 [[ ! -z "$DISPLAY1" ]] && MONITOR="$DISPLAY1" polybar main & 2>/dev/null
 
 DISPLAY2="$(xrandr -q | grep 'HDMI-0\|HDMI-1\|DVI-I-1' | cut -d ' ' -f1)"
