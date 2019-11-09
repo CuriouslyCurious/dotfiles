@@ -54,6 +54,7 @@ Plug 'tikhomirov/vim-glsl'
     autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 Plug 'vim-syntastic/syntastic'
+    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 1
@@ -180,6 +181,9 @@ set clipboard=unnamedplus
 " Backups
 set backupdir=~/.vim-tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,/var/tmp,/tmp
+
+" Scroloff
+set so=6
 
 " lower timeout length
 set timeoutlen=1000 ttimeoutlen=0

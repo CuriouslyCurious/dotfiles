@@ -1,7 +1,4 @@
 # Aliases #
-# Colors
-alias ls="ls --color=auto"
-alias grep="grep --color=auto"
 alias diff="diff --color=auto"
 # Configs
 alias cvim="vim $HOME/.vimrc"
@@ -33,8 +30,11 @@ gitstat() {
     echo "$1's git statistics:"
     git log --numstat --no-merges --find-renames --pretty="%H" --author="$1" | awk 'NF==1 {commits+=1} NF==3 {files+=1; inserted+=$1; deleted+=$2} END {print "commits:", commits, "* files changed:", files, "* insertions(+):", inserted, "* deletions(-):", deleted}'
 }
-
+# grep
+alias grep="rg"
+#alias grep="grep --color=auto"
 # ls
+alias ls="ls --color=auto"
 alias l="ls -lah"
 alias la="ls -lah"
 # Pacman
@@ -57,10 +57,14 @@ alias pgp="pass git push"
 alias pgpom="pass git push origin master"
 alias pgpo="pass git push origin"
 alias pgfm="pass git pull"
+# tree
+alias t="tree"
 # Java is dumb
 #alias syncsim="wmname LG3D && exec $HOME/scripts/syncsim"
+# LaTeX
+alias xelatex="xelatex -shell-escape"
 # Misc
-alias dude="du -h --exclude=./yesterday | sort -h | grep -E \"^[0-9]+(\.|,)?[0-9]*M\""
+alias dude="du -h --exclude=./yesterday 2>/dev/null | sort -h | grep -E \"^[0-9]+(\.|,)?[0-9]*M\""
 alias weather="curl wttr.in/lulea"
 alias c="clear"
 alias se="sudoedit"
