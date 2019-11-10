@@ -50,9 +50,6 @@ Plug 'Raimondi/delimitMate'
 Plug 'tmhedberg/SimpylFold'
 
 " Highlighting
-Plug 'tikhomirov/vim-glsl'
-    autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
-
 Plug 'vim-syntastic/syntastic'
     let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
     let g:syntastic_always_populate_loc_list = 1
@@ -64,6 +61,10 @@ Plug 'vim-syntastic/syntastic'
     let g:syntastic_tex_checkers = ['lacheck']
 
 Plug 'PotatoesMaster/i3-vim-syntax'
+
+Plug 'beyondmarc/opengl.vim'
+Plug 'tikhomirov/vim-glsl'
+    autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 " Latex
 Plug 'lervag/vimtex'
