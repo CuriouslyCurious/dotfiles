@@ -16,3 +16,6 @@
 
 # nixos
 hardware-configuration.nix
+
+# nvim
+**/nvim/plugged
