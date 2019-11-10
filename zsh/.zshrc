@@ -18,7 +18,11 @@ SAVEHIST=10000
 
 zstyle :compinstall filename '$HOME/.zshrc'
 
-autoload -Uz compinit
+# Start zsh completion system
+autoload -Uz compinit && compinit
+
+# Set completion to ignore case
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
 
 case "$TERM" in
     xterm-color) color_prompt=yes;;
@@ -32,6 +36,9 @@ export TERM=xterm-256color
 
 # Stupid bell
 set bell-style none
+
+# Disable case sensitivity
+CASE_SENSITIVE="true"
 
 setopt extendedglob
 
@@ -196,10 +203,6 @@ else
 fi
 
 # OPAM configuration
-<<<<<<< HEAD
-#. /home/curious/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-=======
 if [[ -d "$HOME/.opam" ]]; then
     . /home/curious/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 fi
->>>>>>> ae9175997628cce25ac6f28f9b593e86e79116c5
