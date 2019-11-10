@@ -32,6 +32,10 @@ gitstat() {
 }
 # grep
 alias grep="rg"
+# bat instead of cat
+if [[ -e /bin/bat ]]; then
+    alias cat="bat -pp"
+fi
 #alias grep="grep --color=auto"
 # ls
 alias ls="ls --color=auto"
