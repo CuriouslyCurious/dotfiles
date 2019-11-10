@@ -61,10 +61,12 @@ antibody bundle < $HOME/.zsh_plugins
 ##### Functions #####
 #####################
 
-# run ls -a on entering a new directory
+# Run ls -a on entering a new directory
+# Also save that dir to ~/.last_dir to make it easier to launch a terminal in that directory
 function chpwd() {
     emulate -L zsh
     ls -a --color=auto
+    pwd > ~/.last_dir
 }
 
 ####################
