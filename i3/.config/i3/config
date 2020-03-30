@@ -120,7 +120,8 @@ client.background $bg
 # Beautify my desktop
 exec_always --no-startup-id xrdb -load ~/.Xresources
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id compton -b  # straight outta compton
+#exec --no-startup-id compton -b  # straight outta compton
+exec --no-startup-id picom -b
 exec --no-startup-id feh --bg-fill $HOME/.config/wall.png
 exec --no-startup-id unclutter
 
@@ -129,7 +130,7 @@ exec --no-startup-id xbindkeys
 exec --no-startup-id mpd
 exec --no-startup-id redshift
 exec --no-startup-id xautolock -time 20 -detectsleep -locker "$HOME/scripts/suspend.sh"
-exec --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout se,us,ru
+exec --no-startup-id setxkbmap -option grp:alt_shift_toggle -layout se,us
 exec --no-startup-id xmodmap -e 'keycode 166=Prior' && xmodmap -e 'keycode 167=Next'
 exec --no-startup-id i3-msg 'workspace $ws1; exec termite; \
                              workspace $ws2; exec firefox; \
@@ -332,4 +333,4 @@ bindsym --release $mod+Shift+Print exec maim ~/Documents/screenshots/$(date +%Y%
 bindsym --release Print exec maim -i $(xdotool getactivewindow) ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
 
 # Area selection screenshot and copy it to the clipboard
-bindsym --release Shift+Print exec maim -s ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
+bindsym --release Shift+Print exec maim -s -o ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
