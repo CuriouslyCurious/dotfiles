@@ -68,7 +68,7 @@ alias t="tree"
 # LaTeX
 alias xelatex="xelatex -shell-escape"
 # Misc
-alias dude="du -h --exclude=./yesterday 2>/dev/null | sort -h | grep -E \"^[0-9]+(\.|,)?[0-9]*M\""
+alias dude="du -h --exclude=./yesterday 2>/dev/null | sort -h | grep -e \"^[0-9]+(\.|,)?[0-9]*M\""
 alias weather="curl wttr.in/lulea"
 alias c="clear"
 alias se="sudoedit"
