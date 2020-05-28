@@ -70,6 +70,7 @@ Plug 'tikhomirov/vim-glsl'
 Plug 'lervag/vimtex'
     let g:vimtex_fold_enabled = 1
     let g:vimtex_view_method = 'zathura'
+    let g:vimtex_compiler_progname = 'nvr'
     let g:vimtex_compiler_latexmk = {
       \ 'options' : [
       \   '-shell-escape',
@@ -101,7 +102,8 @@ Plug 'vim-pandoc/vim-rmarkdown'
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
 
-Plug 'suan/vim-instant-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+    let g:mkdp_auto_start = 1
 Plug 'mzlogin/vim-markdown-toc'
 
 " Themes
@@ -121,11 +123,16 @@ call plug#end()
 """"""""""""""""""""""""""""
 """"" General Settings """""
 """"""""""""""""""""""""""""
+set nocompatible
 filetype plugin indent on
 syntax enable
 
 set list
 set listchars=tab:\┊\ ,eol:¬,trail:·,extends:→,precedes:←
+
+" File searching
+set path+=**
+set wildmenu
 
 " Terminal colors
 "set t_Co=256
