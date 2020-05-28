@@ -1,0 +1,11 @@
+[user]
+	email = thecuriouslycurious@protonmail.com
+	name = CuriouslyCurious
+[diff]
+	tool = vimdiff
+[color]
+	ui = auto
+[core]
+	autocrlf = input
+[init]
+	templatedir = ~/.git_template
