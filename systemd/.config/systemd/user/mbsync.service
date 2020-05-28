@@ -5,3 +5,6 @@ Description=Mailbox synchronization service
 Type=oneshot
 ExecStart=/usr/bin/mbsync -Va
 ExecStartPost=/usr/bin/notmuch new
+
+[Install]
+WantedBy=mbsync.timer
