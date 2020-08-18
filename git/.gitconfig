@@ -9,3 +9,5 @@
 	autocrlf = input
 [init]
 	templatedir = ~/.git_template
+[pull]
+	rebase = false
