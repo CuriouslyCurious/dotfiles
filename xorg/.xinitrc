@@ -9,7 +9,10 @@ xbindkeys=$HOME/.xbindkeysrc
 xset r rate 300 35
 
 # Set keyboard layout
-setxkbmap -layout se
+setxkbmap -option grp:alt_shift_toggle -layout se,us
+
+# Set some shortcuts
+xbindkeys
 
 # merge in defaults and keymaps
 
