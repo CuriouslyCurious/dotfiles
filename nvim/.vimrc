@@ -8,6 +8,9 @@ Plug 'tpope/vim-repeat'
 " nerdtree
 Plug 'scrooloose/nerdtree'
 
+" ctag handling
+Plug 'majutsushi/tagbar'
+
 " webdev (yuck)
 Plug 'alvan/vim-closetag'
     let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.liquid'
@@ -17,28 +20,36 @@ Plug 'alvan/vim-closetag'
 Plug 'airblade/vim-gitgutter'
 
 " Auto-completion
-Plug 'Valloric/YouCompleteMe'
-    let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-    let g:ycm_extra_conf_globlist=['~/.vim/*']
-    let g:ycm_collect_identifiers_from_tags_files = 1
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-    let g:ycm_autoclose_preview_window_after_completion = 1
-    let g:ycm_rust_src_path = '/usr/local/rust/rust-1.26.0/src'
-    let g:ycm_filetype_blacklist={
-                \ 'vim' : 1,
-                \ 'tagbar' : 1,
-                \ 'qf' : 1,
-                \ 'notes' : 1,
-                \ 'markdown' : 1,
-                \ 'md' : 1,
-                \ 'unite' : 1,
-                \ 'text' : 1,
-                \ 'vimwiki' : 1,
-                \ 'pandoc' : 1,
-                \ 'infolog' : 1,
-                \ 'objc' : 1,
-                \ 'mail' : 1
-    \}
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+    let g:deoplete#enable_at_startup = 1
+"Plug 'Valloric/YouCompleteMe'
+"    let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+"    let g:ycm_extra_conf_globlist=['~/.vim/*']
+"    let g:ycm_collect_identifiers_from_tags_files = 1
+"    let g:ycm_autoclose_preview_window_after_insertion = 1
+"    let g:ycm_autoclose_preview_window_after_completion = 1
+"    let g:ycm_rust_src_path = '/usr/local/rust/rust-1.26.0/src'
+"    let g:ycm_filetype_blacklist={
+"                \ 'vim' : 1,
+"                \ 'tagbar' : 1,
+"                \ 'qf' : 1,
+"                \ 'notes' : 1,
+"                \ 'markdown' : 1,
+"                \ 'md' : 1,
+"                \ 'unite' : 1,
+"                \ 'text' : 1,
+"                \ 'vimwiki' : 1,
+"                \ 'pandoc' : 1,
+"                \ 'infolog' : 1,
+"                \ 'objc' : 1,
+"                \ 'mail' : 1
+"    \}
 
 " Auto insert matching delimiters
 Plug 'Raimondi/delimitMate'
@@ -68,6 +79,7 @@ Plug 'tikhomirov/vim-glsl'
 
 " Latex
 Plug 'lervag/vimtex'
+    let g:tex_flavor = 'latex'
     let g:vimtex_fold_enabled = 1
     let g:vimtex_view_method = 'zathura'
     let g:vimtex_compiler_progname = 'nvr'
@@ -79,7 +91,6 @@ Plug 'lervag/vimtex'
       \   '-file-line-error',
       \   '-interaction=nonstopmode'
       \ ]}
-
 " Linting
 "Plug 'nvie/vim-flake8'
 "    autocmd BufWritePost *.py call Flake8()
@@ -214,9 +225,6 @@ nnoremap <space> zc
 vnoremap <space> zo
 let g:SimpylFold_docstring_preview=1
 
-" NERDtree
-map <C-n> :NERDTreeToggle<CR>
-
 " Python settings
 " Bad whitespace
 " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
@@ -247,6 +255,17 @@ let localleader = "\<space>"
 let g:mapleader = "\<space>"
 let maplocalleader = "\<space>"
 
+" Disable ex-mode
+:nnoremap Q <Nop>
+
+" Tag navigation
+"nnoremap <C-]> :tag<CR>
+nnoremap <C-[> :pop<CR>
+
+
+" Addons
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-b> :TagbarToggle<CR>
 
 """""""""""""""""
 """"" Misc. """""
@@ -297,6 +316,7 @@ if has ("autocmd")
     augroup templates
         autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
         autocmd BufNewFile *.tex 0r ~/.vim/templates/skeleton.tex
+        autocmd BufNewFile *.bib 0r ~/.vim/templates/skeleton.bib
         autocmd BufNewFile *.html,*.liquid 0r ~/.vim/templates/skeleton.html
     augroup END
 endif
