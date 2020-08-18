@@ -143,6 +143,10 @@ SPACESHIP_BATTERY_SUFFIX=" "
 
 SPACESHIP_VI_MODE_SHOW=true
 
+# zsh-history-substring-search
+# Skip duplicates
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
+
 ##########################
 ##### Other programs #####
 ##########################
