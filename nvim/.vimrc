@@ -7,6 +7,8 @@ Plug 'tpope/vim-repeat'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 
 " ctag handling
 Plug 'majutsushi/tagbar'
