@@ -29,8 +29,8 @@ if [ -f $HOME/.cargo/env ]; then
 fi
 
 # Load aliases
-if [ -f $HOME/.bash_aliases ]; then
-    source $HOME/.bash_aliases
+if [ -f $HOME/.aliases ]; then
+    source $HOME/.aliases
 fi
 
 # Set editor

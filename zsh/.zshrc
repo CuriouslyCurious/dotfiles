@@ -195,8 +195,8 @@ if [[ -e $(which direnv) ]]; then
 fi
 
 # Load aliases
-if [[ -e $HOME/.bash_aliases ]]; then
-    source $HOME/.bash_aliases
+if [[ -e $HOME/.aliases ]]; then
+    source $HOME/.aliases
 fi
 
 # Set editor
