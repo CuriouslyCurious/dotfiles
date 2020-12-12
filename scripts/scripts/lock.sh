@@ -12,7 +12,7 @@ clean_up() {
 
 trap clean_up SIGHUP SIGINT SIGTERM
 
-ffmpeg -loglevel quiet -y -s "${RESOLUTION}" -f x11grab -i "${DISPLAY}" -vframes 1 -vf 'gblur=sigma=20' "${TEMP_FILE}"
+ffmpeg -loglevel quiet -y -s "${RESOLUTION}" -f x11grab -i "${DISPLAY}" -vframes 1 -vf 'gblur=sigma=30' "${TEMP_FILE}"
 xset +dpms dpms "${SCREEN_TIMEOUT}" "${SCREEN_TIMEOUT}" "${SCREEN_TIMEOUT}"
 i3lock -n -I "${SCREEN_TIMEOUT}" -e -i "${TEMP_FILE}"
 clean_up
