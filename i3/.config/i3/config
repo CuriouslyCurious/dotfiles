@@ -128,11 +128,11 @@ exec --no-startup-id unclutter
 exec --no-startup-id mpd
 exec --no-startup-id redshift
 exec --no-startup-id xautolock -time 20 -detectsleep -locker "$HOME/scripts/suspend.sh"
-exec --no-startup-id i3-msg 'workspace $ws1; exec termite; \
+exec --no-startup-id i3-msg 'workspace $ws1; exec alacritty; \
                              workspace $ws2; exec firefox; \
-                             workspace $ws8; exec termite -e ncmpcpp; \
-                             workspace $ws8; exec termite -e vim "$HOME/Documents/music_list.md"; \
-                             workspace $ws9; exec discord; exec termite -e irssi; \
+                             workspace $ws8; exec alacritty -e ncmpcpp; \
+                             workspace $ws8; exec alacritty -e vim "$HOME/Documents/music_list.md"; \
+                             workspace $ws9; exec discord; exec alacritty -e irssi; \
                              workspace $ws0; exec telegram-desktop; \
                              workspace $ws1;'
 #bar {
@@ -206,8 +206,8 @@ bindsym $mod+Shift+g mode "$mode_gaps"
 set $mod Mod4
 
 floating_modifier $mod
-bindsym $mod+Return exec termite
-bindsym $mod+Shift+Return exec termite -d $(cat ~/.last_dir)
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec alacritty -d $(cat ~/.last_dir)
 bindsym $mod+q kill
 
 #bindsym $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
