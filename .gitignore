@@ -21,6 +21,9 @@ hardware-configuration.nix
 **/nvim/plugged
 **/nvim/.vim/tmp
 
+# neomutt (temporarily ignore until setup is less privacy revealing)
+**/neomutt
+
 # latex
 # ## Core latex/pdflatex auxiliary files:
 *.aux
