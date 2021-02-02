@@ -19,6 +19,7 @@ hardware-configuration.nix
 
 # nvim
 **/nvim/plugged
+**/nvim/.vim/tmp
 
 # latex
 # ## Core latex/pdflatex auxiliary files:
