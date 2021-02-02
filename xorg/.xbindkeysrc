@@ -16,20 +16,20 @@
     XF86AudioStop
 
 # Volume control
-"amixer set Master 1%+"
+"amixer -q -D pulse set Master 2%+"
     XF86AudioRaiseVolume
 
-"amixer set Master 1%-"
+"amixer -q -D pulse set Master 2%-"
     XF86AudioLowerVolume
 
-"amixer set Master toggle"
+"amixer -q -D pulse set Master toggle"
     XF86AudioMute
 
 # Brightness control
-"xbacklight -inc 2 -fps 50"
+"xbacklight -inc 5 -fps 50"
     XF86MonBrightnessUp
 
-"xbacklight -dec 2 -fps 50"
+"xbacklight -dec 5 -fps 50"
     XF86MonBrightnessDown
 
 # Power control
