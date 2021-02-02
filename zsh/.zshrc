@@ -74,31 +74,31 @@ function chpwd() {
 ####################
 
 # vi-mode (https://github.com/ajh17/dotfiles/blob/master/.zshrc#L164)
-bindkey -v
-autoload -Uz edit-command-line
-zle -N edit-command-line
-
-bindkey -M vicmd "/" history-incremental-pattern-search-forward
-bindkey -M vicmd "?" history-incremental-pattern-search-backward
-bindkey -M vicmd '^g' what-cursor-position
-bindkey -M vicmd '^r' redo
-bindkey -M vicmd 'G' end-of-buffer-or-history
-bindkey -M vicmd 'gg' beginning-of-buffer-or-history
-bindkey -M vicmd 'u' undo
-bindkey -M vicmd '~' vi-swap-case
-bindkey -M vicmd '^v' edit-command-line
-bindkey -a '^[[3~' delete-char
-bindkey '^?' backward-delete-char
-bindkey '^[[Z' reverse-menu-complete
-bindkey '^a' vi-insert-bol
-bindkey '^_' run-help
-bindkey '^e' vi-add-eol
-bindkey '^k' kill-line
-bindkey '^l' clear-screen
-bindkey '^n' insert-last-word
-bindkey '^r' history-incremental-search-backward
-bindkey '^s' history-incremental-search-forward
-bindkey '^u' vi-change-whole-line
+#bindkey -v
+#autoload -Uz edit-command-line
+#zle -N edit-command-line
+#
+#bindkey -M vicmd "/" history-incremental-pattern-search-forward
+#bindkey -M vicmd "?" history-incremental-pattern-search-backward
+#bindkey -M vicmd '^g' what-cursor-position
+#bindkey -M vicmd '^r' redo
+#bindkey -M vicmd 'G' end-of-buffer-or-history
+#bindkey -M vicmd 'gg' beginning-of-buffer-or-history
+#bindkey -M vicmd 'u' undo
+#bindkey -M vicmd '~' vi-swap-case
+#bindkey -M vicmd '^v' edit-command-line
+#bindkey -a '^[[3~' delete-char
+#bindkey '^?' backward-delete-char
+#bindkey '^[[Z' reverse-menu-complete
+#bindkey '^a' vi-insert-bol
+#bindkey '^_' run-help
+#bindkey '^e' vi-add-eol
+#bindkey '^k' kill-line
+#bindkey '^l' clear-screen
+#bindkey '^n' insert-last-word
+#bindkey '^r' history-incremental-search-backward
+#bindkey '^s' history-incremental-search-forward
+#bindkey '^u' vi-change-whole-line
 [[ -n ${key[PageUp]} ]] && bindkey "${key[PageUp]}" up-line-or-history
 [[ -n ${key[PageDown]} ]] && bindkey "${key[PageDown]}" down-line-or-history
 
@@ -108,22 +108,22 @@ bindkey "^[OF" end-of-line
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+#bindkey -M vicmd 'k' history-substring-search-up
+#bindkey -M vicmd 'j' history-substring-search-down
 
 # vi-mode is dumb, so this needs to be added
 # start typing + [Up-Arrow] - fuzzy find history forward
-if [[ "${terminfo[kcuu1]}" != "" ]]; then
-  autoload -U up-line-or-beginning-search
-  zle -N up-line-or-beginning-search
-  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
-fi
-# start typing + [Down-Arrow] - fuzzy find history backward
-if [[ "${terminfo[kcud1]}" != "" ]]; then
-  autoload -U down-line-or-beginning-search
-  zle -N down-line-or-beginning-search
-  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
-fi
+#if [[ "${terminfo[kcuu1]}" != "" ]]; then
+#  autoload -U up-line-or-beginning-search
+#  zle -N up-line-or-beginning-search
+#  bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+#fi
+## start typing + [Down-Arrow] - fuzzy find history backward
+#if [[ "${terminfo[kcud1]}" != "" ]]; then
+#  autoload -U down-line-or-beginning-search
+#  zle -N down-line-or-beginning-search
+#  bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+#fi
 
 bindkey "^ " autosuggest-accept
 
@@ -135,17 +135,23 @@ bindkey "^ " autosuggest-accept
 fpath+=~/.zfunc
 
 # Spacehip theme
-autoload -Uz promptinit; promptinit
-ZSH_THEME="spaceship"
-SPACESHIP_BATTERY_SHOW=false
-SPACESHIP_BATTERY_PREFIX=""
-SPACESHIP_BATTERY_SUFFIX=" "
+#autoload -Uz promptinit; promptinit
+#ZSH_THEME="spaceship"
+#SPACESHIP_BATTERY_SHOW=false
+#SPACESHIP_BATTERY_PREFIX=""
+#SPACESHIP_BATTERY_SUFFIX=" "
+#SPACESHIP_VI_MODE_SHOW=true
 
-SPACESHIP_VI_MODE_SHOW=true
+export STARSHIP_CONFIG=$HOME/.config/starship/config.toml
+export STARSHIP_CACHE=$HOME/.config/starship/cache
 
 # zsh-history-substring-search
 # Skip duplicates
 HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
+
+# zsh-vi-mode
+#ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
+#ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
 
 ##########################
 ##### Other programs #####
@@ -212,3 +218,6 @@ fi
 if [[ -d "$HOME/.opam" ]]; then
     . /home/curious/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 fi
+
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"

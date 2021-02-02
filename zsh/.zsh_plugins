@@ -7,8 +7,11 @@ zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search
 zsh-users/zsh-syntax-highlighting
 
-# Theme
-denysdovhan/spaceship-prompt
+# vi mode
+jeffreytse/zsh-vi-mode
+
+# Prompt
+#denysdovhan/spaceship-prompt
 
 # The name says it all
 # MichaelAquilina/zsh-autoswitch-virtualenv
