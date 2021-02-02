@@ -7,8 +7,14 @@ Plug 'tpope/vim-repeat'
 
 " nerdtree
 Plug 'scrooloose/nerdtree'
+    " Exit Vim if NERDTree is the only window left.
+    autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+        \ quit | endif
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
+
+" commenting
+Plug 'preservim/nerdcommenter'
 
 " ctag handling
 Plug 'majutsushi/tagbar'
@@ -21,37 +27,42 @@ Plug 'alvan/vim-closetag'
 " gitgutter
 Plug 'airblade/vim-gitgutter'
 
-" Auto-completion
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-    let g:deoplete#enable_at_startup = 1
-"Plug 'Valloric/YouCompleteMe'
-"    let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-"    let g:ycm_extra_conf_globlist=['~/.vim/*']
-"    let g:ycm_collect_identifiers_from_tags_files = 1
-"    let g:ycm_autoclose_preview_window_after_insertion = 1
-"    let g:ycm_autoclose_preview_window_after_completion = 1
-"    let g:ycm_rust_src_path = '/usr/local/rust/rust-1.26.0/src'
-"    let g:ycm_filetype_blacklist={
-"                \ 'vim' : 1,
-"                \ 'tagbar' : 1,
-"                \ 'qf' : 1,
-"                \ 'notes' : 1,
-"                \ 'markdown' : 1,
-"                \ 'md' : 1,
-"                \ 'unite' : 1,
-"                \ 'text' : 1,
-"                \ 'vimwiki' : 1,
-"                \ 'pandoc' : 1,
-"                \ 'infolog' : 1,
-"                \ 'objc' : 1,
-"                \ 'mail' : 1
-"    \}
+" LSP (auto-completion / linting)
+Plug 'natebosch/vim-lsc'
+    let g:lsc_server_commands = {
+        \'rust': 'rust-analyzer',
+        \'python': 'pyls',
+    \}
+    let g:lsc_auto_map = { 'defaults': v:true,
+        \  'GoToDefinition': 'gd',
+        \  'ShowHover': 'K',
+        \  'Completion': 'completefunc',
+    \}
+    let g:lsc_enable_autocomplete  = v:true
+    let g:lsc_enable_diagnostics   = v:true
+    let g:lsc_reference_highlights = v:true
+    let g:lsc_trace_level          = 'off'
+
+    "highlight lscDiagnosticError cterm=bold
+    hi lscDiagnosticWarning cterm=none
+    "hi lscDiagonsticInfo cterm=bold
+    "hi lscDiagnosticHint cterm=bold
+    "hi lscCurrentParameter cterm=bold
+    "hi lscReference cterm=bold
+
+    set completeopt=menu,menuone,noinsert,noselect
+    " Auto-close scratch preview window upon a complete or leaving insert
+    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+Plug 'ajh17/VimCompletesMe'
+
+" Syntax highlighting
+"Plug 'dense-analysis/ale'
+
+Plug 'PotatoesMaster/i3-vim-syntax'
+
+Plug 'beyondmarc/opengl.vim'
+Plug 'tikhomirov/vim-glsl'
+    autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
 
 " Auto insert matching delimiters
 Plug 'Raimondi/delimitMate'
@@ -61,23 +72,7 @@ Plug 'Raimondi/delimitMate'
 
 " Code-folding
 Plug 'tmhedberg/SimpylFold'
-
-" Highlighting
-Plug 'vim-syntastic/syntastic'
-    let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_python_checkers=['flake8']
-    let g:syntastic_python_flake8_args='--ignore=E501,E225'
-    let g:syntastic_check_on_wq = 0
-    let g:syntastic_tex_checkers = ['lacheck']
-
-Plug 'PotatoesMaster/i3-vim-syntax'
-
-Plug 'beyondmarc/opengl.vim'
-Plug 'tikhomirov/vim-glsl'
-    autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
+Plug 'Konfekt/FastFold'
 
 " Latex
 Plug 'lervag/vimtex'
@@ -93,13 +88,10 @@ Plug 'lervag/vimtex'
       \   '-file-line-error',
       \   '-interaction=nonstopmode'
       \ ]}
-" Linting
-"Plug 'nvie/vim-flake8'
-"    autocmd BufWritePost *.py call Flake8()
 
 " Undo trees
 Plug 'sjl/gundo.vim'
-    nnoremap <leader>u :GundoToggle<CR>
+    nnoremap <C-u> :GundoToggle<CR>
     let g:gundo_prefer_python3 = 1
 
 " Rust
@@ -121,6 +113,7 @@ Plug 'mzlogin/vim-markdown-toc'
 
 " Themes
 Plug 'vim-airline/vim-airline'
+    let g:airline#extensions#tabline#enabled=1
 Plug 'nanotech/jellybeans.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'vim-scripts/CycleColor'
@@ -140,8 +133,13 @@ set nocompatible
 filetype plugin indent on
 syntax enable
 
+set updatetime=300
+
 set list
 set listchars=tab:\┊\ ,eol:¬,trail:·,extends:→,precedes:←
+
+" TODO NOT IMPLEMENTED YET, wait for neovim 0.5
+"set signcolumn=number
 
 " File searching
 set path+=**
@@ -157,9 +155,9 @@ hi Normal guibg=NONE ctermbg=NONE
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
+" To avoid supressing error messages
+set shortmess-=F
 
-" Airline
-let g:airline#extensions#tabline#enabled=1
 set laststatus=2
 
 set visualbell
@@ -168,6 +166,9 @@ set relativenumber
 set wrap
 set enc=utf8
 set autoindent
+
+" Enable cursorline
+set cursorline
 
 " Enable italics
 hi Comment cterm=italic
@@ -199,9 +200,9 @@ set incsearch
 
 set clipboard=unnamedplus
 
-" Backups
-set backupdir=~/.vim-tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,/var/tmp,/tmp
+" Backups "
+set backupdir=~/.vim/tmp,/var/tmp,/tmp
+set directory=~/.vim/tmp,/var/tmp,/tmp
 
 " Scroloff
 set so=6
@@ -239,6 +240,14 @@ let g:SimpylFold_docstring_preview=1
 """"""""""""""""""""
 """"" Keybinds """""
 """"""""""""""""""""
+" Disable ex-mode
+nnoremap Q <Nop>
+
+" Leader
+let mapleader   = "\<space>"
+let localleader = "\<space>"
+let g:mapleader = "\<space>"
+let maplocalleader = "\<space>"
 
 " Visual movement
 " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -251,23 +260,17 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Leader
-let mapleader   = "\<space>"
-let localleader = "\<space>"
-let g:mapleader = "\<space>"
-let maplocalleader = "\<space>"
-
-" Disable ex-mode
-:nnoremap Q <Nop>
+" Open file navigation
+nnoremap <leader>h :bprevious<CR>
+nnoremap <leader>l :bnext<CR>
 
 " Tag navigation
 "nnoremap <C-]> :tag<CR>
 nnoremap <C-[> :pop<CR>
 
-
-" Addons
-nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <C-b> :TagbarToggle<CR>
+" plugins
+nnoremap <C-f> :NERDTreeToggle<CR>
+nnoremap <C-t> :TagbarToggle<CR>
 
 """""""""""""""""
 """"" Misc. """""
