@@ -1,4 +1,4 @@
-# Aliases #
+# Aliases
 alias diff="diff --color=auto"
 # Configs
 alias cvim="vim $HOME/.vimrc"
@@ -31,17 +31,54 @@ gitstat() {
     echo "$1's git statistics:"
     git log --numstat --no-merges --find-renames --pretty="%H" --author="$1" | awk 'NF==1 {commits+=1} NF==3 {files+=1; inserted+=$1; deleted+=$2} END {print "commits:", commits, "* files changed:", files, "* insertions(+):", inserted, "* deletions(-):", deleted}'
 }
+# The Rust Revolution!
 # grep
-alias grep="rg"
+if [[ -e $(which rg) ]]; then
+    alias grep="rg"
+fi
 # bat instead of cat
 if [[ -e $(which bat) ]]; then
     alias cat="bat -n"
 fi
+# exa instead of ls
+if [[ -e $(which exa) ]]; then
+    alias ls="exa -a --colour-scale"
+    alias l="exa -a --colour-scale"
+    alias la="exa -la --colour-scale"
+    alias ll="exa -la --colour-scale"
+else
+    alias ls="ls --color=auto"
+    alias l="ls -ah"
+    alias la="ls -lah"
+    alias ll="ls -lah"
+fi
+# fd instead of find
+if [[ -e $(which fd) ]]; then
+    alias find="fd"
+fi
+# sd instead of sed
+if [[ -e $(which fd) ]]; then
+    alias sed="sd"
+fi
+# procs instead ps
+if [[ -e $(which procs) ]]; then
+    alias ps="procs"
+fi
+# hyperfine
+if [[ -e $(which hyperfine) ]]; then
+    alias hf="hyperfine"
+fi
+# du -sh
+if [[ -e $(which diskus) ]]; then
+    alias du="diskus"
+fi
+# zoxine instead of cd
+#if [[ -e $(which zoxide) ]]; then
+#    alias cd="z"
+#fi
+
+
 #alias grep="grep --color=auto"
-# ls
-alias ls="ls --color=auto"
-alias l="ls -lah"
-alias la="ls -lah"
 # Pacman
 alias pacman="sudo pacman"
 alias Syu="sudo pacman -Syu"
@@ -80,4 +117,4 @@ alias x="exit"
 # Comic mode using sxiv
 alias comic="ls -v | sxiv -i -f -Z -p -t"
 # Stupid stuff
-alias fork-bomb=":() { :|: & };:"
+alias forkbomb=":() { :|: & };:"
