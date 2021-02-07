@@ -1,0 +1,99 @@
+# Don't print a new line at the start of the prompt
+add_newline = true
+
+# Wait 10 milliseconds for starship to check files under the current directory.
+scan_timeout = 10
+
+# Symbol shenaningans for different languages using nerd-font
+#[aws]
+#symbol = " "
+
+[battery]
+full_symbol = ""
+charging_symbol = ""
+discharging_symbol = ""
+
+[character]
+# Replace the "❯" symbol in the prompt with "➜"
+#format = "$all"
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+vicmd_symbol = "[V](bold green)"
+
+[username]
+style_user = "yellow bold"
+style_root = "red bold"
+#format = "[$user]($style) "
+disabled = false
+show_always = false
+
+#[conda]
+#symbol = " "
+
+#[dart]
+#symbol = " "
+
+#[directory]
+#read_only = " "
+
+#[docker]
+#symbol = " "
+
+#[elixir]
+#symbol = " "
+
+#[elm]
+#symbol = " "
+
+#[git_branch]
+#symbol = " "
+
+#[golang]
+#symbol = " "
+
+#[haskell]
+#symbol = " "
+
+#[hg_branch]
+#symbol = " "
+
+#[java]
+#symbol = " "
+
+#[julia]
+#symbol = " "
+
+#[memory_usage]
+#symbol = " "
+
+#[nim]
+#symbol = " "
+
+#[nix_shell]
+#symbol = " "
+
+#[nodejs]
+#symbol = " "
+
+#[package]
+#symbol = " "
+## Disable the package module, hiding it from the prompt completely
+#disabled = true
+
+#[perl]
+#symbol = " "
+
+#[php]
+#symbol = " "
+
+#[python]
+#symbol = " "
+
+#[ruby]
+#symbol = " "
+
+#[rust]
+#symbol = " "
+
+#[swift]
+#symbol = "ﯣ "

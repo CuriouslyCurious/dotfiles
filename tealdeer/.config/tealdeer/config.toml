@@ -1,0 +1,32 @@
+# Available colours: black, red, green, yellow, blue, purple, cyan, white
+[style.description]
+underline = false
+bold = false
+
+[style.command_name]
+foreground = "cyan"
+underline = false
+bold = false
+
+[style.example_text]
+foreground = "yellow"
+underline = false
+bold = false
+
+[style.example_code]
+foreground = "red"
+underline = false
+bold = false
+
+[style.example_variable]
+foreground = "white"
+underline = true
+bold = false
+
+[display]
+compact = false
+use_pager = false
+
+[updates]
+auto_update = false
+auto_update_interval_hours = 720
