@@ -91,7 +91,7 @@ Plug 'lervag/vimtex'
 
 " Undo trees
 Plug 'sjl/gundo.vim'
-    nnoremap <C-u> :GundoToggle<CR>
+    nnoremap <C-g> :GundoToggle<CR>
     let g:gundo_prefer_python3 = 1
 
 " Rust

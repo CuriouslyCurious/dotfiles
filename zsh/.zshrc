@@ -165,11 +165,10 @@ fi
 # Run ssh-agent
 # https://wiki.archlinux.org/index.php/SSH_keys#SSH_agents
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent > ~/.ssh/agent-thing
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
-
-if [[ "$SSH_AGENT_PID" == "" ]]; then
-    eval "$(<~/.ssh/agent-thing)"
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
 export PATH="$HOME/.local/bin:$PATH"
