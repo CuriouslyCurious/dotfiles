@@ -5,6 +5,11 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 xbindkeys=$HOME/.xbindkeysrc
 
+# Start the window manager
+if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+    exec startx
+fi
+
 # Set typematic delay
 xset r rate 300 35
 
@@ -44,13 +49,6 @@ fi
 if [ -f "/usr/bin/unclutter" ]; then
     unclutter &
 fi
-
-# Start the window manager
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-    exec startx
-fi
-
-
 
 exec i3
 

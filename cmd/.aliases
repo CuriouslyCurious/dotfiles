@@ -7,8 +7,9 @@ alias e="$EDITOR"
 # Movement
 alias ..="cd .."
 # vim
-alias vim="vim"
-alias vi="vim"
+alias vim="nvim"
+alias vi="nvim"
+alias vimdiff="nvim -d"
 # Git
 alias ga="git add"
 alias gaa="git add --all"
