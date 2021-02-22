@@ -13,10 +13,10 @@ end
 # Run ssh-agent
 # https://wiki.archlinux.org/index.php/SSH_keys#SSH_agents
 if ! pgrep -u "$USER" ssh-agent > /dev/null
-    ssh-agent -t 1h > "$HOME/ssh-agent.env"
+    ssh-agent -c -t 1h > "$HOME/.ssh/ssh-agent.env"
 end
-if test ! -e "$SSH_AUTH_SOCK"
-    source "$HOME/ssh-agent.env" > /dev/null
+if test -e "$SSH_AUTH_SOCK"
+    eval "$HOME/.ssh/ssh-agent.env" > /dev/null
 end
 
 set -U PATH "$HOME/.local/bin:$PATH"
@@ -47,4 +47,3 @@ end
 
 # Load prompt
 starship init fish | source
-
