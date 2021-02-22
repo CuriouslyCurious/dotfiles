@@ -18,12 +18,7 @@ function import_bash_aliases \
 		set aname (string trim $aname)
 		set command (string trim $command)
 
-        if test -f ~/.config/fish/functions/$aname.fish
-            echo "Overwriting alias $aname as $command"
-        else
-            echo "Creating alias $aname as $command"
-        end
-        alias $aname $command
-        funcsave $aname
+        echo "Processing alias $aname as $command"
+        abbr $aname $command
     end
 end
