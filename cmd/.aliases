@@ -76,18 +76,18 @@ if [[ -e $(which diskus) ]]; then
     alias du="diskus"
 fi
 # zoxine instead of cd
-#if [[ -e $(which zoxide) ]]; then
-#    alias cd="z"
-#fi
+if [[ -e $(which zoxide) ]]; then
+	alias z="zoxide"
+    #alias cd="z"
+fi
 
 # Pacman
 alias pacman="sudo pacman"
-alias Syu="sudo pacman -Syu"
+alias p="sudo pacman"
 # Power
 alias hibernate="systemctl hibernate"
 alias suspend="systemctl suspend"
 # taskwarrior
-alias t="task"
 alias tw="task"
 # pass
 alias p="pass"
