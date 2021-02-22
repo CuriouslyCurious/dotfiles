@@ -220,3 +220,18 @@ fi
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+
+##################
+#### Greeting ####
+##################
+if [[ -f $(which neofetch) ]]; then
+	neofetch
+fi
+
+echo ""
+
+if [[ -f $(which task) ]]; then
+	task
+fi
+
+

@@ -35,6 +35,8 @@ gitstat() {
 # grep
 if [[ -e $(which rg) ]]; then
     alias grep="rg"
+else
+	alias grep="grep --color=auto"
 fi
 # bat instead of cat
 if [[ -e $(which bat) ]]; then
@@ -77,8 +79,6 @@ fi
 #    alias cd="z"
 #fi
 
-
-#alias grep="grep --color=auto"
 # Pacman
 alias pacman="sudo pacman"
 alias Syu="sudo pacman -Syu"
@@ -104,8 +104,6 @@ alias t="tree"
 # bottom
 alias top="btm"
 alias htop="btm"
-# Java is dumb
-#alias syncsim="wmname LG3D && exec $HOME/scripts/syncsim"
 # LaTeX
 alias xelatex="xelatex -shell-escape"
 # Misc
