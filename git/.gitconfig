@@ -17,7 +17,7 @@
 	ui = auto
 [core]
 	autocrlf = input
-	editor = nvim
+	editor = /usr/bin/nvim
 [init]
 	templatedir = ~/.git_template
 	defaultBranch = master
