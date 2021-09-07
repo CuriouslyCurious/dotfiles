@@ -60,6 +60,8 @@ orange = #FF9F55
 font-0 = DejaVuSansMono Nerd Font Mono:pixelsize=10;2
 font-1 = DejaVuSansMono Nerd Font Mono:pixelsize=18;3
 font-2 = Noto Sans Mono CJK SC:size=8;1
+font-3 = DejaVuSansMono Nerd Font Mono:pixelsize=8;1
+font-4 = DejaVuSansMono Nerd Font Mono:pixelsize=14;2
 ;font-0 = Siji:pixelsize=10;2
 
 monitor = ${env:MONITOR}
@@ -96,7 +98,7 @@ module-margin-right = 0
 
 modules-left = i3 right_arrow xwindow
 modules-center = mpd
-modules-right = keyboard openvpn wlan eth pulseuadio cpu memory battery date left_arrow pkg
+modules-right = keyboard openvpn wlan eth pulseuadio cpu memory battery date left_arrow pkg github
 
 separator =
 
@@ -243,7 +245,7 @@ type = custom/script
 exec = $HOME/.config/polybar/openvpn.sh
 interval = 5
 
-label = " %output:0:30%"
+label = "%output:0:30%"
 format = <label>
 ;format-background=${colors.dark}
 format-foreground=${colors.green}
@@ -373,11 +375,11 @@ full-at = 99
 
 time-format = "%Hh%Mm"
 
-format-charging = <animation-charging><label-charging>
-format-discharging = <ramp-capacity><label-discharging>
+format-charging = %{T5}<animation-charging>%{T-} <label-charging>
+format-discharging = %{T4}<ramp-capacity>%{T-} <label-discharging>
 format-full = <label-full>
 
-label-full = " %percentage%%"
+label-full = "%{T4}%{T-} %percentage%%"
 label-charging = "%percentage%% %time%"
 label-discharging = "%percentage%% %time%"
 
@@ -425,21 +427,20 @@ format-discharging-suffix            = |
 format-discharging-suffix-foreground = ${colors.background}
 
 label-full-padding = 0
-label-charging-padding = 1
-label-discharging-padding = 1
+label-charging-padding = 0
+label-discharging-padding = 0
 ramp-capacity-padding = 0
 animation-charging-padding = 0
 
 
 [module/date]
 type = internal/date
-date = " %I:%M %p"
-date-alt = " %a %Y-%m-%d  %I:%M %p"
+date = "  %I:%M %p"
+date-alt = "  %a %Y-%m-%d  %I:%M %p"
 interval = 15
 
 label-foreground = ${colors.cyan}
-label-padding = 1
-
+label-padding =
 
 [module/weather]
 type = custom/script
@@ -479,6 +480,21 @@ exec-if = "ping -q -w 2 -c 1 8.8.8.8 > /dev/null"
 click-left = $HOME/.config/polybar/pkg.sh
 
 label-padding = 1
+
+[module/github]
+type = internal/github
+
+token = ${file:/home/curious/.config/github/notifications.token}
+user = CuriouslyCurious
+
+empty-notifications = false
+interval = 600
+
+format = <label>
+format-background=${colors.dark}
+label-font = 3
+label = 
+label-offline =
 
 ;[module/keyboard]
 ;;type = internal/xkeyboard
