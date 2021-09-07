@@ -6,7 +6,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 xbindkeys=$HOME/.xbindkeysrc
 
 # Start the window manager
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]; then
     exec startx
 fi
 
