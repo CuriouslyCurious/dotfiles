@@ -18,21 +18,22 @@
 font pango:DejaVu Sans Mono 10, FontAwesome 10
 
 # Monitor arrangement
-set $monC DisplayPort-0
-set $monR HDMI-0
-set $monL DVI-0
+#set $monC DisplayPort-0
+#set $monR HDMI-0
+#set $monL DVI-0
 
 # Set workspaces default monitors
-workspace $ws1 output $monC
-workspace $ws2 output $monC
-workspace $ws3 output $monL
-workspace $ws4 output $monC
-workspace $ws5 output $monR
-workspace $ws0 output $monC
+#workspace $ws1 output $monC
+#workspace $ws2 output $monC
+#workspace $ws3 output $monL
+#workspace $ws4 output $monC
+#workspace $ws5 output $monR
+#workspace $ws0 output $monC
 
 # The border around windows
-new_window pixel 2
-new_float pixel 2
+default_border pixel 2
+#new_window pixel 2
+#new_float pixel 2
 
 #workspace_auto_back_and_forth yes
 #hide_edge_borders both
@@ -116,13 +117,24 @@ client.background $bg
 ##### Start-up #####
 ####################
 
+output * bg "$HOME/.config/wall.png" fill
+
 # Beautify my desktop
-exec_always --no-startup-id xrdb -load ~/.Xresources
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always --no-startup-id xrdb -load ~/.Xresources
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec --no-startup-id compton -b  # straight outta compton
-exec --no-startup-id picom -b
-exec --no-startup-id feh --bg-fill $HOME/.config/wall.png
+#exec --no-startup-id picom -b
+#exec --no-startup-id feh --bg-fill $HOME/.config/wall.png
+
+input "type:keyboard" {
+    xkb_layout us,se
+    xkb_options grp:alt_shift_toggle
+    repeat_delay 250
+    repeat_rate 50
+}
+
 exec --no-startup-id unclutter
+exec --no-startup-id flameshot
 
 # Misc.
 exec --no-startup-id mpd
@@ -162,42 +174,42 @@ gaps inner 12
 gaps outer 0
 
 # adjust gaps on-the-fly
-set $mode_gaps Gaps: (O)uter, (I)nner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 1
-        bindsym minus gaps inner current minus 1
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 1
-        bindsym Shift+minus gaps inner all minus 1
-        bindsym Shift+0 gaps inner all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 1
-        bindsym minus gaps outer current minus 1
-        bindsym 0 gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 1
-        bindsym Shift+minus gaps outer all minus 1
-        bindsym Shift+0 gaps outer all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-bindsym $mod+Shift+g mode "$mode_gaps"
+# set $mode_gaps Gaps: (O)uter, (I)nner
+# set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+# set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+#
+# mode "$mode_gaps" {
+#         bindsym o      mode "$mode_gaps_outer"
+#         bindsym i      mode "$mode_gaps_inner"
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+# }
+#
+# mode "$mode_gaps_inner" {
+#         bindsym plus  gaps inner current plus 1
+#         bindsym minus gaps inner current minus 1
+#         bindsym 0     gaps inner current set 0
+#
+#         bindsym Shift+plus  gaps inner all plus 1
+#         bindsym Shift+minus gaps inner all minus 1
+#         bindsym Shift+0 gaps inner all set 0
+#
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+# }
+# mode "$mode_gaps_outer" {
+#         bindsym plus  gaps outer current plus 1
+#         bindsym minus gaps outer current minus 1
+#         bindsym 0 gaps outer current set 0
+#
+#         bindsym Shift+plus  gaps outer all plus 1
+#         bindsym Shift+minus gaps outer all minus 1
+#         bindsym Shift+0 gaps outer all set 0
+#
+#         bindsym Return mode "default"
+#         bindsym Escape mode "default"
+# }
+# bindsym $mod+Shift+g mode "$mode_gaps"
 
 
 ####################
@@ -246,7 +258,7 @@ bindsym $mod+v split v;exec notify-send 'tile vertically'
 
 bindsym $mod+f fullscreen
 
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -279,7 +291,7 @@ bindsym $mod+0 workspace $ws0
 bindsym $mod+Tab workspace back_and_forth
 bindsym $mod+minus move scratchpad
 bindsym $mod+plus scratchpad show
-bindsym $mod+Shift+s sticky toggle
+#bindsym $mod+Shift+s sticky toggle
 bindsym $mod+n exec --no-startup-id thunar
 
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -311,7 +323,10 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit'
 
 # https://github.com/cac03/i3lock
-bindsym $mod+Shift+i exec $HOME/scripts/lock.sh
+#bindsym $mod+Shift+i exec $HOME/scripts/lock.sh
+
+# Screensaver/session lock screen
+bindsym $mod+Shift+s exec $HOME/scripts/lock.sh
 
 # Switch monitor mode (enter presentation mode)
 bindsym $mod+p exec $HOME/scripts/monitor_mode.sh
@@ -324,10 +339,12 @@ bindsym $mod+p exec $HOME/scripts/monitor_mode.sh
 #bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # Area selection
 
 # Screenshot everything and send it to the clipboard
-bindsym --release $mod+Shift+Print exec maim ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
+#bindsym --release $mod+Shift+Print exec maim ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
+
+bindsym --release Print exec flameshot gui
 
 # Screenshot current active window and send that picture to the clipboard
-bindsym --release Print exec maim -i $(xdotool getactivewindow) ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
+bindsym --release Shift+Print exec maim -i $(xdotool getactivewindow) ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
 
 # Area selection screenshot and copy it to the clipboard
-bindsym --release Shift+Print exec maim -s -o ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
+#bindsym --release Shift+Print exec maim -s -o ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
