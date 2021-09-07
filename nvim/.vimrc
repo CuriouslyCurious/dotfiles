@@ -1,4 +1,14 @@
-call plug#begin('~/.config/nvim/plugged')
+" TODO: * Add snippets plugin
+"       * Switch to buffers instead of tabs
+"       * Go through keybinds
+
+set shell=/bin/bash
+
+" Leader
+let mapleader   = "\<space>"
+let localleader = "\<space>"
+let g:mapleader = "\<space>"
+let maplocalleader = "\<space>"
 
 " VIM enhancements
 Plug 'ciaranm/securemodelines'
@@ -14,30 +24,52 @@ Plug 'ciaranm/securemodelines'
         \ "rightleft",   "rl",   "norightleft", "norl",
         \ "colorcolumn"
         \ ]
-Plug 'preservim/nerdcommenter'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'justinmk/vim-sneak'
+Plug 'preservim/nerdcommenter'          " Commenting stuff
+Plug 'editorconfig/editorconfig-vim'    " For standardising code-style via .editorconfig files
+Plug 'justinmk/vim-sneak'               " Jump to any location specified by two characters
     let g:sneak#s_next = 1
-Plug 'terryma/vim-expand-region'
+    let g:sneak#label = 1               " Vimium-style navigation
+Plug 'terryma/vim-expand-region'        " Select increasingly large regions of text
+                                        " TODO: look at keybinds
     map K <Plug>(expand_region_expand)
     map J <Plug>(expand_region_shrink)
-Plug 'godlygeek/tabular'
+
 " tpope magic
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'               " Make replacing quotes and such easier (cs)
+Plug 'tpope/vim-repeat'                 " Repeat more actions
 "Plug 'tpope/vim-fugitive'
 "Plug 'tpope/vim-sensible'
 "
-" VIM GUI
-Plug 'machakann/vim-highlightedyank'
-Plug 'itchyny/lightline.vim'
-    let g:lightline = {
-        \ 'colorscheme': 'material',
-    \}
-Plug 'andymass/vim-matchup'
+Plug 'andymass/vim-matchup'             " Navigate between sets of matching texts (%)
+Plug 'terryma/vim-smooth-scroll'        " Because it is fancy
+    noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+    noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+    noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+    noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+" Statusline/tabline
+"Plug 'mengelbrecht/lightline-bufferline'
+"Plug 'itchyny/lightline.vim'
+    "let g:lightline = {
+        "\ 'colorscheme': 'material',
+        "\ 'active': {
+        "\   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
+        "\ },
+        "\ 'tabline': {
+        "\   'left': [ ['buffers'] ],
+        "\   'right': [ ['close'] ]
+        "\ },
+        "\ 'component_expand': {
+        "\   'buffers': 'lightline#bufferline#buffers'
+        "\ },
+        "\ 'component_type': {
+        "\   'buffers': 'tabsel'
+        "\ }
+    "\ }
+
 
 " Auto insert matching delimiters
-"Plug 'Raimondi/delimitMate'
+Plug 'cohama/lexima.vim'
     "" Disable auto-closing for tags to ensure closetag can do its thing
     "let delimitMate_matchpairs = "(:),[:],{:}"
     "autocmd! FileType html,xhtml,phtml,liquid let b:delimitMate_matchpairs = "(:),[:],{:}"
@@ -47,78 +79,13 @@ Plug 'andymass/vim-matchup'
     "let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.liquid'
     "let g:closetag_filetypes = '*.html,*.xhtml,*.phtml,*.liquid'
 
-" nerdtree
-"Plug 'scrooloose/nerdtree'
-    "" Exit Vim if NERDTree is the only window left.
-    "autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-        "\ quit | endif
-"Plug 'Xuyuanp/nerdtree-git-plugin'
-"Plug 'ryanoasis/vim-devicons'
-
-" ctag handling
+" ctag bar
+" XXX: Might delete this and just use the quickfix bar instead
 Plug 'majutsushi/tagbar'
 
 " Undo trees
 Plug 'sjl/gundo.vim'
     let g:gundo_prefer_python3 = 1
-
-" gitgutter
-Plug 'airblade/vim-gitgutter'
-
-" fzf (starting at root)
-Plug 'airblade/vim-rooter'
-" post-hook update for fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-" Auto-completion / linting
-Plug 'ncm2/ncm2'
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-    set shortmess+=c
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'roxma/nvim-yarp'
-
-" LSP (LanguageClient)
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-    let g:LanguageClient_serverCommands = {
-        \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ }
-Plug 'Shougo/echodoc.vim'
-
-"Plug 'natebosch/vim-lsc'
-"    let g:lsc_server_commands = {
-"        \'rust': 'rust-analyzer',
-"        \'python': 'pyls',
-"    \}
-"    let g:lsc_auto_map = { 'defaults': v:true,
-"        \  'GoToDefinition': 'gd',
-"        \  'ShowHover': 'K',
-"        \  'Completion': 'completefunc',
-"    \}
-"    let g:lsc_enable_autocomplete  = v:true
-"    let g:lsc_enable_diagnostics   = v:true
-"    let g:lsc_reference_highlights = v:true
-"    let g:lsc_trace_level          = 'off'
-"
-"    "highlight lscDiagnosticError cterm=bold
-"    hi lscDiagnosticWarning cterm=none
-"    "hi lscDiagonsticInfo cterm=bold
-"    "hi lscDiagnosticHint cterm=bold
-"    "hi lscCurrentParameter cterm=bold
-"    "hi lscReference cterm=bold
-"
-"    " Auto-close scratch preview window upon a complete or leaving insert
-"    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-"Plug 'ajh17/VimCompletesMe'
-
-
-" Code-folding
-"Plug 'tmhedberg/SimpylFold'
-"Plug 'Konfekt/FastFold'
 
 " Latex
 Plug 'lervag/vimtex'
@@ -135,54 +102,27 @@ Plug 'lervag/vimtex'
       \   '-interaction=nonstopmode'
       \ ]}
 
-" Syntax
-Plug 'dense-analysis/ale'
-Plug 'cespare/vim-toml'
-Plug 'vim-pandoc/vim-rmarkdown'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'rust-lang/rust.vim'
-    let g:rustfmt_autosave = 1
-    let g:rustfmt_emit_files = 1
-    let g:rustfmt_fail_silently = 0
-    let g:rust_clip_command = 'xclip -selection clipboard'
-Plug 'PotatoesMaster/i3-vim-syntax'
-Plug 'beyondmarc/opengl.vim'
-Plug 'tikhomirov/vim-glsl'
-    autocmd! BufNewFile,BufRead *.vs,*.fs set ft=glsl
-Plug 'dag/vim-fish'
-
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
     let g:mkdp_auto_start = 1
 Plug 'mzlogin/vim-markdown-toc'
 
 " Themes
-"Plug 'vim-airline/vim-airline'
-    "let g:airline#extensions#tabline#enabled=1
-Plug 'nanotech/jellybeans.vim'
-Plug 'flazz/vim-colorschemes'
-Plug 'vim-scripts/CycleColor'
-"Plug 'liuchengxu/space-vim-dark'
-"    let g:space_vim_dark_background=234
-Plug 'skielbasa/vim-material-monokai'
-    let g:airline_theme='materialmonokai'
-    let g:materialmonokai_italic=1
-    let g:materialmonokai_subtle_spell=1
+"Plug 'skielbasa/vim-material-monokai'
+    "let g:airline_theme='materialmonokai'
+    "let g:materialmonokai_italic=1
+    "let g:materialmonokai_subtle_spell=1
 call plug#end()
-
 
 """"""""""""""""""""""""""""
 """"" General Settings """""
 """"""""""""""""""""""""""""
 set nocompatible
 filetype plugin indent on
-syntax enable
+syntax on
 set hidden
-set updatetime=300
-" TODO NOT IMPLEMENTED YET, wait for neovim 0.5
-"set signcolumn=number
-set signcolumn=yes
+set updatetime=1000
+" set signcolumn=yes
 set noshowmode
 set ttyfast
 set visualbell
@@ -208,33 +148,28 @@ set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp
 "set t_Co=256
 set background=dark
 set termguicolors
-colorscheme material-monokai
+colorscheme monokai_material
 hi Normal guibg=NONE ctermbg=NONE
 
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
+set laststatus=2
+
 " To avoid supressing error messages
 set shortmess-=F
-
-set laststatus=2
 
 " Enable cursorline
 set cursorline
 
-
 " Enable italics
 hi Comment cterm=italic
 
-" Make .tex files run faster
-" https://stackoverflow.com/questions/8300982/vim-running-slow-with-latex-files
-au FileType tex setlocal nocursorline
-au FileType tex :NoMatchParen
-" https://github.com/vim/vim/issues/727
-autocmd FileType tex set regexpengine=1
-
 " Clipboard
 set clipboard=unnamedplus
+
+" Enable tabline
+set showtabline=2
 
 " Tab settings
 set tabstop=4
@@ -242,9 +177,8 @@ set softtabstop=4
 set expandtab
 set shiftwidth=4
 set smarttab
-set noexpandtab
 
-set backspace=2
+set backspace=indent,eol,start
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
@@ -276,7 +210,6 @@ cnoremap %s/ %sm/
 
 " Enable folding
 "set foldmethod=indent
-"set foldlevel=99
 "nnoremap <space> zc
 "vnoremap <space> zo
 "let g:SimpylFold_docstring_preview=1
@@ -289,14 +222,14 @@ set timeoutlen=1000 ttimeoutlen=0
 
 " Persistent undo and backups
 call mkdir($HOME . "/.vim/tmp", "p")
-set backupdir=~/.vim/tmp,/var/tmp,/tmp
-set directory=~/.vim/tmp,/var/tmp,/tmp
+set backupdir=$HOME/.vim/tmp,/var/tmp,/tmp
+set directory=$HOME/.vim/tmp,/var/tmp,/tmp
 
 if has('persistent_undo')
-	set undodir=~/.vim/tmp
-	set undofile
-	set undolevels=1000
-	set undoreload=10000
+    set undodir=$HOME/.vim/tmp
+    set undofile
+    set undolevels=1000
+    set undoreload=10000
 endif
 
 " Python settings
@@ -312,15 +245,10 @@ endif
 """"" Keybinds """""
 """"""""""""""""""""
 " Disable ex-mode
-nnoremap Q <Nop>
+noremap Q <Nop>
 " Disable F1 help
-nnoremap F1 <nop>
-
-" Leader
-let mapleader   = "\<space>"
-let localleader = "\<space>"
-let g:mapleader = "\<space>"
-let maplocalleader = "\<space>"
+nnoremap <F1> <Nop>
+inoremap <F1> <Nop>
 
 " Jump to start and end of line using the home row keys
 map H ^
@@ -333,8 +261,12 @@ nnoremap <Leader>w :w<CR>
 " <leader><leader> toggles between last two buffers
 nnoremap <leader><leader> <c-^>
 
-" Open new file adjacent to current file
+" OpeA: Pyright is now an officially-supported Microsoft type checker for Python. It will continue to be developed and maintained as an open-source project under its original MIT license terms. The Pyright extension for VSCode is a reference implementation and is not guaranteed to be fully functional or maintained long-term.n new file adjacent to current file
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Word delete in insert mode
+inoremap <C-BS> <C-W>
+vnoremap <C-BS> <C-W>
 
 " Visual movement
 " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -347,53 +279,38 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Open file navigation
+" Open buffer navigation
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
+nnoremap <C-W> :bd<CR>
 nnoremap <leader>h :bprevious<CR>
 nnoremap <leader>l :bnext<CR>
 
 " Ctrl+h to stop search highlight
-vnoremap <C-h> :nohlsearch<cr>
-nnoremap <C-h> :nohlsearch<cr>
+" vnoremap <C-h> :nohlsearch<cr>
+" nnoremap <C-h> :nohlsearch<cr>
 
 " Tag navigation
 "nnoremap <C-]> :tag<CR>
 nnoremap <C-[> :pop<CR>
 
-" Completion
-set completeopt=menuone,noinsert,noselect
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
-inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
-"inoremap <silent><expr> <TAB>
-"      \ pumvisible() ? "\<C-n>" :
-"      \ <SID>check_back_space() ? "\<TAB>" :
-"      \ coc#refresh()
-
-"function! s:check_back_space() abort
-  "let col = col('.') - 1
-  "return !col || getline('.')[col - 1]  =~# '\s'
-"endfunction
-"
-
-" LanguageClient bindings
-nmap <silent>K <Plug>(lcn-hover)
-nmap <silent> gd <Plug>(lcn-definition)
-nmap <silent> <F2> <Plug>(lcn-rename)
-
 " Gundo
 nnoremap <C-g> :GundoToggle<CR>
 
 " Toggle plugins
-nnoremap <C-o> :Files<CR>
+" nnoremap <C-o> :Files<CR>
 nnoremap <C-t> :TagbarToggle<CR>
 
 """""""""""""""""
 """"" Misc. """""
 """""""""""""""""
+" Make .tex files run faster
+" https://stackoverflow.com/questions/8300982/vim-running-slow-with-latex-files
+au FileType tex setlocal nocursorline
+au FileType tex :NoMatchParen
+" https://github.com/vim/vim/issues/727
+autocmd FileType tex set regexpengine=1
+
 " Spell check
 let b:lang=0
 let g:langList=["nospell", "en_gb", "sv"]
@@ -431,6 +348,15 @@ function! <SID>StripTrailingWhitespaces()
     %s/\s\+$//e
     call cursor(l, c)
 endfun
+
+" Figure out the system Python for Neovim to ensure has('python3') works in
+" virtualenvs
+" https://github.com/neovim/neovim/issues/1887
+if exists("$VIRTUAL_ENV")
+    let g:python3_host_prog=substitute(system("which -a python3 | head -n2 | tail -n1"), "\n", '', 'g')
+else
+    let g:python3_host_prog=substitute(system("which python3"), "\n", '', 'g')
+endif
 
 " Call the remove trailing whitespaces on write
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
