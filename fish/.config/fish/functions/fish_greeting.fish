@@ -1,4 +1,4 @@
 function fish_greeting
-	neofetch
+	macchina --theme lithium --custom-ascii ~/.config/fish/ascii.txt -A blue
 	task
 end

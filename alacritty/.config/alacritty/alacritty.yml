@@ -14,14 +14,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
-  #TERM: alacritty
+  TERM: xterm-256color
 
 window:
   # Window dimensions (changes require restart)
@@ -412,10 +412,10 @@ colors:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /bin/bash
-#  args:
-#    - --login
+shell:
+  program: /bin/fish
+  args:
+    - --login
 
 # Startup directory
 #

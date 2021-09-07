@@ -1,6 +1,6 @@
 # https://gist.github.com/cdfa/ad5c51e30d8af1a7507d7d8ec9eb3b85
 
-set ignore_list ".." "forkbomb"
+set ignore_list ".." "forkbomb" "e" "se"
 echo $ignore_list
 
 function import_bash_aliases \

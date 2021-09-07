@@ -12,7 +12,7 @@ set -U fish_color_operator normal
 set -U fish_color_escape magenta
 set -U fish_color_cwd green
 set -U fish_color_cwd_root red
-set -U fish_color_valid_path --underline
+set -U fish_color_valid_path --bold
 set -U fish_color_autosuggestion gray
 set -U fish_color_user brgreen
 set -U fish_color_host normal

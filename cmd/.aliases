@@ -4,12 +4,16 @@ alias diff="diff --color=auto"
 alias cvim="vim $HOME/.vimrc"
 # Editor
 alias e="$EDITOR"
+alias se="sudo $EDITOR"
+alias sudoedit="sudo $EDITOR" # sudoedit is a minefield
 # Movement
 alias ..="cd .."
 # vim
 alias vim="nvim"
 alias vi="nvim"
 alias vimdiff="nvim -d"
+# cargo
+alias c="cargo"
 # Git
 alias ga="git add"
 alias gaa="git add --all"
@@ -36,28 +40,29 @@ gitstat() {
 # grep
 if [[ -e $(which rg) ]]; then
     alias grep="rg"
-else
-	alias grep="grep --color=auto"
 fi
+#else
+    # alias grep="grep --color=auto"
+#fi
 # bat instead of cat
 if [[ -e $(which bat) ]]; then
     alias cat="bat -n"
 fi
 # exa instead of ls
+# alias ls="ls --color=auto"
+# alias l="ls -ah"
+# alias la="ls -lah"
+# alias ll="ls -lah"
 if [[ -e $(which exa) ]]; then
-    alias ls="exa -a --colour-scale"
-    alias l="exa -a --colour-scale"
-    alias la="exa -la --colour-scale"
-    alias ll="exa -la --colour-scale"
-else
-    alias ls="ls --color=auto"
-    alias l="ls -ah"
-    alias la="ls -lah"
-    alias ll="ls -lah"
+    alias ls="exa -a"
+    alias l="exa -a"
+    alias la="exa -la"
+    alias ll="exa -la"
 fi
 # fd instead of find
 if [[ -e $(which fd) ]]; then
     alias find="fd"
+    alias cargo_rec_clean=fd -t f cargo.toml -x sh -c 'cd "$1" && cargo clean -v' sh {//}
 fi
 # sd instead of sed
 if [[ -e $(which fd) ]]; then
@@ -80,10 +85,14 @@ if [[ -e $(which zoxide) ]]; then
 	alias z="zoxide"
     #alias cd="z"
 fi
-
+# tokei
+if [[ -e $(which tokei) ]]; then
+    alias loc="tokei"
+fi
+# sudo
+alias sudo="sudo "
 # Pacman
-alias pacman="sudo pacman"
-alias p="sudo pacman"
+alias pac="sudo pacman"
 # Power
 alias hibernate="systemctl hibernate"
 alias suspend="systemctl suspend"
@@ -94,8 +103,8 @@ alias p="pass"
 alias pg="pass git"
 alias pga="pass git add"
 alias pgaa="pass git add --all"
-alias pgc="pass git commic -v"
-alias pgca="pass git commic -av"
+alias pgc="pass git commit -v"
+alias pgca="pass git commit -av"
 alias pgp="pass git push"
 alias pgpom="pass git push origin master"
 alias pgpo="pass git push origin"
@@ -109,8 +118,7 @@ alias htop="btm"
 alias xelatex="xelatex -shell-escape"
 # Misc
 alias dude="du -h --exclude=./yesterday 2>/dev/null | sort -h | grep -e \"^[0-9]+(\.|,)?[0-9]*M\""
-alias c="clear"
-alias se="sudoedit"
+alias cls="clear"
 alias x="exit"
 # Comic mode using sxiv
 alias comic="ls -v | sxiv -i -f -Z -p -t"

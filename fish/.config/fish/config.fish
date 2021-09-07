@@ -12,12 +12,12 @@ end
 
 # Run ssh-agent
 # https://wiki.archlinux.org/index.php/SSH_keys#SSH_agents
-if ! pgrep -u "$USER" ssh-agent > /dev/null
-    ssh-agent -c -t 1h > "$HOME/.ssh/ssh-agent.env"
-end
-if test -e "$SSH_AUTH_SOCK"
-    eval "$HOME/.ssh/ssh-agent.env" > /dev/null
-end
+#if ! pgrep -u "$USER" ssh-agent > /dev/null
+#    ssh-agent -c -t 1h > "$HOME/.ssh/ssh-agent.env"
+#end
+#if test -e "$SSH_AUTH_SOCK"
+#    eval "$HOME/.ssh/ssh-agent.env" > /dev/null
+#end
 
 set -U PATH "$HOME/.local/bin:$PATH"
 
@@ -42,8 +42,16 @@ if test -d "$HOME/scripts"
     set -U PATH "$HOME/scripts:$PATH"
 end
 
+
 # Load dircolors
 # eval (gdircolors ~/.dircolors)
 
 # Load prompt
 starship init fish | source
+
+# Autostart X at login
+#if status is-login
+#    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+#        exec startx -- -keeptty
+#    end
+#end
