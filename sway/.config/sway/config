@@ -1,0 +1,351 @@
+#
+#  ██╗   ██████╗     ██╗   ██╗███╗   ███╗
+#  ██║   ╚════██╗    ██║   ██║████╗ ████║
+#  ██║    █████╔╝    ██║   ██║██╔████╔██║
+#  ██║    ╚═══██╗    ╚██╗ ██╔╝██║╚██╔╝██║
+#  ██║   ██████╔╝     ╚████╔╝ ██║ ╚═╝ ██║
+#  ╚═╝   ╚═════╝       ╚═══╝  ╚═╝     ╚═╝
+#
+# Curious' i3 config
+# Inspired by:
+# - tmplt
+# - KingKobra87 (https://github.com/kingkobra87/dotfiles/blob/master/.i3/config)
+
+###################
+##### General #####
+###################
+font pango:DejaVu Sans Mono 10, FontAwesome 10
+
+set $mod Mod4
+set $term alacritty
+set $menu wofi --show run
+set $bindsym --to-code bindsym --to-code --to-code
+set $lock swaylock -f -c 000000
+# exec $HOME/scripts/lock.sh
+
+# Load in some environment variables first time we start sway
+# exec_always source "$HOME/.config/sway/envs"
+
+# Hide cursor
+
+# Monitor arrangement
+#set $monC DisplayPort-0
+#set $monR HDMI-0
+#set $monL DVI-0
+
+# Set workspaces default monitors
+#workspace $ws1 output $monC
+#workspace $ws2 output $monC
+#workspace $ws3 output $monL
+#workspace $ws4 output $monC
+#workspace $ws5 output $monR
+#workspace $ws0 output $monC
+
+# The border around windows
+default_border pixel 2
+#new_window pixel 2
+#new_float pixel 2
+
+#workspace_auto_back_and_forth yes
+#hide_edge_borders both
+
+#####################
+###### COLOURS ######
+#####################
+set $bg         #282A36
+set $fg         #F8F8F2
+
+set $dark       #1E1F26
+set $medium     #474b61
+set $light      #E6E6E6
+
+set $red        #FF5555
+set $magenta    #FF79C6
+set $blue       #BD93F9
+set $cyan       #8BE9FD
+set $green      #50FA7B
+set $yellow     #F1FA8C
+
+# class                 border      background  text        indicator   child_border
+client.focused          $blue       $blue       $blue       $blue       $blue
+client.focused_inactive $dark       $dark       $dark       $dark       $dark
+client.unfocused        $dark       $dark       $dark       $dark       $dark
+client.urgent           $magenta    $magenta    $magenta    $magenta    $magenta
+client.placeholder      $green      $green      $green      $green      $green
+
+client.background $bg
+
+###################
+##### i3-gaps #####
+###################
+smart_borders on
+smart_gaps on
+gaps inner 12
+gaps outer 0
+
+####################
+##### Start-up #####
+####################
+# Set wallpaper
+output * bg "$HOME/.config/wall.png" fill
+
+# Unclutter
+seat * hide_cursor 3000
+seat * hide_cursor when-typing enable
+
+# Set timeout
+exec swayidle -w \
+                # timeout 299 "swaymsg 'output * dpms off'" \
+                timeout 300 "swaylock" \
+                timeout 301 "swaymsg 'output * dpms off'" \
+                resume "swaymsg 'output * dpms on'" \
+                before-sleep "swaylock -f -c ffffff" \
+                before-sleep "mpc stop"
+
+# Beautify my desktop
+#exec_always --no-startup-id xrdb -load ~/.Xresources
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec --no-startup-id unclutter
+exec --no-startup-id waybar
+exec --no-startup-id pipewire
+
+# Launch a global ssh-agent (instead of doing it form the shells)
+exec --no-startup-id "bash $HOME/.config/sway/ssh-agent.sh"
+
+exec --no-startup-id mpd
+# exec --no-startup-id wlsunset -l 65.6 -L 22.2 -T 6500 -t 3000
+exec --no-startup-id wlsunset -T 6500 -t 3000 -S 08:00 -s 23:00 -d 5
+
+# Start-up layout
+exec --no-startup-id i3-msg 'workspace $ws1; exec alacritty; \
+                             workspace $ws2; exec firefox; \
+                             workspace $ws8; exec alacritty -e ncmpcpp; \
+                             workspace $ws8; exec alacritty -e vim "$HOME/Documents/music_list.md"; \
+                             #workspace $ws9; exec discord; exec alacritty -e irssi; \
+                             workspace $ws0; exec telegram-desktop; \
+                             workspace $ws1';
+
+####################
+##### Keybinds #####
+####################
+
+input * {
+    xkb_layout se(nodeadkeys),us
+    xkb_options grp:alt_shift_toggle
+    repeat_delay 250
+    repeat_rate 50
+}
+
+input "type:touchpad" {
+    tap disabled
+    natural_scroll enabled
+    dwt enabled
+    accel_profile "flat"
+    pointer_accel 0
+    scroll_factor 1
+}
+
+
+floating_modifier $mod
+bindsym --to-code $mod+Return exec $term
+bindsym --to-code $mod+Shift+Return exec alacritty --working-directory $(cat ~/.last_dir)
+bindsym --to-code $mod+q kill
+
+# Media control
+bindsym --to-code XF86AudioPlay exec mpc toggle
+bindsym --to-code XF86AudioPrev exec mpc prev
+bindsym --to-code XF86AudioNext exec mpc next
+bindsym --to-code XF86AudioStop exec mpc stop
+# TODO: Pipewire binds
+bindsym --to-code XF86AudioRaiseVolume exec
+bindsym --to-code XF86AudioLowerVolume exec
+bindsym --to-code XF86AudioMute exec
+
+# Brightness
+bindsym --to-code XF86MonBrightnessUp exec light -A 4
+bindsym --to-code XF86MonBrightnessDown exec light -U 4
+
+#bindsym --to-code $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
+#bindsym --to-code $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85"
+bindsym --to-code $mod+d exec $menu
+
+# https://github.com/carnager/rofi-pass
+bindsym --to-code $mod+shift+d exec rofi-pass -show run
+
+# vi-like movement
+bindsym --to-code $mod+h focus left
+bindsym --to-code $mod+j focus down
+bindsym --to-code $mod+k focus up
+bindsym --to-code $mod+l focus right
+
+bindsym --to-code $mod+Shift+h move left
+bindsym --to-code $mod+Shift+j move down
+bindsym --to-code $mod+Shift+k move up
+bindsym --to-code $mod+Shift+l move right
+
+# Cursor key movement
+bindsym --to-code $mod+Left focus left
+bindsym --to-code $mod+Down focus down
+bindsym --to-code $mod+Up focus up
+bindsym --to-code $mod+Right focus right
+
+bindsym --to-code $mod+Shift+Left move left
+bindsym --to-code $mod+Shift+Down move down
+bindsym --to-code $mod+Shift+Up move up
+bindsym --to-code $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym --to-code $mod+b split h;exec notify-send 'tile horizontally'
+# split in vertical orientation
+bindsym --to-code $mod+v split v;exec notify-send 'tile vertically'
+
+bindsym --to-code $mod+f fullscreen
+
+#bindsym --to-code $mod+s layout stacking
+bindsym --to-code $mod+w layout tabbed
+bindsym --to-code $mod+e layout toggle split
+
+bindsym --to-code $mod+Shift+space floating toggle
+bindsym --to-code $mod+space focus mode_toggle
+
+# Workspace stuff
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "10"
+
+bindsym --to-code $mod+1 workspace $ws1
+bindsym --to-code $mod+2 workspace $ws2
+bindsym --to-code $mod+3 workspace $ws3
+bindsym --to-code $mod+4 workspace $ws4
+bindsym --to-code $mod+5 workspace $ws5
+bindsym --to-code $mod+6 workspace $ws6
+bindsym --to-code $mod+7 workspace $ws7
+bindsym --to-code $mod+8 workspace $ws8
+bindsym --to-code $mod+9 workspace $ws9
+bindsym --to-code $mod+0 workspace $ws0
+
+bindsym --to-code $mod+Tab workspace back_and_forth
+bindsym --to-code $mod+minus move scratchpad
+bindsym --to-code $mod+plus scratchpad show
+#bindsym --to-code $mod+Shift+s sticky toggle
+bindsym --to-code $mod+n exec --no-startup-id thunar
+
+bindsym --to-code $mod+Shift+1 move container to workspace $ws1
+bindsym --to-code $mod+Shift+2 move container to workspace $ws2
+bindsym --to-code $mod+Shift+3 move container to workspace $ws3
+bindsym --to-code $mod+Shift+4 move container to workspace $ws4
+bindsym --to-code $mod+Shift+5 move container to workspace $ws5
+bindsym --to-code $mod+Shift+6 move container to workspace $ws6
+bindsym --to-code $mod+Shift+7 move container to workspace $ws7
+bindsym --to-code $mod+Shift+8 move container to workspace $ws8
+bindsym --to-code $mod+Shift+9 move container to workspace $ws9
+bindsym --to-code $mod+Shift+0 move container to workspace $ws0
+
+# Resize mode
+bindsym --to-code $mod+r mode "resize"
+mode "resize" {
+        bindsym --to-code h resize shrink width 4 px
+        bindsym --to-code j resize grow height 4 px
+        bindsym --to-code k resize shrink height 4 px
+        bindsym --to-code l resize grow width 4 px
+        bindsym --to-code Return mode "default"
+        bindsym --to-code Escape mode "default"
+}
+
+# Reload the sway config
+bindsym --to-code $mod+Shift+r reload
+
+# Exit prompt
+bindsym --to-code $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit'
+
+# https://github.com/cac03/i3lock
+#bindsym --to-code $mod+Shift+i exec $HOME/scripts/lock.sh
+
+# Screensaver/session lock screen
+bindsym --to-code $mod+Shift+s exec $lock
+
+# Switch monitor mode (enter presentation mode)
+bindsym --to-code $mod+p exec $HOME/scripts/monitor_mode.sh
+
+# https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
+# Multi-screen screenshots with scrot
+#bindsym --to-code --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # All screens
+
+# OSX-like area selection screenshots
+#bindsym --to-code --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # Area selection
+
+# Screenshot everything and send it to the clipboard
+#bindsym --to-code --release $mod+Shift+Print exec maim ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
+
+# bindsym --to-code --release Print exec flameshot gui
+
+# TODO:
+bindsym --to-code --release $mod+Shift+Print exec grim - | wl-copy
+
+bindsym --to-code --release Shift+Print exec grim - | wl-copy
+
+bindsym --to-code --release Print exec grim -g "$(slurp)" - | wl-copy
+
+# Screenshot current active window and send that picture to the clipboard
+# bindsym --to-code --release Shift+Print exec maim -i $(xdotool getactivewindow) ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
+
+# Area selection screenshot and copy it to the clipboard
+#bindsym --to-code --release Shift+Print exec maim -s -o ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
+
+
+# Program-specific settings
+assign [class="Gimp"] 5
+for_window [title="GIMP Startup"] move workspace $ws5
+for_window [class="Gimp"] move workspace $ws5
+for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
+for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
+
+for_window [title="gscept Lab Environment"] floating enable;
+
+assign [class="Pyxel Edit 0.4.8"] 5
+for_window [title="Pyxel Edit 0.4.8"] move workspace 5
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Organizer"] floating enable
+for_window [class="Navigator"] floating enable
+for_window [class="^URxvt$" instance="^irssi$"] floating enable, resize grow up 180 px, resize grow down 200 px
+for_window [class="^URxvt$" instance="^visualizer$"] floating enable, resize grow up 185 px, resize shrink down 238 px
+for_window [class="^URxvt$" instance="^playlist$"] floating enable, resize grow down 200 px, resize shrink up 235 px
+
+# https://github.com/ValveSoftware/steam-for-linux/issues/1040
+for_window [class="^Steam$" title="^Friends$"] floating enable
+for_window [class="^Steam$" title="Steam - News"] floating enable
+for_window [class="^Steam$" title=".* - Chat"] floating enable
+for_window [class="^Steam$" title="^Settings$"] floating enable
+for_window [class="^Steam$" title=".* - event started"] floating enable
+for_window [class="^Steam$" title=".* CD key"] floating enable
+for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
+for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
+for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
+for_window [title="^Steam Keyboard$"] floating enable
+
+# Telegram
+assign [class="^Telegram$"] 10
+for_window [title="^Telegram$"] move workspace 10
+
+# Discord
+assign [class="^Discord$"] 9
+for_window [title="^Discord Updater$"] move workspace 9
+for_window [title="^Discord$"] move workspace 9
+
+# Renoise
+assign [class="^Renoise$"] 5
+for_window [title="^Renoise$"] move workspace 5
+
+# Octave
+# To prevent Octave from ruining the graphs
+for_window [title="Figure *"] floating enable
+
