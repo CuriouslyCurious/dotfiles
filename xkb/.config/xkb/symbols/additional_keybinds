@@ -1,0 +1,11 @@
+xkb_symbols "basic" {
+    include "us"
+    key <DEL> { [ Delete ] };
+    key <INS> { [ Insert ] };
+    # TODO: Ensure mod+minus and mod+plus works on both us and se layouts
+    key <MINUS> { [ minus ] };
+    key <PLUS> { [ plus ] };
+
+    key <PGUP> { [ Page_Up ] };
+    key <PGDN> { [ Page_Down ] };
+};
