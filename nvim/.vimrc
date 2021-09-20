@@ -11,7 +11,7 @@ let g:mapleader = "\<space>"
 let maplocalleader = "\<space>"
 
 " VIM enhancements
-Plug 'ciaranm/securemodelines'
+Plug 'ciaranm/securemodelines'          " Prevent insecure tab configuration
     let g:secure_modelines_allowed_items = [
         \ "textwidth",   "tw",
         \ "softtabstop", "sts",
@@ -69,8 +69,8 @@ Plug 'terryma/vim-smooth-scroll'        " Because it is fancy
 
 
 " Auto insert matching delimiters
-Plug 'cohama/lexima.vim'
-    "" Disable auto-closing for tags to ensure closetag can do its thing
+" Plug 'Raimondi/delimitMate'
+    " Disable auto-closing for tags to ensure closetag can do its thing
     "let delimitMate_matchpairs = "(:),[:],{:}"
     "autocmd! FileType html,xhtml,phtml,liquid let b:delimitMate_matchpairs = "(:),[:],{:}"
 
@@ -130,7 +130,7 @@ set number
 set relativenumber
 set wrap
 set encoding=utf8
-set autoindent
+" set autoindent
 ""set colorcolumn=100
 
 set list
@@ -283,8 +283,8 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
 nnoremap <C-W> :bd<CR>
-nnoremap <leader>h :bprevious<CR>
-nnoremap <leader>l :bnext<CR>
+nnoremap <leader>l :bprevious<CR>
+nnoremap <leader>h :bnext<CR>
 
 " Ctrl+h to stop search highlight
 " vnoremap <C-h> :nohlsearch<cr>
