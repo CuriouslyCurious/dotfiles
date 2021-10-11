@@ -90,9 +90,10 @@ if [[ -e $(which tokei) ]]; then
     alias loc="tokei"
 fi
 # sudo
-alias sudo="sudo "
+alias sudo="doas "
 # Pacman
-alias pac="sudo pacman"
+alias pac="doas pacman"
+alias pacman="doas pacman"
 # Power
 alias hibernate="systemctl hibernate"
 alias suspend="systemctl suspend"
