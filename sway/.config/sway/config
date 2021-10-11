@@ -93,6 +93,9 @@ output * bg "$HOME/.config/wall.png" fill
 seat * hide_cursor 3000
 seat * hide_cursor when-typing enable
 
+# Notifications
+exec mako
+
 # Set timeout
 exec swayidle -w \
                 # timeout 299 "swaymsg 'output * dpms off'" \
@@ -103,21 +106,20 @@ exec swayidle -w \
                 before-sleep "mpc stop"
 
 # Beautify my desktop
-#exec_always --no-startup-id xrdb -load ~/.Xresources
-#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id unclutter
-exec --no-startup-id waybar
-exec --no-startup-id pipewire
+#exec_always xrdb -load ~/.Xresources
+#exec_always $HOME/.config/polybar/launch.sh
+exec waybar
+exec pipewire
 
 # Launch a global ssh-agent (instead of doing it form the shells)
-exec --no-startup-id "bash $HOME/.config/sway/ssh-agent.sh"
+exec "bash $HOME/.config/sway/ssh-agent.sh"
 
-exec --no-startup-id mpd
-# exec --no-startup-id wlsunset -l 65.6 -L 22.2 -T 6500 -t 3000
-exec --no-startup-id wlsunset -T 6500 -t 3000 -S 08:00 -s 23:00 -d 5
+exec mpd
+# exec wlsunset -l 65.6 -L 22.2 -T 6500 -t 3000
+exec wlsunset -T 6500 -t 3000 -S 08:00 -s 23:00 -d 5
 
 # Start-up layout
-exec --no-startup-id i3-msg 'workspace $ws1; exec alacritty; \
+exec i3-msg 'workspace $ws1; exec alacritty; \
                              workspace $ws2; exec firefox; \
                              workspace $ws8; exec alacritty -e ncmpcpp; \
                              workspace $ws8; exec alacritty -e vim "$HOME/Documents/music_list.md"; \
@@ -235,7 +237,7 @@ bindsym --to-code $mod+Tab workspace back_and_forth
 bindsym --to-code $mod+minus move scratchpad
 bindsym --to-code $mod+plus scratchpad show
 #bindsym --to-code $mod+Shift+s sticky toggle
-bindsym --to-code $mod+n exec --no-startup-id thunar
+bindsym --to-code $mod+n exec thunar
 
 bindsym --to-code $mod+Shift+1 move container to workspace $ws1
 bindsym --to-code $mod+Shift+2 move container to workspace $ws2
