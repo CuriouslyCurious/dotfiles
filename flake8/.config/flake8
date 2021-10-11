@@ -1,9 +1,9 @@
 [flake8]
 ignore =
-    # W391: blank line at end of file
+    #W391: blank line at end of file
     W391,
     #E127: continuation line over-indented for visual indent
-    E127,
+    #E127,
     #E128: continuation line under-indented for visual indent
-    E128
+    #E128,
 max-line-length = 120
