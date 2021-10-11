@@ -1,0 +1,12 @@
+hide_scroll=true
+matching=alphabetical
+insensitive=true
+columns=1
+sort_order=alphabetical
+gtk_dark=true
+orientation=vertical
+filter_rate=100
+line_wrap=word_char
+hide_search_false
+dynamic_lines=false
+layer=top
