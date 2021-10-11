@@ -9,8 +9,13 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
     " Make folding be based on treesitter
+    " Sexy Folds by u/Rafat913
     set foldmethod=expr
     set foldexpr=nvim_treesitter#foldexpr()
+    set foldtext=getline(v:foldstart).'...'.trim(getline(v:foldend))
+    set fillchars=fold:\\
+    set foldnestmax=3
+    set foldminlines=1
     set foldlevel=99
     set indentexpr=nvim_treesitter#indent()
     " TODO: Statusline indicator
