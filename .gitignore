@@ -18,6 +18,8 @@
 hardware-configuration.nix
 
 # nvim
+.netrwhist
+.netrwbook
 **/nvim/plugged
 **/nvim/.vim/tmp
 
