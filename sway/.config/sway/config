@@ -103,7 +103,7 @@ output DP-1 mode 2560x144@144Hz
 seat * hide_cursor when-typing disable
 
 # Notifications
-exec fnott
+exec mako
 exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 
 # Set timeout
@@ -130,13 +130,13 @@ exec mpd
 exec wlsunset -T 6500 -t 3000 -S 08:00 -s 23:00 -d 5
 
 # Start-up layout
-exec i3-msg 'workspace $ws1; exec alacritty; \
-                             workspace $ws2; exec firefox; \
-                             workspace $ws8; exec alacritty -e ncmpcpp; \
-                             workspace $ws8; exec alacritty -e vim "$HOME/Documents/music_list.md"; \
-                             #workspace $ws9; exec discord; exec alacritty -e irssi; \
-                             workspace $ws0; exec telegram-desktop; \
-                             workspace $ws1';
+exec swaymsg 'workspace $ws1; exec $term; \
+              workspace $ws2; exec $browser; \
+              workspace $ws8; exec $term -e ncmpcpp; \
+              workspace $ws8; exec $term -e $editor "$HOME/Documents/music_list.md"; \
+              #workspace $ws9; exec discord; exec alacritty -e irssi; \
+              workspace $ws0; exec telegram-desktop; \
+              workspace $ws1';
 
 ####################
 ##### Keybinds #####

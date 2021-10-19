@@ -1,0 +1,43 @@
+# Global
+max-history=5
+sort=-time
+
+# Bindings
+on-button-left=invoke-default-action
+on-button-middle=none
+on-button-right=dismiss
+on-touch=dismiss
+on-notify=none
+
+# Style
+font=monospace 10
+background-color=#28557777
+text-color=#FFFFFFFF
+width=300
+height=100
+margin=10
+padding=5
+border-size=2
+border-color=#4C7899FF
+border-radius=0
+progress-color=over #5588AAFF
+icons=1
+max-icon-size=64
+icon-path=""
+icon-location=left
+markup=1
+actions=1
+history=1
+format=(%g) <b>%s</b>\n%b
+text-alignment=left
+default-timeout=5000
+ignore-timeout=0
+group-by=app-name
+max-visible=5
+output=""
+layer=top
+anchor=top-right
+
+# Criterias
+
+
