@@ -23,7 +23,8 @@ set $term foot
 set $menu wofi -t $term
 set $bindsym --to-code bindsym --to-code --to-code
 set $lock swaylock -f -c 000000
-# exec $HOME/scripts/lock.sh
+set $screenshot_processing swappy -f - -o - | pngquant - | wl-copy
+# grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
 
 # Load in some environment variables first time we start sway
 # exec_always source "$HOME/.config/sway/envs"
@@ -102,7 +103,8 @@ output DP-1 mode 2560x144@144Hz
 seat * hide_cursor when-typing disable
 
 # Notifications
-exec mako
+exec fnott
+exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 
 # Set timeout
 # exec swayidle -w \
@@ -294,11 +296,10 @@ bindsym --to-code $mod+p exec $HOME/scripts/monitor_mode.sh
 # bindsym --to-code --release Print exec flameshot gui
 
 # TODO:
-bindsym --to-code --release $mod+Shift+Print exec grim - | wl-copy
-
-bindsym --to-code --release Shift+Print exec grim - | wl-copy
-
-bindsym --to-code --release Print exec grim -g "$(slurp)" - | wl-copy
+bindsym --to-code --release Print exec grim -g "$(slurp -d)" - | $screenshot_processing
+bindsym --to-code --release Shift+Print exec grim - | $screenshot_processing
+bindsym --to-code --release $mod+Shift+Print exec grim -g $(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -o -r -d) - | swappy -f -
+#$$screenshot_processing
 
 # Screenshot current active window and send that picture to the clipboard
 # bindsym --to-code --release Shift+Print exec maim -i $(xdotool getactivewindow) ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
