@@ -99,6 +99,8 @@ alias hibernate="systemctl hibernate"
 alias suspend="systemctl suspend"
 # taskwarrior
 alias tw="task"
+# GPG
+alias gpg-export="gpg --armor --export-options export-minimal --export "
 # pass
 alias p="pass"
 alias pg="pass git"
