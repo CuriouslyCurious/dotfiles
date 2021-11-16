@@ -48,10 +48,12 @@ end
 # Load dircolors
 # eval (gdircolors ~/.dircolors)
 
-zoxide init fish --cmd cd | source
+# Load zoxide
+zoxide init --cmd cd fish | source
 
 # Load prompt
 starship init fish | source
+
 
 # Autostart X at login
 #if status is-login
