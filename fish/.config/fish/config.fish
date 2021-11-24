@@ -19,32 +19,36 @@ end
 #    eval "$HOME/.ssh/ssh-agent.env" > /dev/null
 #end
 
-set -U PATH "$HOME/.local/bin:$PATH"
+set GPG_TTY (tty)
+
+set PATH "$HOME/.local/bin:$PATH"
 
 # Export rustup to $PATH if it exists
-if test -e $HOME/.cargo/env
-    set -U PATH "$HOME/.cargo/bin:$PATH"
+if test -e $HOME/.cargo/bin
+    set PATH "$HOME/.cargo/bin:$PATH"
 end
 
 # Export go/bin to $GOPATH if it exists and then set -U to $PATH
 if test -d $HOME/go/bin
-    set -U GOPATH "$HOME/go/bin"
-    set -U PATH "$GOPATH:$PATH"
+    set GOPATH "$HOME/go/bin"
+    set PATH "$GOPATH:$PATH"
 end
 
 # Export gem path to $PATH if it exists
 if test -d "$HOME/.gem/ruby/2.5.0/bin"
-    set -U PATH "$HOME/.gem/ruby/2.5.0/bin:$PATH"
+    set PATH "$HOME/.gem/ruby/2.5.0/bin:$PATH"
 end
 
 # Export dotfile's script dir to $PATH if it exists
 if test -d "$HOME/scripts"
-    set -U PATH "$HOME/scripts:$PATH"
+    set PATH "$HOME/scripts:$PATH"
 end
 
 
 # Load dircolors
 # eval (gdircolors ~/.dircolors)
+
+zoxide init fish --cmd cd | source
 
 # Load prompt
 starship init fish | source
