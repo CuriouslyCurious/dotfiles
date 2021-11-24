@@ -210,7 +210,7 @@ nnoremap <silent> g* g*zz
 " Enable magic on search
 nnoremap ? ?\v
 nnoremap / /\v
-cnoremap %s/ %sm/
+"cnoremap %s/ %sm/
 
 " Enable folding
 "set foldmethod=indent
@@ -368,11 +368,11 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 " https://vim.fandom.com/wiki/Improved_hex_editing
 nnoremap <C-H> :Hexmode<CR>
 inoremap <C-H> <Esc>:Hexmode<CR>
-vnoremap <C-H> :<C-U>Hexmode<CR>
 
 " ex command for toggling hex mode - define mapping if desired
 command -bar Hexmode call ToggleHex()
 
+" TODO: Fix this hexmode shit
 " helper function to toggle hex mode
 function ToggleHex()
     " hex mode should be considered a read-only operation
@@ -470,5 +470,12 @@ if has ("autocmd")
         autocmd BufNewFile *.tex 0r ~/.vim/templates/skeleton.tex
         autocmd BufNewFile *.bib 0r ~/.vim/templates/skeleton.bib
         autocmd BufNewFile *.html,*.liquid 0r ~/.vim/templates/skeleton.html
+    augroup END
+endif
+
+" Auto-format"
+if has ("autocomd")
+    augroup formats
+        autocomd BufWritePre *.rs :! cargo fmt
     augroup END
 endif
