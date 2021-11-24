@@ -121,13 +121,13 @@ exec waybar
 # Audio
 exec pipewire
 exec pipewire-pulse
-exec pipewire-media-session
+#exec pipewire-media-session
 
 # Launch a global ssh-agent (instead of doing it form the shells)
 exec "bash $HOME/.config/sway/ssh-agent.sh"
 
 exec mpd
-exec wlsunset -T 6500 -t 3000 -S 08:00 -s 23:00 -d 5
+exec wlsunset -T 6500 -t 3000 -S 08:00 -s 18:00 -d 5
 
 # Start-up layout
 exec swaymsg 'workspace $ws1; exec $term; \
@@ -159,7 +159,7 @@ input "type:touchpad" {
 }
 
 bindsym --to-code $mod+Return exec $term
-bindsym --to-code $mod+Shift+Return exec alacritty --working-directory $(cat ~/.last_dir)
+bindsym --to-code $mod+Shift+Return exec foot --working-directory $(cat ~/.last_dir)
 bindsym --to-code $mod+q kill
 
 # Media control
