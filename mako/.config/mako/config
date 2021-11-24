@@ -11,7 +11,7 @@ on-notify=none
 
 # Style
 font=monospace 10
-background-color=#28557777
+background-color=#285577AA
 text-color=#FFFFFFFF
 width=300
 height=100
