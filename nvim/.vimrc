@@ -24,11 +24,10 @@ Plug 'ciaranm/securemodelines'          " Prevent insecure tab configuration
         \ "rightleft",   "rl",   "norightleft", "norl",
         \ "colorcolumn"
         \ ]
-Plug 'preservim/nerdcommenter'          " Commenting stuff
 Plug 'editorconfig/editorconfig-vim'    " For standardising code-style via .editorconfig files
-Plug 'justinmk/vim-sneak'               " Jump to any location specified by two characters
-    let g:sneak#s_next = 1
-    let g:sneak#label = 1               " Vimium-style navigation
+"Plug 'justinmk/vim-sneak'               " Jump to any location specified by two characters
+"    let g:sneak#s_next = 1
+"    let g:sneak#label = 1               " Vimium-style navigation
 Plug 'terryma/vim-expand-region'        " Select increasingly large regions of text
                                         " TODO: look at keybinds
     map K <Plug>(expand_region_expand)
@@ -46,6 +45,7 @@ Plug 'terryma/vim-smooth-scroll'        " Because it is fancy
     noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
     noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
     noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
 
 " Statusline/tabline
 "Plug 'mengelbrecht/lightline-bufferline'
@@ -370,98 +370,98 @@ nnoremap <C-H> :Hexmode<CR>
 inoremap <C-H> <Esc>:Hexmode<CR>
 
 " ex command for toggling hex mode - define mapping if desired
-command -bar Hexmode call ToggleHex()
+" command -bar Hexmode call ToggleHex()
 
 " TODO: Fix this hexmode shit
 " helper function to toggle hex mode
-function ToggleHex()
-    " hex mode should be considered a read-only operation
-    " save values for modified and read-only for restoration later,
-    " and clear the read-only flag for now
-    let l:modified=&mod
-    let l:oldreadonly=&readonly
-    let &readonly=0
-    let l:oldmodifiable=&modifiable
-    let &modifiable=1
-    if !exists("b:editHex") || !b:editHex
-        " save old options
-        let b:oldft=&ft
-        let b:oldbin=&bin
-        " set new options
-        setlocal binary " make sure it overrides any textwidth, etc.
-        silent :e " this will reload the file without trickeries
-        "(DOS line endings will be shown entirely )
-        let &ft="xxd"
-        " set status
-        let b:editHex=1
-        " switch to hex editor
-        %!xxd
-    else
-        " restore old options
-        let &ft=b:oldft
-        if !b:oldbin
-            setlocal nobinary
-        endif
-        " set status
-        let b:editHex=0
-        " return to normal editing
-        %!xxd -r
-    endif
-    " restore values for modified and read only state
-    let &mod=l:modified
-    let &readonly=l:oldreadonly
-    let &modifiable=l:oldmodifiable
-endfunction
-
-" autocmds to automatically enter hex mode and handle file writes properly
-if has("autocmd")
-  " vim -b : edit binary using xxd-format!
-    augroup Binary
-        au!
-
-        " set binary option for all binary files before reading them
-        au BufReadPre *.bin,*.hex setlocal binary
-
-        " if on a fresh read the buffer variable is already set, it's wrong
-        au BufReadPost *
-              \ if exists('b:editHex') && b:editHex |
-              \   let b:editHex = 0 |
-              \ endif
-
-        " convert to hex on startup for binary files automatically
-        au BufReadPost *
-              \ if &binary | Hexmode | endif
-
-        " When the text is freed, the next time the buffer is made active it will
-        " re-read the text and thus not match the correct mode, we will need to
-        " convert it again if the buffer is again loaded.
-        au BufUnload *
-              \ if getbufvar(expand("<afile>"), 'editHex') == 1 |
-              \   call setbufvar(expand("<afile>"), 'editHex', 0) |
-              \ endif
-
-        " before writing a file when editing in hex mode, convert back to non-hex
-        au BufWritePre *
-              \ if exists("b:editHex") && b:editHex && &binary |
-              \  let oldro=&ro | let &ro=0 |
-              \  let oldma=&ma | let &ma=1 |
-              \  silent exe "%!xxd -r" |
-              \  let &ma=oldma | let &ro=oldro |
-              \  unlet oldma | unlet oldro |
-              \ endif
-
-        " after writing a binary file, if we're in hex mode, restore hex mode
-        au BufWritePost *
-              \ if exists("b:editHex") && b:editHex && &binary |
-              \  let oldro=&ro | let &ro=0 |
-              \  let oldma=&ma | let &ma=1 |
-              \  silent exe "%!xxd" |
-              \  exe "set nomod" |
-              \  let &ma=oldma | let &ro=oldro |
-              \  unlet oldma | unlet oldro |
-              \ endif
-    augroup END
-endif
+	"function ToggleHex()
+"    " hex mode should be considered a read-only operation
+"    " save values for modified and read-only for restoration later,
+"    " and clear the read-only flag for now
+"    let l:modified=&mod
+"    let l:oldreadonly=&readonly
+"    let &readonly=0
+"    let l:oldmodifiable=&modifiable
+"    let &modifiable=1
+"    if !exists("b:editHex") || !b:editHex
+"        " save old options
+"        let b:oldft=&ft
+"        let b:oldbin=&bin
+"        " set new options
+"        setlocal binary " make sure it overrides any textwidth, etc.
+"        silent :e " this will reload the file without trickeries
+"        "(DOS line endings will be shown entirely )
+"        let &ft="xxd"
+"        " set status
+"        let b:editHex=1
+"        " switch to hex editor
+"        %!xxd
+"    else
+"        " restore old options
+"        let &ft=b:oldft
+"        if !b:oldbin
+"            setlocal nobinary
+"        endif
+"        " set status
+"        let b:editHex=0
+"        " return to normal editing
+"        %!xxd -r
+"    endif
+"    " restore values for modified and read only state
+"    let &mod=l:modified
+"    let &readonly=l:oldreadonly
+"    let &modifiable=l:oldmodifiable
+"endfunction
+"
+"" autocmds to automatically enter hex mode and handle file writes properly
+"if has("autocmd")
+"  " vim -b : edit binary using xxd-format!
+"    augroup Binary
+"        au!
+"
+"        " set binary option for all binary files before reading them
+"        au BufReadPre *.bin,*.hex setlocal binary
+"
+"        " if on a fresh read the buffer variable is already set, it's wrong
+"        au BufReadPost *
+"              \ if exists('b:editHex') && b:editHex |
+"              \   let b:editHex = 0 |
+"              \ endif
+"
+"        " convert to hex on startup for binary files automatically
+"        au BufReadPost *
+"              \ if &binary | Hexmode | endif
+"
+"        " When the text is freed, the next time the buffer is made active it will
+"        " re-read the text and thus not match the correct mode, we will need to
+"        " convert it again if the buffer is again loaded.
+"        au BufUnload *
+"              \ if getbufvar(expand("<afile>"), 'editHex') == 1 |
+"              \   call setbufvar(expand("<afile>"), 'editHex', 0) |
+"              \ endif
+"
+"        " before writing a file when editing in hex mode, convert back to non-hex
+"        au BufWritePre *
+"              \ if exists("b:editHex") && b:editHex && &binary |
+"              \  let oldro=&ro | let &ro=0 |
+"              \  let oldma=&ma | let &ma=1 |
+"              \  silent exe "%!xxd -r" |
+"              \  let &ma=oldma | let &ro=oldro |
+"              \  unlet oldma | unlet oldro |
+"              \ endif
+"
+"        " after writing a binary file, if we're in hex mode, restore hex mode
+"        au BufWritePost *
+"              \ if exists("b:editHex") && b:editHex && &binary |
+"              \  let oldro=&ro | let &ro=0 |
+"              \  let oldma=&ma | let &ma=1 |
+"              \  silent exe "%!xxd" |
+"              \  exe "set nomod" |
+"              \  let &ma=oldma | let &ro=oldro |
+"              \  unlet oldma | unlet oldro |
+"              \ endif
+"    augroup END
+"endif
 
 " Templates
 if has ("autocmd")
