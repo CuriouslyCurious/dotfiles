@@ -1,6 +1,4 @@
-" TODO: * Add snippets plugin
-"       * Switch to buffers instead of tabs
-"       * Go through keybinds
+" TODO: * Switch to buffers instead of tabs
 
 set shell=/bin/bash
 
@@ -25,9 +23,6 @@ Plug 'ciaranm/securemodelines'          " Prevent insecure tab configuration
         \ "colorcolumn"
         \ ]
 Plug 'editorconfig/editorconfig-vim'    " For standardising code-style via .editorconfig files
-"Plug 'justinmk/vim-sneak'               " Jump to any location specified by two characters
-"    let g:sneak#s_next = 1
-"    let g:sneak#label = 1               " Vimium-style navigation
 Plug 'terryma/vim-expand-region'        " Select increasingly large regions of text
                                         " TODO: look at keybinds
     map K <Plug>(expand_region_expand)
@@ -45,28 +40,6 @@ Plug 'terryma/vim-smooth-scroll'        " Because it is fancy
     noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
     noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
     noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-
-
-" Statusline/tabline
-"Plug 'mengelbrecht/lightline-bufferline'
-"Plug 'itchyny/lightline.vim'
-    "let g:lightline = {
-        "\ 'colorscheme': 'material',
-        "\ 'active': {
-        "\   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'filename', 'modified' ] ]
-        "\ },
-        "\ 'tabline': {
-        "\   'left': [ ['buffers'] ],
-        "\   'right': [ ['close'] ]
-        "\ },
-        "\ 'component_expand': {
-        "\   'buffers': 'lightline#bufferline#buffers'
-        "\ },
-        "\ 'component_type': {
-        "\   'buffers': 'tabsel'
-        "\ }
-    "\ }
-
 
 " Auto insert matching delimiters
 " Plug 'Raimondi/delimitMate'
@@ -111,11 +84,6 @@ Plug 'mzlogin/vim-markdown-toc'
 Plug 'soywod/himalaya', {'rtp': 'vim'}
     let g:himalaya_mailbox_picker = 'telescope'
 
-" Themes
-"Plug 'skielbasa/vim-material-monokai'
-    "let g:airline_theme='materialmonokai'
-    "let g:materialmonokai_italic=1
-    "let g:materialmonokai_subtle_spell=1
 call plug#end()
 
 """"""""""""""""""""""""""""
@@ -134,6 +102,7 @@ set number
 set relativenumber
 set wrap
 set encoding=utf8
+set mouse=a
 " set autoindent
 ""set colorcolumn=100
 
@@ -208,8 +177,8 @@ nnoremap <silent> # #zz
 nnoremap <silent> g* g*zz
 
 " Enable magic on search
-nnoremap ? ?\v
-nnoremap / /\v
+"nnoremap ? ?\v
+"nnoremap / /\v
 "cnoremap %s/ %sm/
 
 " Enable folding
@@ -222,7 +191,7 @@ nnoremap / /\v
 set scrolloff=4
 
 " lower timeout length
-set timeoutlen=1000 ttimeoutlen=0
+set timeoutlen=1000 ttimeoutlen=50
 
 " Persistent undo and backups
 call mkdir($HOME . "/.vim/tmp", "p")
@@ -260,10 +229,11 @@ map L $
 
 " Frequent actions
 "nnoremap <Leader>o :CtrlP<CR>
-nnoremap <Leader>w :w<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :cope<CR>
 
 " <leader><leader> toggles between last two buffers
-nnoremap <leader><leader> <c-^>
+"nnoremap <leader><leader> <c-^>
 
 " OpeA: Pyright is now an officially-supported Microsoft type checker for Python. It will continue to be developed and maintained as an open-source project under its original MIT license terms. The Pyright extension for VSCode is a reference implementation and is not guaranteed to be fully functional or maintained long-term.n new file adjacent to current file
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
@@ -284,9 +254,9 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Open buffer navigation
+nnoremap <C-W> :bd<CR>
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
-nnoremap <C-W> :bd<CR>
 nnoremap <leader>l :bprevious<CR>
 nnoremap <leader>h :bnext<CR>
 
@@ -296,14 +266,10 @@ nnoremap <leader>h :bnext<CR>
 
 " Tag navigation
 "nnoremap <C-]> :tag<CR>
-nnoremap <C-[> :pop<CR>
+" nnoremap <C-[> :pop<CR>
 
 " Gundo
 nnoremap <C-g> :GundoToggle<CR>
-
-" Toggle plugins
-" nnoremap <C-o> :Files<CR>
-nnoremap <C-t> :TagbarToggle<CR>
 
 """""""""""""""""
 """"" Misc. """""

@@ -40,15 +40,15 @@ Plug 'romgrk/barbar.nvim'
 
 " Pretty debugging
 Plug 'folke/trouble.nvim'
-    nnoremap <leader>xx <cmd>TroubleToggle<cr>
+    nnoremap <leader>t <cmd>TroubleToggle><cr>
+    nnoremap <leader>tq <cmd>TroubleToggle quickfix><cr>
+    nnoremap <leader>tl <cmd>TroubleToggle loclist<cr>
     nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
     nnoremap <leader>xd <cmd>TroubleToggle lsp_document_diagnostics<cr>
-    nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
-    nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
     "nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 
 " LSP
-Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig', {'tag': '*'}
 " Autocompletion
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -59,13 +59,17 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
+" LSP status for statuslines
 Plug 'nvim-lua/lsp-status.nvim'
+
+" Rust
+Plug 'saecki/crates.nvim', { 'tag': 'v0.1.0' }
 
 " Autopairing
 Plug 'windwp/nvim-autopairs'
 
 " EasyMotion (Vimium-style navigation)
-Plug 'phaazon/hop.nvim'
+Plug 'phaazon/hop.nvim', {'tag': '*'}
 
 " Telescope
 Plug 'nvim-lua/popup.nvim'
@@ -81,21 +85,21 @@ Plug 'nvim-telescope/telescope.nvim'
     nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Fancy highlighting
-" Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim', {'tag': '*'}
 
 " Comment
 Plug 'numToStr/Comment.nvim'
 
 " Git gutter
 " Requires plenar
-Plug 'lewis6991/gitsigns.nvim'
+Plug 'lewis6991/gitsigns.nvim', {'tag': '*'}
 
 " Markdown preview
 " Plug 'npxbr/glow.nvim', {'do': ':GlowInstall', 'branch': 'main'}
 
 " file explorer
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-tree.lua', {'tag': '*'}
     nnoremap <C-n> :NvimTreeToggle<CR>
 
 call plug#end()
@@ -282,6 +286,14 @@ lua << EOF
         },
     }
 
+    -- Indent-blankline
+    require("indent_blankline").setup {
+        -- for example, context is off by default, use this to turn it on
+        show_current_context = true,
+        -- show_current_context_start = true,
+
+    }
+
     -- Hop
     require'hop'.setup()
     vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_words()<cr>", {})
@@ -308,6 +320,16 @@ lua << EOF
         },
     }
 
+    -- nvim-tree
+    require('nvim-tree').setup {
+        auto_close = true,
+    }
+
+
     -- Todo comments
     --require("todo-comments").setup()
+
+    -- Rust
+    require('crates').setup()
+
 EOF
