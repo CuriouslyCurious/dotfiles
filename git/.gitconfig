@@ -22,4 +22,4 @@
 	templatedir = ~/.git_template
 	defaultBranch = master
 [pull]
-	rebase = false
+	rebase = true
