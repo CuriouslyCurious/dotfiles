@@ -24,6 +24,7 @@ set $menu wofi -t $term
 set $bindsym --to-code bindsym --to-code --to-code
 set $lock swaylock -f -c 000000
 set $screenshot_processing swappy -f - -o - | pngquant - | wl-copy
+set $light_file ~/.cache/light/level
 # grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
 
 # Load in some environment variables first time we start sway
@@ -118,6 +119,9 @@ exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 # Beautify my desktop
 exec waybar
 
+# Restore brightness
+exec light -S $(cat $light_file)
+
 # Audio
 exec pipewire
 exec pipewire-pulse
@@ -126,13 +130,13 @@ exec pipewire-pulse
 # Launch a global ssh-agent (instead of doing it form the shells)
 exec "bash $HOME/.config/sway/ssh-agent.sh"
 
-exec mpd
+#exec mpd
 exec wlsunset -T 6500 -t 3000 -S 08:00 -s 18:00 -d 5
 
 # Start-up layout
 exec swaymsg 'workspace $ws1; exec $term; \
               workspace $ws2; exec $browser; \
-              workspace $ws8; exec $term -e ncmpcpp; \
+              #workspace $ws8; exec $term -e ncmpcpp; \
               workspace $ws8; exec $term -e $editor "$HOME/Documents/music_list.md"; \
               #workspace $ws9; exec discord; exec alacritty -e irssi; \
               workspace $ws0; exec telegram-desktop; \
@@ -159,8 +163,11 @@ input "type:touchpad" {
 }
 
 bindsym --to-code $mod+Return exec $term
-bindsym --to-code $mod+Shift+Return exec foot --working-directory $(cat ~/.last_dir)
+bindsym --to-code $mod+Shift+Return exec $term --working-directory $(cat ~/.last_dir)
 bindsym --to-code $mod+q kill
+
+# Launch btop in a terminal
+bindsym --to-code Ctrl+Shift+Escape exec $term btop
 
 # Media control
 bindsym --to-code XF86AudioPlay exec mpc toggle
@@ -172,9 +179,10 @@ bindsym --to-code XF86AudioRaiseVolume exec pamixer --increase 1
 bindsym --to-code XF86AudioLowerVolume exec pamixer --decrease 1
 bindsym --to-code XF86AudioMute exec pamixer --mute
 
-# Brightness
-bindsym --to-code XF86MonBrightnessUp exec light -A 4
-bindsym --to-code XF86MonBrightnessDown exec light -U 4
+# Brightness (broken piece of junk)
+bindsym --to-code XF86MonBrightnessUp exec light -A 3 && light -G > $light_file
+bindsym --to-code XF86MonBrightnessDown exec light -U 3 && light -G > $light_file
+
 
 #bindsym --to-code $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
 #bindsym --to-code $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85"
