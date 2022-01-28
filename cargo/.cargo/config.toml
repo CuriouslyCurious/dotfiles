@@ -1,0 +1,32 @@
+# Incremental builds for faster build speeds once everything is compiled at least once
+[build]
+incremental = true
+
+# Use mold instead of normal llvm linker to vastly increase linking speed for debug builds of big projects
+[profile.debug]
+linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=/usr/bin/mold"]
+
+[profile.bench]
+incremental = false
+lto = "thin"
+
+# Optimized for speed and size
+[profile.release]
+incremental = false
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+# Compile with CPU specific instructions, not recommended for distributed binaries
+#rustflags = [
+#    "-C target-cpu=native",
+#]
+
+# [target.thumbv7em-none-eabihf]
+# runner = 'arm-none-eabi-gdb'
+#rustflags = [
+#  "-C", "link-arg=-Tlink.x",
+#  "-C", "linker=arm-none-eabi-ld",
+#  "-Z", "linker-flavor=ld",
+#]
+
