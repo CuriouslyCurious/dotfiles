@@ -10,6 +10,9 @@ else
 	set -U EDITOR nano
 end
 
+# ctrl-backspace
+bind \cH backward-kill-path-component
+
 # Run ssh-agent
 # https://wiki.archlinux.org/index.php/SSH_keys#SSH_agents
 #if ! pgrep -u "$USER" ssh-agent > /dev/null
