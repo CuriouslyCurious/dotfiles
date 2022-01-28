@@ -25,7 +25,8 @@ Plug 'nvim-treesitter/playground'
 Plug 'norcalli/nvim-colorizer.lua'
 
 " Theme
-Plug 'curiouslycurious/monokai.nvim'
+"Plug 'curiouslycurious/monokai.nvim'
+Plug 'https://gitlab.com/CuriouslyCurious/material-monokai.nvim', { 'branch': 'dev' }
 
 " Highlight Todo comments
 "Plug 'folke/todo-comments.nvim'

@@ -121,7 +121,7 @@ set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp
 "set t_Co=256
 set background=dark
 set termguicolors
-colorscheme monokai_material
+colorscheme material-monokai
 hi Normal guibg=NONE ctermbg=NONE
 
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -239,8 +239,10 @@ nnoremap <leader>q :cope<CR>
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Word delete in insert mode
-inoremap <C-BS> <C-W>
-vnoremap <C-BS> <C-W>
+"inoremap <C-BS> <C-W>
+"vnoremap <C-BS> <C-W>
+inoremap  <C-W>
+vnoremap  <C-W>
 
 " Visual movement
 " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -332,8 +334,8 @@ endif
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
 " https://vim.fandom.com/wiki/Improved_hex_editing
-nnoremap <C-H> :Hexmode<CR>
-inoremap <C-H> <Esc>:Hexmode<CR>
+" nnoremap <C-H> :Hexmode<CR>
+" inoremap <C-H> <Esc>:Hexmode<CR>
 
 " ex command for toggling hex mode - define mapping if desired
 " command -bar Hexmode call ToggleHex()
