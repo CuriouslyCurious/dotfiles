@@ -31,17 +31,43 @@ set $light_file ~/.cache/light/level
 # exec_always source "$HOME/.config/sway/envs"
 
 # Monitor arrangement
-#set $monC DisplayPort-0
-#set $monR HDMI-0
-#set $monL DVI-0
+set $monC DP-1
+set $monL HDMI-A-1
+
+# Setup monitors
+output DP-1 subpixel rgb
+#output DP-1 adaptive_sync on
+output DP-1 mode 2560x1440@144Hz
+#144Hz
+
+# Setup HDMI-A-1
+#output HDMI-A-1 mode 1920x1080@60Hz
+
+# Position monitors
+output HDMI-A-1 pos 0 0 res 1920x1080
+output DP-1 pos 1920 0 res 2560x1440
+
+# Workspace stuff
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "10"
 
 # Set workspaces default monitors
-#workspace $ws1 output $monC
-#workspace $ws2 output $monC
-#workspace $ws3 output $monL
-#workspace $ws4 output $monC
-#workspace $ws5 output $monR
-#workspace $ws0 output $monC
+workspace $ws1 output $monC
+workspace $ws2 output $monC
+workspace $ws3 output $monL
+workspace $ws4 output $monC
+workspace $ws5 output $monC
+
+workspace $ws9 output monL
+workspace $ws0 output $monC
 
 # The border around windows
 default_border pixel 3
@@ -94,13 +120,9 @@ gaps outer 0
 # Set wallpaper
 output * bg "$HOME/.config/wall.png" fill
 
-# Set DP-1 monitor
-output DP-1 subpixel rgb
-output DP-1 adaptive_sync on
-output DP-1 mode 2560x144@144Hz
-
 # Unclutter
 #seat * hide_cursor 3000
+# Bugged so have to disable it: https://github.com/swaywm/sway/issues/6297
 seat * hide_cursor when-typing disable
 
 # Notifications
@@ -116,7 +138,7 @@ exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 #                 before-sleep "swaylock -f -c ffffff" \
 #                 before-sleep "mpc stop"
 
-# Beautify my desktop
+# Launch waybar
 exec waybar
 
 # Restore brightness
@@ -124,8 +146,6 @@ exec light -S $(cat $light_file)
 
 # Audio
 exec pipewire
-exec pipewire-pulse
-#exec pipewire-media-session
 
 # Launch a global ssh-agent (instead of doing it form the shells)
 exec "bash $HOME/.config/sway/ssh-agent.sh"
@@ -134,13 +154,12 @@ exec "bash $HOME/.config/sway/ssh-agent.sh"
 exec wlsunset -T 6500 -t 3000 -S 08:00 -s 18:00 -d 5
 
 # Start-up layout
-exec swaymsg 'workspace $ws1; exec $term; \
-              workspace $ws2; exec $browser; \
-              #workspace $ws8; exec $term -e ncmpcpp; \
-              workspace $ws8; exec $term -e $editor "$HOME/Documents/music_list.md"; \
-              #workspace $ws9; exec discord; exec alacritty -e irssi; \
-              workspace $ws0; exec telegram-desktop; \
-              workspace $ws1';
+#exec swaymsg workspace $ws1, exec $term
+exec swaymsg workspace $ws2, exec $browser
+exec swaymsg workspace $ws8, exec $term -e ncmpcpp, exec $term -e $editor "$HOME/Documents/music_list.md"
+exec swaymsg workspace $ws9, exec discord #, exec $term -e $irc
+exec swaymsg workspace $ws0, exec telegram-desktop
+exec swaymsg workspace $ws1
 
 ####################
 ##### Keybinds #####
@@ -183,6 +202,7 @@ bindsym --to-code XF86AudioMute exec pamixer --mute
 bindsym --to-code XF86MonBrightnessUp exec light -A 3 && light -G > $light_file
 bindsym --to-code XF86MonBrightnessDown exec light -U 3 && light -G > $light_file
 
+bindsym --to-code $mod+M exec bash ~/scripts/toggle_mic.sh
 
 #bindsym --to-code $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
 #bindsym --to-code $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85"
@@ -224,18 +244,6 @@ bindsym --to-code $mod+e layout toggle split
 
 bindsym --to-code $mod+Shift+space floating toggle
 bindsym --to-code $mod+space focus mode_toggle
-
-# Workspace stuff
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws0 "10"
 
 bindsym --to-code $mod+1 workspace $ws1
 bindsym --to-code $mod+2 workspace $ws2
@@ -364,4 +372,7 @@ for_window [title="^Renoise$"] move workspace 5
 # Octave
 # To prevent Octave from ruining the graphs
 for_window [title="Figure *"] floating enable
+
+# PolyMC
+for_window [title=".* PolyMC 5"] floating enable
 
