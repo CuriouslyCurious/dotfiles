@@ -44,6 +44,14 @@ if test -d "$HOME/scripts"
     set PATH "$HOME/scripts:$PATH"
 end
 
+# Ctrl-backspace working as it should
+#bind \e\[3\;5~ kill-word
+bind -k backspace backward-kill-word
+bind -M insert -k backspace backward-kill-word
+
+# Line jump stuff
+bind H beginning-of-line
+bind L end-of-line
 
 # Load dircolors
 # eval (gdircolors ~/.dircolors)
