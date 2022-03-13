@@ -29,7 +29,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'https://gitlab.com/CuriouslyCurious/material-monokai.nvim', { 'branch': 'dev' }
 
 " Highlight Todo comments
-"Plug 'folke/todo-comments.nvim'
+Plug 'folke/todo-comments.nvim'
 
 " Airline but Lua (TODO: Add tabbar support or switch to another statusline)
 " TODO: Also add material-monokai theme
@@ -41,7 +41,7 @@ Plug 'romgrk/barbar.nvim'
 
 " Pretty debugging
 Plug 'folke/trouble.nvim'
-    nnoremap <leader>t <cmd>TroubleToggle><cr>
+    nnoremap <leader>tt <cmd>TroubleToggle><cr>
     nnoremap <leader>tq <cmd>TroubleToggle quickfix><cr>
     nnoremap <leader>tl <cmd>TroubleToggle loclist<cr>
     nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
@@ -328,7 +328,7 @@ lua << EOF
 
 
     -- Todo comments
-    --require("todo-comments").setup()
+    require("todo-comments").setup()
 
     -- Rust
     require('crates').setup()

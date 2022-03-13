@@ -14,277 +14,277 @@ Plug 'ciaranm/securemodelines'          " Prevent insecure tab configuration
         \ "textwidth",   "tw",
         \ "softtabstop", "sts",
         \ "tabstop",     "ts",
-        \ "shiftwidth",  "sw",
-        \ "expandtab",   "et",   "noexpandtab", "noet",
-        \ "filetype",    "ft",
-        \ "foldmethod",  "fdm",
-        \ "readonly",    "ro",   "noreadonly", "noro",
-        \ "rightleft",   "rl",   "norightleft", "norl",
-        \ "colorcolumn"
-        \ ]
-Plug 'editorconfig/editorconfig-vim'    " For standardising code-style via .editorconfig files
-Plug 'terryma/vim-expand-region'        " Select increasingly large regions of text
-                                        " TODO: look at keybinds
-    map K <Plug>(expand_region_expand)
-    map J <Plug>(expand_region_shrink)
+            \ "shiftwidth",  "sw",
+            \ "expandtab",   "et",   "noexpandtab", "noet",
+            \ "filetype",    "ft",
+            "\ "foldmethod",  "fdm",
+            \ "readonly",    "ro",   "noreadonly", "noro",
+            \ "rightleft",   "rl",   "norightleft", "norl",
+            \ "colorcolumn"
+            \ ]
+    Plug 'editorconfig/editorconfig-vim'    " For standardising code-style via .editorconfig files
+    Plug 'terryma/vim-expand-region'        " Select increasingly large regions of text
+                                            " TODO: look at keybinds
+        map K <Plug>(expand_region_expand)
+        map J <Plug>(expand_region_shrink)
 
-" tpope magic
-Plug 'tpope/vim-surround'               " Make replacing quotes and such easier (cs)
-Plug 'tpope/vim-repeat'                 " Repeat more actions
-"Plug 'tpope/vim-fugitive'
-"Plug 'tpope/vim-sensible'
-"
-Plug 'andymass/vim-matchup'             " Navigate between sets of matching texts (%)
-Plug 'terryma/vim-smooth-scroll'        " Because it is fancy
-    noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-    noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-    noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-    noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+    " tpope magic
+    Plug 'tpope/vim-surround'               " Make replacing quotes and such easier (cs)
+    Plug 'tpope/vim-repeat'                 " Repeat more actions
+    "Plug 'tpope/vim-fugitive'
+    "Plug 'tpope/vim-sensible'
+    "
+    Plug 'andymass/vim-matchup'             " Navigate between sets of matching texts (%)
+    Plug 'terryma/vim-smooth-scroll'        " Because it is fancy
+        noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+        noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+        noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+        noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
-" Auto insert matching delimiters
-" Plug 'Raimondi/delimitMate'
-    " Disable auto-closing for tags to ensure closetag can do its thing
-    "let delimitMate_matchpairs = "(:),[:],{:}"
-    "autocmd! FileType html,xhtml,phtml,liquid let b:delimitMate_matchpairs = "(:),[:],{:}"
+    " Auto insert matching delimiters
+    " Plug 'Raimondi/delimitMate'
+        " Disable auto-closing for tags to ensure closetag can do its thing
+        "let delimitMate_matchpairs = "(:),[:],{:}"
+        "autocmd! FileType html,xhtml,phtml,liquid let b:delimitMate_matchpairs = "(:),[:],{:}"
 
-"" webdev (yuck)
-"Plug 'alvan/vim-closetag'
-    "let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.liquid'
-    "let g:closetag_filetypes = '*.html,*.xhtml,*.phtml,*.liquid'
+    "" webdev (yuck)
+    "Plug 'alvan/vim-closetag'
+        "let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.liquid'
+        "let g:closetag_filetypes = '*.html,*.xhtml,*.phtml,*.liquid'
 
-" ctag bar
-" XXX: Might delete this and just use the quickfix bar instead
-Plug 'majutsushi/tagbar'
+    " ctag bar
+    " XXX: Might delete this and just use the quickfix bar instead
+    Plug 'majutsushi/tagbar'
 
-" Undo trees
-Plug 'sjl/gundo.vim'
-    let g:gundo_prefer_python3 = 1
+    " Undo trees
+    Plug 'sjl/gundo.vim'
+        let g:gundo_prefer_python3 = 1
 
-" Latex
-Plug 'lervag/vimtex'
-    let g:tex_flavor = 'latex'
-    "let g:vimtex_fold_enabled = 1
-    let g:vimtex_view_method = 'zathura'
-    let g:vimtex_compiler_progname = 'nvr'
-    let g:vimtex_compiler_latexmk = {
-      \ 'options' : [
-      \   '-shell-escape',
-      \   '-xelatex',
-      \   '-verbose',
-      \   '-file-line-error',
-      \   '-interaction=nonstopmode'
-      \ ]}
+    " Latex
+    Plug 'lervag/vimtex'
+        let g:tex_flavor = 'latex'
+        "let g:vimtex_fold_enabled = 1
+        let g:vimtex_view_method = 'zathura'
+        let g:vimtex_compiler_progname = 'nvr'
+        let g:vimtex_compiler_latexmk = {
+          \ 'options' : [
+          \   '-shell-escape',
+          \   '-xelatex',
+          \   '-verbose',
+          \   '-file-line-error',
+          \   '-interaction=nonstopmode'
+          \ ]}
 
-" Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-    let g:mkdp_auto_start = 1
-Plug 'mzlogin/vim-markdown-toc'
+    " Markdown
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+        let g:mkdp_auto_start = 1
+    Plug 'mzlogin/vim-markdown-toc'
 
-" Mail
-Plug 'soywod/himalaya', {'rtp': 'vim'}
-    let g:himalaya_mailbox_picker = 'telescope'
+    " Mail
+    Plug 'soywod/himalaya', {'rtp': 'vim'}
+        let g:himalaya_mailbox_picker = 'telescope'
 
-call plug#end()
+    call plug#end()
 
-""""""""""""""""""""""""""""
-""""" General Settings """""
-""""""""""""""""""""""""""""
-set nocompatible
-filetype plugin indent on
-syntax on
-set hidden
-set updatetime=1000
-" set signcolumn=yes
-set noshowmode
-set ttyfast
-set visualbell
-set number
-set relativenumber
-set wrap
-set encoding=utf8
-set mouse=a
-" set autoindent
-""set colorcolumn=100
+    """"""""""""""""""""""""""""
+    """"" General Settings """""
+    """"""""""""""""""""""""""""
+    set nocompatible
+    filetype plugin indent on
+    syntax on
+    set hidden
+    set updatetime=1000
+    " set signcolumn=yes
+    set noshowmode
+    set ttyfast
+    set visualbell
+    set number
+    set relativenumber
+    set wrap
+    set encoding=utf8
+    set mouse=a
+    " set autoindent
+    ""set colorcolumn=100
 
-set list
-set listchars=tab:\┊\ ,nbsp:¬,extends:»,precedes:«,trail:•
+    set list
+    set listchars=tab:\┊\ ,nbsp:¬,extends:»,precedes:«,trail:•
 
-"tab:\┊\ ,eol:a,trail:·,extends:→,precedes:←
+    "tab:\┊\ ,eol:a,trail:·,extends:→,precedes:←
 
-" File searching
-"set path+=**
-set wildmenu
-set wildmode=list:longest
-set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
+    " File searching
+    "set path+=**
+    set wildmenu
+    set wildmode=list:longest
+    set wildignore=.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.min.js,*.swp,publish/*,intermediate/*,*.o,*.hi,Zend,vendor
 
-" Terminal colors
-"set t_Co=256
-set background=dark
-set termguicolors
-colorscheme material-monokai
-hi Normal guibg=NONE ctermbg=NONE
+    " Terminal colors
+    "set t_Co=256
+    set background=dark
+    set termguicolors
+    colorscheme material-monokai
+    hi Normal guibg=NONE ctermbg=NONE
 
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-set laststatus=2
+    set laststatus=2
 
-" To avoid supressing error messages
-set shortmess-=F
+    " To avoid supressing error messages
+    set shortmess-=F
 
-" Enable cursorline
-set cursorline
+    " Enable cursorline
+    set cursorline
 
-" Enable italics
-hi Comment cterm=italic
+    " Enable italics
+    hi Comment cterm=italic
 
-" Clipboard
-set clipboard=unnamedplus
+    " Clipboard
+    set clipboard=unnamedplus
 
-" Enable tabline
-set showtabline=2
+    " Enable tabline
+    set showtabline=2
 
-" Tab settings
-set tabstop=4
-set softtabstop=4
-set expandtab
-set shiftwidth=4
-set smarttab
+    " Tab settings
+    set tabstop=4
+    set softtabstop=4
+    set expandtab
+    set shiftwidth=4
+    set smarttab
 
-set backspace=indent,eol,start
-set guioptions-=T
-set guioptions-=r
-set guioptions-=L
+    set backspace=indent,eol,start
+    set guioptions-=T
+    set guioptions-=r
+    set guioptions-=L
 
-if executable('rg')
-    set grepprg=rg\ --no-heading\ --vimgrep
-    set grepformat=%f:%l:%c:%m
-else
-    set grepprg=grep\ -nH\ $*
-endif
+    if executable('rg')
+        set grepprg=rg\ --no-heading\ --vimgrep
+        set grepformat=%f:%l:%c:%m
+    else
+        set grepprg=grep\ -nH\ $*
+    endif
 
-" Search settings
-set hlsearch
-set incsearch
-set smartcase
-set gdefault
+    " Search settings
+    set hlsearch
+    set incsearch
+    set smartcase
+    set gdefault
 
-" Search results centered
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
-nnoremap <silent> * *zz
-nnoremap <silent> # #zz
-nnoremap <silent> g* g*zz
+    " Search results centered
+    nnoremap <silent> n nzz
+    nnoremap <silent> N Nzz
+    nnoremap <silent> * *zz
+    nnoremap <silent> # #zz
+    nnoremap <silent> g* g*zz
 
-" Enable magic on search
-"nnoremap ? ?\v
-"nnoremap / /\v
-"cnoremap %s/ %sm/
+    " Enable magic on search
+    "nnoremap ? ?\v
+    "nnoremap / /\v
+    "cnoremap %s/ %sm/
 
-" Enable folding
-"set foldmethod=indent
-"nnoremap <space> zc
-"vnoremap <space> zo
-"let g:SimpylFold_docstring_preview=1
+    " Enable folding
+    "set foldmethod=indent
+    "nnoremap <space> zc
+    "vnoremap <space> zo
+    "let g:SimpylFold_docstring_preview=1
 
-" Scroloff
-set scrolloff=4
+    " Scroloff
+    set scrolloff=4
 
-" lower timeout length
-set timeoutlen=1000 ttimeoutlen=50
+    " lower timeout length
+    set timeoutlen=1000 ttimeoutlen=50
 
-" Persistent undo and backups
-call mkdir($HOME . "/.vim/tmp", "p")
-set backupdir=$HOME/.vim/tmp,/var/tmp,/tmp
-set directory=$HOME/.vim/tmp,/var/tmp,/tmp
+    " Persistent undo and backups
+    call mkdir($HOME . "/.vim/tmp", "p")
+    set backupdir=$HOME/.vim/tmp,/var/tmp,/tmp
+    set directory=$HOME/.vim/tmp,/var/tmp,/tmp
 
-if has('persistent_undo')
-    set undodir=$HOME/.vim/tmp
-    set undofile
-    set undolevels=1000
-    set undoreload=10000
-endif
+    if has('persistent_undo')
+        set undodir=$HOME/.vim/tmp
+        set undofile
+        set undolevels=1000
+        set undoreload=10000
+    endif
 
-" Python settings
-" Bad whitespace
-" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-" Python tab settings
-"au BufNewFile,BufRead *.py
-"    \ set textwidth=79
-"    \ set fileformat=unix
+    " Python settings
+    " Bad whitespace
+    " au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+    " Python tab settings
+    "au BufNewFile,BufRead *.py
+    "    \ set textwidth=79
+    "    \ set fileformat=unix
 
 
-""""""""""""""""""""
-""""" Keybinds """""
-""""""""""""""""""""
-" Disable ex-mode
-noremap Q <Nop>
-" Disable F1 help
-nnoremap <F1> <Nop>
-inoremap <F1> <Nop>
+    """"""""""""""""""""
+    """"" Keybinds """""
+    """"""""""""""""""""
+    " Disable ex-mode
+    noremap Q <Nop>
+    " Disable F1 help
+    nnoremap <F1> <Nop>
+    inoremap <F1> <Nop>
 
-" Jump to start and end of line using the home row keys
-map H ^
-map L $
+    " Jump to start and end of line using the home row keys
+    map H ^
+    map L $
 
-" Frequent actions
-"nnoremap <Leader>o :CtrlP<CR>
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :cope<CR>
+    " Frequent actions
+    "nnoremap <Leader>o :CtrlP<CR>
+    nnoremap <leader>w :w<CR>
+    nnoremap <leader>q :cope<CR>
 
-" <leader><leader> toggles between last two buffers
-"nnoremap <leader><leader> <c-^>
+    " <leader><leader> toggles between last two buffers
+    "nnoremap <leader><leader> <c-^>
 
-" OpeA: Pyright is now an officially-supported Microsoft type checker for Python. It will continue to be developed and maintained as an open-source project under its original MIT license terms. The Pyright extension for VSCode is a reference implementation and is not guaranteed to be fully functional or maintained long-term.n new file adjacent to current file
-nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+    " OpeA: Pyright is now an officially-supported Microsoft type checker for Python. It will continue to be developed and maintained as an open-source project under its original MIT license terms. The Pyright extension for VSCode is a reference implementation and is not guaranteed to be fully functional or maintained long-term.n new file adjacent to current file
+    nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
-" Word delete in insert mode
-"inoremap <C-BS> <C-W>
-"vnoremap <C-BS> <C-W>
-inoremap  <C-W>
-vnoremap  <C-W>
+    " Word delete in insert mode
+    "inoremap <C-BS> <C-W>
+    "vnoremap <C-BS> <C-W>
+    inoremap  <C-W>
+    vnoremap  <C-W>
 
-" Visual movement
-" https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
-nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+    " Visual movement
+    " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+    nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+    nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
-" Split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+    " Split navigations
+    nnoremap <C-J> <C-W><C-J>
+    nnoremap <C-K> <C-W><C-K>
+    nnoremap <C-L> <C-W><C-L>
+    nnoremap <C-H> <C-W><C-H>
 
-" Open buffer navigation
-nnoremap <C-W> :bd<CR>
-nnoremap <left> :bp<CR>
-nnoremap <right> :bn<CR>
-nnoremap <leader>l :bprevious<CR>
-nnoremap <leader>h :bnext<CR>
+    " Open buffer navigation
+    nnoremap <C-W> :bd<CR>
+    nnoremap <left> :bp<CR>
+    nnoremap <right> :bn<CR>
+    nnoremap <leader>l :bprevious<CR>
+    nnoremap <leader>h :bnext<CR>
 
-" Ctrl+h to stop search highlight
-" vnoremap <C-h> :nohlsearch<cr>
-" nnoremap <C-h> :nohlsearch<cr>
+    " Ctrl+h to stop search highlight
+    " vnoremap <C-h> :nohlsearch<cr>
+    " nnoremap <C-h> :nohlsearch<cr>
 
-" Tag navigation
-"nnoremap <C-]> :tag<CR>
-" nnoremap <C-[> :pop<CR>
+    " Tag navigation
+    "nnoremap <C-]> :tag<CR>
+    " nnoremap <C-[> :pop<CR>
 
-" Gundo
-nnoremap <C-g> :GundoToggle<CR>
+    " Gundo
+    nnoremap <C-g> :GundoToggle<CR>
 
-"""""""""""""""""
-""""" Misc. """""
-"""""""""""""""""
-" Make .tex files run faster
-" https://stackoverflow.com/questions/8300982/vim-running-slow-with-latex-files
-au FileType tex setlocal nocursorline
-au FileType tex :NoMatchParen
-" https://github.com/vim/vim/issues/727
-autocmd FileType tex set regexpengine=1
+    """""""""""""""""
+    """"" Misc. """""
+    """""""""""""""""
+    " Make .tex files run faster
+    " https://stackoverflow.com/questions/8300982/vim-running-slow-with-latex-files
+    au FileType tex setlocal nocursorline
+    au FileType tex :NoMatchParen
+    " https://github.com/vim/vim/issues/727
+    autocmd FileType tex set regexpengine=1
 
-" Spell check
-let b:lang=0
+    " Spell check
+    let b:lang=0
 let g:langList=["nospell", "en_gb", "sv"]
 function ToggleSpell()
     let b:lang=b:lang+1
