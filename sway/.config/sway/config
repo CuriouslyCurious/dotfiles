@@ -25,7 +25,8 @@ set $editor nvim
 set $menu wofi -t $term
 set $bindsym --to-code bindsym --to-code --to-code
 set $lock swaylock -f -c 000000
-set $screenshot_processing swappy -f - -o - | pngquant - | wl-copy
+set $screenshot_processing wl-copy
+# swappy -f - -o - | pngquant - | wl-copy
 set $light_file ~/.cache/light/level
 # grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
 
@@ -37,17 +38,17 @@ set $monC DP-1
 set $monL HDMI-A-1
 
 # Setup monitors
-output DP-1 subpixel rgb
+#output DP-1 subpixel rgb
 #output DP-1 adaptive_sync on
-output DP-1 mode 2560x1440@144Hz
+#output DP-1 mode 2560x1440
 #144Hz
 
 # Setup HDMI-A-1
 #output HDMI-A-1 mode 1920x1080@60Hz
 
 # Position monitors
-output HDMI-A-1 pos 0 0 res 1920x1080
-output DP-1 pos 1920 0 res 2560x1440
+output HDMI-A-1 pos -1921 0
+output DP-1 pos 0 0
 
 # Workspace stuff
 set $ws1 "1"
@@ -168,7 +169,7 @@ exec swaymsg workspace $ws1
 ####################
 
 # Keyboard
-input "type:keyboard" {
+input * {
     xkb_layout se,us
     xkb_options grp:alt_shift_toggle
     repeat_delay 250
@@ -193,22 +194,27 @@ input "type:mouse" {
     scroll_factor 1
 }
 
+
+bindsym --to-code $mod+q kill
+
+# Terminal
 bindsym --to-code $mod+Return exec $term
 bindsym --to-code $mod+Shift+Return exec $term --working-directory $(cat ~/.last_dir)
-bindsym --to-code $mod+q kill
 
 # Launch btop in a terminal
 bindsym --to-code Ctrl+Shift+Escape exec $term btop
 
 # Media control
-bindsym --to-code XF86AudioPlay exec mpc toggle
-bindsym --to-code XF86AudioPrev exec mpc prev
-bindsym --to-code XF86AudioNext exec mpc next
-bindsym --to-code XF86AudioStop exec mpc stop
 # TODO: Pipewire binds
-bindsym --to-code XF86AudioRaiseVolume exec pamixer --increase 1
-bindsym --to-code XF86AudioLowerVolume exec pamixer --decrease 1
-bindsym --to-code XF86AudioMute exec pamixer --mute
+bindsym --to-code {
+    XF86AudioPlay exec mpc toggle
+    XF86AudioPrev exec mpc prev
+    XF86AudioNext exec mpc next
+    XF86AudioStop exec mpc stop
+    XF86AudioRaiseVolume exec pamixer --increase 1
+    XF86AudioLowerVolume exec pamixer --decrease 1
+    XF86AudioMute exec pamixer --mute
+}
 
 # Brightness (broken piece of junk)
 bindsym --to-code XF86MonBrightnessUp exec light -A 3 && light -G > $light_file
@@ -221,27 +227,29 @@ bindsym --to-code $mod+M exec bash ~/scripts/toggle_mic.sh
 bindsym --to-code $mod+d exec $menu --show run -p "run program"
 bindsym --to-code $mod+shift+d exec /bin/find ~/.password-store -type f -not -path "*/\.git*" -not -path "*/\.gpg-id" -not -path "\.password-store" | /bin/sed -e "s/.*password-store\///" -e "s/\.gpg//" | $menu -d -p "copy password" | xargs pass show --clip >/dev/null
 
-# vi-like movement
-bindsym --to-code $mod+h focus left
-bindsym --to-code $mod+j focus down
-bindsym --to-code $mod+k focus up
-bindsym --to-code $mod+l focus right
+bindsym --to-code {
+    # vi-like movement
+    $mod+h focus left
+    $mod+j focus down
+    $mod+k focus up
+    $mod+l focus right
 
-bindsym --to-code $mod+Shift+h move left
-bindsym --to-code $mod+Shift+j move down
-bindsym --to-code $mod+Shift+k move up
-bindsym --to-code $mod+Shift+l move right
+    $mod+Shift+h move left
+    $mod+Shift+j move down
+    $mod+Shift+k move up
+    $mod+Shift+l move right
 
-# Cursor key movement
-bindsym --to-code $mod+Left focus left
-bindsym --to-code $mod+Down focus down
-bindsym --to-code $mod+Up focus up
-bindsym --to-code $mod+Right focus right
+    # Cursor key movement
+    $mod+Left focus left
+    $mod+Down focus down
+    $mod+Up focus up
+    $mod+Right focus right
 
-bindsym --to-code $mod+Shift+Left move left
-bindsym --to-code $mod+Shift+Down move down
-bindsym --to-code $mod+Shift+Up move up
-bindsym --to-code $mod+Shift+Right move right
+    $mod+Shift+Left move left
+    $mod+Shift+Down move down
+    $mod+Shift+Up move up
+    $mod+Shift+Right move right
+}
 
 # split in horizontal orientation
 bindsym --to-code $mod+b split h;exec notify-send 'tile horizontally'
@@ -257,33 +265,37 @@ bindsym --to-code $mod+e layout toggle split
 bindsym --to-code $mod+Shift+space floating toggle
 bindsym --to-code $mod+space focus mode_toggle
 
-bindsym --to-code $mod+1 workspace $ws1
-bindsym --to-code $mod+2 workspace $ws2
-bindsym --to-code $mod+3 workspace $ws3
-bindsym --to-code $mod+4 workspace $ws4
-bindsym --to-code $mod+5 workspace $ws5
-bindsym --to-code $mod+6 workspace $ws6
-bindsym --to-code $mod+7 workspace $ws7
-bindsym --to-code $mod+8 workspace $ws8
-bindsym --to-code $mod+9 workspace $ws9
-bindsym --to-code $mod+0 workspace $ws0
+bindsym --to-code {
+    $mod+1 workspace $ws1
+    $mod+2 workspace $ws2
+    $mod+3 workspace $ws3
+    $mod+4 workspace $ws4
+    $mod+5 workspace $ws5
+    $mod+6 workspace $ws6
+    $mod+7 workspace $ws7
+    $mod+8 workspace $ws8
+    $mod+9 workspace $ws9
+    $mod+0 workspace $ws0
 
-bindsym --to-code $mod+Tab workspace back_and_forth
-bindsym --to-code $mod+minus move scratchpad
-bindsym --to-code $mod+plus scratchpad show
+    $mod+Shift+1 move container to workspace $ws1
+    $mod+Shift+2 move container to workspace $ws2
+    $mod+Shift+3 move container to workspace $ws3
+    $mod+Shift+4 move container to workspace $ws4
+    $mod+Shift+5 move container to workspace $ws5
+    $mod+Shift+6 move container to workspace $ws6
+    $mod+Shift+7 move container to workspace $ws7
+    $mod+Shift+8 move container to workspace $ws8
+    $mod+Shift+9 move container to workspace $ws9
+    $mod+Shift+0 move container to workspace $ws0
+
+    $mod+Tab workspace back_and_forth
+    $mod+minus move scratchpad
+    $mod+plus scratchpad show
+
+    $mod+n exec thunar
+}
+
 #bindsym --to-code $mod+Shift+s sticky toggle
-bindsym --to-code $mod+n exec thunar
-
-bindsym --to-code $mod+Shift+1 move container to workspace $ws1
-bindsym --to-code $mod+Shift+2 move container to workspace $ws2
-bindsym --to-code $mod+Shift+3 move container to workspace $ws3
-bindsym --to-code $mod+Shift+4 move container to workspace $ws4
-bindsym --to-code $mod+Shift+5 move container to workspace $ws5
-bindsym --to-code $mod+Shift+6 move container to workspace $ws6
-bindsym --to-code $mod+Shift+7 move container to workspace $ws7
-bindsym --to-code $mod+Shift+8 move container to workspace $ws8
-bindsym --to-code $mod+Shift+9 move container to workspace $ws9
-bindsym --to-code $mod+Shift+0 move container to workspace $ws0
 
 # Resize mode
 bindsym --to-code $mod+r mode "resize"
