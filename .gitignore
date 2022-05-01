@@ -26,6 +26,9 @@ hardware-configuration.nix
 # neomutt (temporarily ignore until setup is less privacy revealing)
 **/neomutt
 
+# light
+light/.config/light/targets/sysfs/backlight/auto/save
+
 # latex
 # ## Core latex/pdflatex auxiliary files:
 *.aux
