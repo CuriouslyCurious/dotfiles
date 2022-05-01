@@ -355,6 +355,7 @@ bindsym --to-code --release $mod+Shift+Print exec grim -g $(swaymsg -t get_tree 
 # Area selection screenshot and copy it to the clipboard
 #bindsym --to-code --release Shift+Print exec maim -s -o ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
 
+include swaybar
 
 # Program-specific settings
 assign [class="Gimp"] 5
