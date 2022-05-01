@@ -1,0 +1,23 @@
+bar {
+    id 1
+    swaybar_command swaybar
+    #bindcode
+    #bindsym
+    binding_mode_indicator yes
+    font DejaVuSansMono Nerd Font Mono 12pt
+
+    gaps 0
+    height 0
+
+    hidden_state hide
+    mode dock
+
+    # Default mod
+    modifier Mod4
+
+    output *
+
+    pango_markup enabled
+    position top
+    separator_symbol #
+}
