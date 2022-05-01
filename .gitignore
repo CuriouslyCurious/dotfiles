@@ -29,6 +29,9 @@ hardware-configuration.nix
 # light
 light/.config/light/targets/sysfs/backlight/auto/save
 
+# fish
+**/fisher.fish
+
 # latex
 # ## Core latex/pdflatex auxiliary files:
 *.aux
