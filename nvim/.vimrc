@@ -76,8 +76,9 @@ Plug 'ciaranm/securemodelines'          " Prevent insecure tab configuration
           \ ]}
 
     " Markdown
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug'] }
         let g:mkdp_auto_start = 1
+        let g:mkdp_auto_close = 1
     Plug 'mzlogin/vim-markdown-toc'
 
     " Mail

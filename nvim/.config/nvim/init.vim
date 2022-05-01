@@ -270,7 +270,7 @@ lua << EOF
             --},
         },
         incremental_selection = {
-            enable = true,
+            enable = false,
             keymaps = {
                 init_selection = '<CR>',
                 scope_incremental = '<CR>',
