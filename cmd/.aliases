@@ -20,9 +20,11 @@ alias gaa="git add --all"
 alias gc="git commit -v"
 alias gca="git commit -av"
 alias gch="git checkout"
+alias gchb="git checkout -b"
 alias gp="git push"
 alias gpom="git push origin master"
 alias gpo="git push origin"
+alias gpa="git push --all"
 alias gb="git branch"
 alias gs="git status"
 alias gl="git log"
@@ -98,7 +100,9 @@ alias pacman="doas pacman"
 alias hibernate="systemctl hibernate"
 alias suspend="systemctl suspend"
 # taskwarrior
-alias tw="task"
+alias t="task"
+# timewarrior
+alias tw="timew"
 # GPG
 alias gpg-export="gpg --armor --export-options export-minimal --export "
 # pass
@@ -113,7 +117,7 @@ alias pgpom="pass git push origin master"
 alias pgpo="pass git push origin"
 alias pgfm="pass git pull"
 # tree
-alias t="tree"
+#alias t="tree"
 # bottom
 alias top="btm"
 alias htop="btm"
