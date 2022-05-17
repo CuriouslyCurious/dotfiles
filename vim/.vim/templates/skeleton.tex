@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+%\usepackage{libertine}
+%\usepackage{kpfonts}
+\usepackage{lipsum}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{placeins}
+\usepackage{gensymb}
+\usepackage{inconsolata}
+\usepackage{csquotes}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{subcaption}
+\usepackage{mdframed}
+%\usepackage[backend=biber,style=authoryear,citestyle=authoryear]{biblatex}
+%\addbibresource{ref.bib}
+\usepackage[version=4]{mhchem}
+% \usepackage{icomma}
+\setitemize{noitemsep,topsep=0pt,parsep=0pt,partopsep=0pt}
+
+% Hide section numbers
+%\makeatletter
+%\def\@seccntformat#1{%
+%  \expandafter\ifx\csname c@#1\endcsname\c@section\else
+%  \csname the#1\endcsname\quad
+%  \fi}
+%\makeatother
+
+\makeatletter
+%\renewcommand{\@seccntformat}[1]{}
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\today}
+\chead{Some Course, Laboration}
+\rhead{A.~B.~Carlsson}
+\cfoot{\thepage\ of \pageref{LastPage}}
+
+
+\title{Some Course -- Some Subject
+\author{
+Adrian Barney -- Computer Science \\ {\tt some@student} \and
+Department of Computer Science \and
+\includegraphics[width=0.2\textwidth]{.jpg}}
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\thispagestyle{empty}
+\begin{abstract}
+    \noindent
+\end{abstract}
+\newpage
+
+\tableofcontents
+\thispagestyle{empty}
+\newpage
+
+\setcounter{page}{1}
+
+\section{Introduction}
+
+\section{Result}
+
+\section{Discussion}
+
+\newpage
+\printbibliography
+
+\end{document}
