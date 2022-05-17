@@ -153,7 +153,7 @@ exec waybar
 exec light -S $(cat $light_file)
 
 # Audio
-exec pipewire
+exec wireplumber
 
 # Launch a global ssh-agent (instead of doing it form the shells)
 exec "bash $HOME/.config/sway/ssh-agent.sh"
