@@ -10,9 +10,6 @@ else
 	set -U EDITOR nano
 end
 
-# ctrl-backspace
-bind \cH backward-kill-path-component
-
 # Run ssh-agent
 # https://wiki.archlinux.org/index.php/SSH_keys#SSH_agents
 #if ! pgrep -u "$USER" ssh-agent > /dev/null
@@ -49,8 +46,8 @@ end
 
 # Ctrl-backspace working as it should
 #bind \e\[3\;5~ kill-word
-bind -k backspace backward-kill-word
-bind -M insert -k backspace backward-kill-word
+bind \cH backward-kill-path-component
+bind -M insert \cH backward-kill-word
 
 # Line jump stuff
 bind H beginning-of-line
