@@ -31,9 +31,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     --let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.liquid'
     --let g:closetag_filetypes = '*.html,*.xhtml,*.phtml,*.liquid'
 
-    -- ctag bar
-    -- XXX: Might delete this and just use the quickfix bar instead
-    Plug 'majutsushi/tagbar'
 
     -- Undo trees
     Plug 'sjl/gundo.vim'
@@ -65,6 +62,9 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug('soywod/himalaya', {rtp = 'vim'})
         vim.g['himalaya_mailbox_picker'] = 'telescope'
 
+    -- Common lua functions
+    Plug 'nvim-lua/plenary.nvim'
+
     -- Syntax highlighting (treesitter)
     Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
     -- Plug 'nvim-treesitter/playground'
@@ -90,19 +90,37 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     -- Barline
     Plug 'romgrk/barbar.nvim'
 
+    -- skim/fzf
+    Plug('lotabout/skim', { dir = '~/.skim', ['do'] = './install' })
+    Plug('lotabout/skim.vim')
+        -- Requires neovim > 0.7
+        vim.api.nvim_create_user_command('Ag',
+            "call fzf#vim#ag_interactive(<q-args>, fzf#vim#with_preview('right:50%', 'alt-h'))",
+            { nargs = '*' }
+        )
+        vim.api.nvim_create_user_command('Rg',
+            "call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%', 'alt-h'))",
+            { nargs = '*' }
+        )
+        vim.api.nvim_create_user_command('Files',
+            "call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', 'alt-h'))",
+            { nargs = '*', complete = 'dir' }
+        )
+        vim.keymap.set('n', '<C-o>', '<cmd>Files<cr>')
+
     -- Pretty debugging
     Plug 'folke/trouble.nvim'
-        vim.keymap.set('n', '<silent> <C-t>', '<cmd>TroubleToggle<cr>')
-        vim.keymap.set('n', '<silent> <leader>tq', '<cmd>TroubleToggle quickfix<cr>')
-        vim.keymap.set('n', '<silent> <leader>tl', '<cmd>TroubleToggle loclist<cr>')
-        vim.keymap.set('n', '<silent> <leader>xw', '<cmd>TroubleToggle lsp_workspace_diagnostics<cr>')
-        vim.keymap.set('n', '<silent> <leader>xd', '<cmd>TroubleToggle lsp_document_diagnostics<cr>')
+        vim.keymap.set('n', '<C-t>', '<cmd>TroubleToggle<cr>')
+        vim.keymap.set('n', '<leader>tq', '<cmd>TroubleToggle quickfix<cr>')
+        vim.keymap.set('n', '<leader>tl', '<cmd>TroubleToggle loclist<cr>')
+        vim.keymap.set('n', '<leader>xw', '<cmd>TroubleToggle lsp_workspace_diagnostics<cr>')
+        vim.keymap.set('n', '<leader>xd', '<cmd>TroubleToggle lsp_document_diagnostics<cr>')
         --nnoremap gR <cmd>TroubleToggle lsp_references<cr>
     Plug 'mfussenegger/nvim-dap'
-        vim.keymap.set('n', '<silent> <leader>db', "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
-        vim.keymap.set('n', '<silent> <leader>dc', "<cmd>lua require'dap'.continue()<cr>")
-        vim.keymap.set('n', '<silent> <leader>dso', "<cmd>lua require'dap'.step_over()<cr>")
-        vim.keymap.set('n', '<silent> <leader>dsi', "<cmd>lua require'dap'.step_into()<cr>")
+        vim.keymap.set('n', '<leader>db', "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
+        vim.keymap.set('n', '<leader>dc', "<cmd>lua require'dap'.continue()<cr>")
+        vim.keymap.set('n', '<leader>dso', "<cmd>lua require'dap'.step_over()<cr>")
+        vim.keymap.set('n', '<leader>dsi', "<cmd>lua require'dap'.step_into()<cr>")
 
     -- LSP
     Plug 'neovim/nvim-lspconfig'
@@ -130,17 +148,16 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug('phaazon/hop.nvim', {tag =  '*'})
 
     -- Telescope
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-        -- Find files using Telescope command-line sugar.
-        vim.keymap.set('n', '<C-o>', '<cmd>Telescope find_files<cr>')
-        vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
-        vim.keymap.set('n', '<leader>ft', '<cmd>Telescope git_files<cr>')
-        vim.keymap.set('n', '<leader>fc', '<cmd>Telescope git_commits<cr>')
-        vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
-        vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
-        vim.keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
+    -- Plug 'nvim-lua/popup.nvim'
+    -- Plug 'nvim-telescope/telescope.nvim'
+    --     -- Find files using Telescope command-line sugar.
+    --     vim.keymap.set('n', '<C-o>', '<cmd>Telescope find_files<cr>')
+    --     vim.keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
+    --     vim.keymap.set('n', '<leader>ft', '<cmd>Telescope git_files<cr>')
+    --     vim.keymap.set('n', '<leader>fc', '<cmd>Telescope git_commits<cr>')
+    --     vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
+    --     vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
+    --     vim.keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
 
     -- Fancy highlighting
     Plug('lukas-reineke/indent-blankline.nvim', {tag = '*'})
