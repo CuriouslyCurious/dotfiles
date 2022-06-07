@@ -403,6 +403,7 @@ endif
 if has ("autocomd")
     augroup formats
         autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
+        autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 200)
     augroup END
 endif
 

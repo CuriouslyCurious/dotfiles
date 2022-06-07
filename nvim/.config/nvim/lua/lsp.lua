@@ -86,11 +86,47 @@ local on_attach = function(client, bufnr)
 end
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = { "clangd", "pylsp", "rust_analyzer", "texlab" }
+local servers = {
+    {
+        name = "clangd",
+        settings = {},
+    },
+    {
+        name = "pylsp",
+        settings = {},
+
+    },
+    {
+        name = "rust_analyzer",
+        settings = {
+            assist = {
+                importGranularity = "module",
+                importPrefix = "self",
+            },
+            cargo = {
+                loadOutDirsFromCheck = true
+            },
+            procMacro = {
+                enable = true
+            },
+            checkOnSave = {
+                command = "clippy"
+            },
+        }
+    },
+    {
+        name = "texlab",
+        settings = {},
+    }
+}
+
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
+    nvim_lsp[lsp["name"]].setup {
         on_attach = on_attach,
         capabilities = capabilities,
+        settings = {
+            [lsp["name"]] = lsp["settings"]
+        }
     }
 end
 
@@ -189,23 +225,6 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     })
 })
-
-nvim_lsp.rust_analyzer.setup {
-    settings = {
-        ["rust-analyzer"] = {
-            cargo = {
-                loadOutDirsFromCheck = true
-            },
-            procMacro = {
-                enable = true
-            },
-            -- enable clippy on save
-            checkOnSave = {
-                command = "clippy"
-            },
-        }
-    }
-}
 
 lsp_status.config {
     current_function = true,
