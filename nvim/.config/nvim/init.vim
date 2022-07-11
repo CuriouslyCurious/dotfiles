@@ -184,10 +184,11 @@ nnoremap <leader>q :cope<CR>
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Word delete in insert mode
-"inoremap <C-BS> <C-W>
-"vnoremap <C-BS> <C-W>
-inoremap  <C-W>
-vnoremap  <C-W>
+inoremap <C-BS> <C-W>
+vnoremap <C-BS> <C-W>
+cnoremap <C-BS> <C-W>
+" inoremap  <C-W>
+" vnoremap  <C-W>
 
 " Visual movement
 " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
