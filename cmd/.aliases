@@ -82,11 +82,6 @@ fi
 if [[ -e $(which diskus) ]]; then
     alias du="diskus"
 fi
-# zoxide instead of cd
-if [[ -e $(which zoxide) ]]; then
-    #alias z="zoxide"
-    alias cd="z"
-fi
 # tokei
 if [[ -e $(which tokei) ]]; then
     alias loc="tokei"
