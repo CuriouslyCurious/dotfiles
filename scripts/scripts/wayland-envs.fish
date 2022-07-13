@@ -8,7 +8,7 @@ export TERM=foot
 # server - will mostly not show anything unless more compisitors are run (afaict)
 export WAYLAND_DEBUG=0
 
-# More functional tray on waybar
+# Set desktop variables (makes waybar more functional)
 export XDG_CURRENT_DESKTOP=sway
 export XDG_SESSION_DESKTOP=sway
 
@@ -76,3 +76,8 @@ export NO_AT_BRIDGE=1
 
 # Create a Dbus session for stupid stuff that needs one
 export (dbus-launch)
+
+#dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
+
+# Disgusting, to make screensharing on Wayland work (xdg-desktop-portal-wlr)
+#systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
