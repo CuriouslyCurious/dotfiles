@@ -1,23 +1,69 @@
 bar {
     id 1
     swaybar_command swaybar
+
     #bindcode
     #bindsym
+
     binding_mode_indicator yes
-    font DejaVuSansMono Nerd Font Mono 12pt
+    font DejaVuSansMono Nerd Font Mono 10
 
     gaps 0
     height 0
 
+    # When the bar should be shown
     hidden_state hide
     mode dock
 
     # Default mod
     modifier Mod4
 
+    # Which screens to output the bar to
     output *
 
     pango_markup enabled
     position top
     separator_symbol #
+
+    # Status information
+    status_command while ~/scripts/status_bar.sh; do sleep 1; done
+    status_edge_padding 0
+    status_padding 0
+
+    strip_workspace_name no
+    #unbindcode
+    #unbindsym
+
+    # Wrapping when scrolling through workspace with the scroll wheel
+    wrap_scroll no
+
+    workspace_buttons yes
+    workspace_min_width 0
+
+    # Tray customization
+    #tray_bindcode
+    #tray_bindsym
+
+    tray_padding 2
+
+    tray_output *
+
+    icon_theme hicolor
+
+    colors {
+        # RRGGBBAA
+        background #1f292d
+        statusline #cdd3de
+        separator #e6db74
+        focused_background #1f292d
+        #focused_statusline #
+        #focused_separator
+
+        focused_workspace #383a3e #66d9ef #1f292d
+        active_workspace #383a3e #37b6ff #cdd3de
+        inactive_workspace #383a3e #1f292d #cdd3de
+        urgent_workspace #383a3e #e73c50 #1f292d
+
+        #binding_mode
+    }
 }
