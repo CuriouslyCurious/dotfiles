@@ -1,0 +1,37 @@
+# Disable xwayland
+xwayland disable
+
+exec {
+    # Notifications
+    mako
+
+    # Screensaver
+    swayidle -w \
+        timeout 300 '$lock' \
+        timeout 301 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on"' \
+        before-sleep '$lock'
+
+    # Restore brightness
+    light -S $(cat $light_file)
+
+    # Audio
+    pipewire
+    pipewire-pulse
+    wireplumber
+
+    # Music
+    #mpd
+
+    # Dampen blue-light
+    wlsunset -T 6500 -t 3000 -S 08:00 -s 18:00 -d 5
+
+    # Start-up layout
+    # FIXME: This is not behaving properly
+    #swaymsg workspace $ws1, exec $term
+    #swaymsg workspace $ws2, exec $browser
+    #swaymsg workspace $ws8, exec $term -e ncmpcpp, exec $term -e $editor "$HOME/Documents/music_list.md"
+    #swaymsg workspace $ws9, exec discord #, exec $term -e $irc
+    #swaymsg workspace $ws0, exec telegram-desktop
+    #swaymsg workspace $ws1, exec $term
+}

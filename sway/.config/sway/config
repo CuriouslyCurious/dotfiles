@@ -1,101 +1,34 @@
-#
-#  ██╗   ██████╗     ██╗   ██╗███╗   ███╗
-#  ██║   ╚════██╗    ██║   ██║████╗ ████║
-#  ██║    █████╔╝    ██║   ██║██╔████╔██║
-#  ██║    ╚═══██╗    ╚██╗ ██╔╝██║╚██╔╝██║
-#  ██║   ██████╔╝     ╚████╔╝ ██║ ╚═╝ ██║
-#  ╚═╝   ╚═════╝       ╚═══╝  ╚═╝     ╚═╝
-#
-# Curious' i3 config
-# Inspired by:
-# - tmplt
-# - KingKobra87 (https://github.com/kingkobra87/dotfiles/blob/master/.i3/config)
+# Sway config file
+# TODO: Fix lights being garbage
+# TODO: Create a wofi bind for:
+# TODO: * exiting/suspending/hibernating/locking
+# TODO: * cgl (once that is done)
+# TODO: * selecting bluetooth devices (once that is done)
+# TODO: * selecting wifi network (once that is done)
+# TODO: * selecting vpn (once that is done)
 
-###################
-##### General #####
-###################
-font pango:DejaVu Sans Mono 10, FontAwesome 10
-
-set $mod Mod4
-floating_modifier $mod
-
-set $term foot
-set $browser firefox
-set $editor nvim
-set $menu wofi -t $term
-set $bindsym --to-code bindsym --to-code --to-code
-set $lock swaylock -f -c 000000
-set $screenshot_processing wl-copy
-# swappy -f - -o - | pngquant - | wl-copy
-set $light_file ~/.cache/light/level
-# grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp)" - | swappy -f -
-
-# Load in some environment variables first time we start sway
-# exec_always source "$HOME/.config/sway/envs"
-
-# Monitor arrangement
-set $monC DP-1
-set $monL HDMI-A-1
-
-# Setup monitors
-#output DP-1 subpixel rgb
-#output DP-1 adaptive_sync on
-#output DP-1 mode 2560x1440
-#144Hz
-
-# Setup HDMI-A-1
-#output HDMI-A-1 mode 1920x1080@60Hz
-
-# Position monitors
-output HDMI-A-1 pos -1921 0
-output DP-1 pos 0 0
-
-# Workspace stuff
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws0 "10"
-
-# Set workspaces default monitors
-workspace $ws1 output $monC
-workspace $ws2 output $monC
-workspace $ws3 output $monL
-workspace $ws4 output $monC
-workspace $ws5 output $monC
-
-workspace $ws9 output monL
-workspace $ws0 output $monC
+# Font
+font pango:DejaVu Sans Mono 10
 
 # The border around windows
 default_border pixel 3
-#new_window pixel 2
-#new_float pixel 2
 
-#workspace_auto_back_and_forth yes
-#hide_edge_borders both
+# Colours
+set {
+    $bg         #282A36
+    $fg         #F8F8F2
 
-#####################
-###### COLOURS ######
-#####################
-set $bg         #282A36
-set $fg         #F8F8F2
+    $dark       #1E1F26
+    $medium     #474b61
+    $light      #E6E6E6
 
-set $dark       #1E1F26
-set $medium     #474b61
-set $light      #E6E6E6
-
-set $red        #FF5555
-set $magenta    #FF79C6
-set $blue       #BD93F9
-set $cyan       #8BE9FD
-set $green      #50FA7B
-set $yellow     #F1FA8C
+    $red        #FF5555
+    $magenta    #FF79C6
+    $blue       #BD93F9
+    $cyan       #8BE9FD
+    $green      #50FA7B
+    $yellow     #F1FA8C
+}
 
 # class                 border      background  text        indicator   child_border
 client.focused          $blue       $blue       $blue       $blue       $blue
@@ -106,75 +39,11 @@ client.placeholder      $green      $green      $green      $green      $green
 
 client.background $bg
 
-###################
-##### i3-gaps #####
-###################
+# Gaps
 smart_borders on
 smart_gaps on
 gaps inner 12
 gaps outer 0
-
-####################
-##### Start-up #####
-####################
-# Disable xwayland
-#xwayland disable
-
-# Set wallpaper
-output * bg "$HOME/.config/wall.png" fill
-
-# Unclutter
-#seat * hide_cursor 3000
-# Bugged so have to disable it: https://github.com/swaywm/sway/issues/6297
-seat * hide_cursor when-typing disable
-
-# Notifications
-exec mako
-exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
-
-# Set timeout
-exec swayidle -w \
-	timeout 300 '$lock' \
-	timeout 301 'swaymsg "output * dpms off"' \
-		resume 'swaymsg "output * dpms on"' \
-	before-sleep '$lock'
-# exec swayidle -w \
-#                 # timeout 299 "swaymsg 'output * dpms off'" \
-#                 timeout 300 "swaylock" \
-#                 timeout 301 "swaymsg 'output * dpms off'" \
-#                 resume "swaymsg 'output * dpms on'" \
-#                 before-sleep "swaylock -f -c ffffff" \
-#                 before-sleep "mpc stop"
-
-# Launch waybar
-exec waybar
-
-# Restore brightness
-exec light -S $(cat $light_file)
-
-# Audio
-exec wireplumber
-
-# Launch a global ssh-agent (instead of doing it form the shells)
-exec "bash $HOME/.config/sway/ssh-agent.sh"
-
-#exec mpd
-exec wlsunset -T 6500 -t 3000 -S 08:00 -s 18:00 -d 5
-
-# Start-up layout
-#exec swaymsg workspace $ws1, exec $term
-exec swaymsg workspace $ws2, exec $browser
-#exec swaymsg workspace $ws8, exec $term -e ncmpcpp, exec $term -e $editor "$HOME/Documents/music_list.md"
-#exec swaymsg workspace $ws9, exec discord #, exec $term -e $irc
-exec swaymsg workspace $ws0, exec telegram-desktop
-exec swaymsg workspace $ws1, exec $term
-
-# Disgusting, to make screensharing on Wayland work (xdg-desktop-portal-wlr)
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-
-####################
-##### Keybinds #####
-####################
 
 # Keyboard
 input "*" {
@@ -202,210 +71,7 @@ input "type:mouse" {
     scroll_factor 1
 }
 
-
-bindsym --to-code $mod+q kill
-
-# Terminal
-bindsym --to-code $mod+Return exec $term
-bindsym --to-code $mod+Shift+Return exec $term --working-directory $(cat ~/.last_dir)
-
-# Launch btop in a terminal
-bindsym --to-code Ctrl+Shift+Escape exec $term btop
-
-# Media control
-# TODO: Pipewire binds
-bindsym --to-code {
-    XF86AudioPlay exec mpc toggle
-    XF86AudioPrev exec mpc prev
-    XF86AudioNext exec mpc next
-    XF86AudioStop exec mpc stop
-    XF86AudioRaiseVolume exec pamixer --increase 1
-    XF86AudioLowerVolume exec pamixer --decrease 1
-    XF86AudioMute exec pamixer --mute
-}
-
-# Brightness (broken piece of junk)
-bindsym --to-code XF86MonBrightnessUp exec light -A 3 && light -G > $light_file
-bindsym --to-code XF86MonBrightnessDown exec light -U 3 && light -G > $light_file
-
-bindsym --to-code $mod+M exec bash ~/scripts/toggle_mic.sh
-
-#bindsym --to-code $mod+d exec dmenu_run -b -fn '-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso8859-*' -sb '#cb555a'
-#bindsym --to-code $mod+d exec rofi -show run -lines 7 -eh8 -width 40 -padding 50 -opacity "85"
-bindsym --to-code $mod+d exec $menu --show run -p "run program"
-bindsym --to-code $mod+shift+d exec /bin/find ~/.password-store -type f -not -path "*/\.git*" -not -path "*/\.gpg-id" -not -path "\.password-store" | /bin/sed -e "s/.*password-store\///" -e "s/\.gpg//" | $menu -d -p "copy password" | xargs pass show --clip >/dev/null
-
-bindsym --to-code {
-    # vi-like movement
-    $mod+h focus left
-    $mod+j focus down
-    $mod+k focus up
-    $mod+l focus right
-
-    $mod+Shift+h move left
-    $mod+Shift+j move down
-    $mod+Shift+k move up
-    $mod+Shift+l move right
-
-    # Cursor key movement
-    $mod+Left focus left
-    $mod+Down focus down
-    $mod+Up focus up
-    $mod+Right focus right
-
-    $mod+Shift+Left move left
-    $mod+Shift+Down move down
-    $mod+Shift+Up move up
-    $mod+Shift+Right move right
-}
-
-# split in horizontal orientation
-bindsym --to-code $mod+b split h;exec notify-send 'tile horizontally'
-# split in vertical orientation
-bindsym --to-code $mod+v split v;exec notify-send 'tile vertically'
-
-bindsym --to-code $mod+f fullscreen
-
-#bindsym --to-code $mod+s layout stacking
-bindsym --to-code $mod+w layout tabbed
-bindsym --to-code $mod+e layout toggle split
-
-bindsym --to-code $mod+Shift+space floating toggle
-bindsym --to-code $mod+space focus mode_toggle
-
-bindsym --to-code {
-    $mod+1 workspace $ws1
-    $mod+2 workspace $ws2
-    $mod+3 workspace $ws3
-    $mod+4 workspace $ws4
-    $mod+5 workspace $ws5
-    $mod+6 workspace $ws6
-    $mod+7 workspace $ws7
-    $mod+8 workspace $ws8
-    $mod+9 workspace $ws9
-    $mod+0 workspace $ws0
-
-    $mod+Shift+1 move container to workspace $ws1
-    $mod+Shift+2 move container to workspace $ws2
-    $mod+Shift+3 move container to workspace $ws3
-    $mod+Shift+4 move container to workspace $ws4
-    $mod+Shift+5 move container to workspace $ws5
-    $mod+Shift+6 move container to workspace $ws6
-    $mod+Shift+7 move container to workspace $ws7
-    $mod+Shift+8 move container to workspace $ws8
-    $mod+Shift+9 move container to workspace $ws9
-    $mod+Shift+0 move container to workspace $ws0
-
-    $mod+Tab workspace back_and_forth
-    $mod+minus move scratchpad
-    $mod+plus scratchpad show
-
-    $mod+n exec thunar
-}
-
-#bindsym --to-code $mod+Shift+s sticky toggle
-
-# Resize mode
-bindsym --to-code $mod+r mode "resize"
-mode "resize" {
-        bindsym --to-code h resize shrink width 4 px
-        bindsym --to-code j resize grow height 4 px
-        bindsym --to-code k resize shrink height 4 px
-        bindsym --to-code l resize grow width 4 px
-        bindsym --to-code Return mode "default"
-        bindsym --to-code Escape mode "default"
-}
-
-# Reload the sway config
-bindsym --to-code $mod+Shift+r reload
-
-# Exit prompt
-bindsym --to-code $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit'
-
-# https://github.com/cac03/i3lock
-#bindsym --to-code $mod+Shift+i exec $HOME/scripts/lock.sh
-
-# Screensaver/session lock screen
-bindsym --to-code $mod+Shift+section exec $lock
-
-# Switch monitor mode (enter presentation mode)
-bindsym --to-code $mod+p exec $HOME/scripts/monitor_mode.sh
-
-# https://www.reddit.com/r/i3wm/comments/65vis5/screenshot_commands_from_my_i3_config/
-# Multi-screen screenshots with scrot
-#bindsym --to-code --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # All screens
-
-# OSX-like area selection screenshots
-#bindsym --to-code --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Documents/screenshots && mv $f ~/Documents/screenshots && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`' # Area selection
-
-# Screenshot everything and send it to the clipboard
-#bindsym --to-code --release $mod+Shift+Print exec maim ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
-
-# bindsym --to-code --release Print exec flameshot gui
-
-bindsym --to-code --release $mod+Shift+s exec grim -g "$(slurp -d)" - | $screenshot_processing
-bindsym --to-code --release Print exec grim -g "$(slurp -d)" - | $screenshot_processing
-bindsym --to-code --release Shift+Print exec grim - | $screenshot_processing
-bindsym --to-code --release $mod+Shift+Print exec grim -g $(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -o -r -d) - | swappy -f -
-#$$screenshot_processing
-
-# Screenshot current active window and send that picture to the clipboard
-# bindsym --to-code --release Shift+Print exec maim -i $(xdotool getactivewindow) ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
-
-# Area selection screenshot and copy it to the clipboard
-#bindsym --to-code --release Shift+Print exec maim -s -o ~/Documents/screenshots/$(date +%Y%m%d_%H%M%S).png && xclip -selection clipboard -t image/png -i ~/Documents/screenshots/`ls -1 -t ~/Documents/screenshots | head -1`
-
+include output.sway
+include bindings.sway
+include startup.sway
 include swaybar
-
-# Program-specific settings
-assign [class="Gimp"] 5
-for_window [title="GIMP Startup"] move workspace $ws5
-for_window [class="Gimp"] move workspace $ws5
-for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
-for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
-
-for_window [title="gscept Lab Environment"] floating enable;
-
-assign [class="Pyxel Edit 0.4.8"] 5
-for_window [title="Pyxel Edit 0.4.8"] move workspace 5
-
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="Organizer"] floating enable
-for_window [class="Navigator"] floating enable
-for_window [class="^URxvt$" instance="^irssi$"] floating enable, resize grow up 180 px, resize grow down 200 px
-for_window [class="^URxvt$" instance="^visualizer$"] floating enable, resize grow up 185 px, resize shrink down 238 px
-for_window [class="^URxvt$" instance="^playlist$"] floating enable, resize grow down 200 px, resize shrink up 235 px
-
-# https://github.com/ValveSoftware/steam-for-linux/issues/1040
-for_window [class="^Steam$" title="^Friends$"] floating enable
-for_window [class="^Steam$" title="Steam - News"] floating enable
-for_window [class="^Steam$" title=".* - Chat"] floating enable
-for_window [class="^Steam$" title="^Settings$"] floating enable
-for_window [class="^Steam$" title=".* - event started"] floating enable
-for_window [class="^Steam$" title=".* CD key"] floating enable
-for_window [class="^Steam$" title="^Steam - Self Updater$"] floating enable
-for_window [class="^Steam$" title="^Screenshot Uploader$"] floating enable
-for_window [class="^Steam$" title="^Steam Guard - Computer Authorization Required$"] floating enable
-for_window [title="^Steam Keyboard$"] floating enable
-
-# Telegram
-assign [class="^Telegram$"] 10
-for_window [title="^Telegram$"] move workspace 10
-
-# Discord
-assign [class="^Discord$"] 9
-for_window [title="^Discord Updater$"] move workspace 9
-for_window [title="^Discord$"] move workspace 9
-
-# Renoise
-assign [class="^Renoise$"] 5
-for_window [title="^Renoise$"] move workspace 5
-
-# Octave
-# To prevent Octave from ruining the graphs
-for_window [title="Figure *"] floating enable
-
-# PolyMC
-for_window [title=".* PolyMC 5"] floating enable
-

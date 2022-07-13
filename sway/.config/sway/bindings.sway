@@ -1,0 +1,164 @@
+# Keybinds for sway
+
+# Set modifier to Windows-key
+set $mod Mod4
+floating_modifier $mod
+
+# Workspace variables
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws0 "0"
+
+# Variables for programs
+set $term foot
+set $browser firefox
+set $editor nvim
+set $menu wofi -t $term
+set $bindsym --to-code bindsym --to-code --to-code
+set $lock swaylock -f -c 000000
+set $screenshot_processing wl-copy
+# swappy -f - -o - | pngquant - | wl-copy
+set $light_file ~/.cache/light/level
+
+# Programs
+bindsym --to-code {
+    $mod+q kill
+
+    # Reload the sway config
+    $mod+Shift+r reload
+
+    # Terminal
+    $mod+Return exec $term
+    $mod+Shift+Return exec $term --working-directory $(cat ~/.last_dir)
+
+    # Launch btop in a terminal
+    Ctrl+Shift+Escape exec $term btop
+
+    # Exit prompt
+    $mod+Shift+e exec sh -c '[ $(echo "NO | YES" | dmenu -sb "#ff6600" -i -p "Really exit i3 X session?") = "YES" ] && i3-msg exit'
+
+    # Screensaver/session lock screen
+    $mod+Shift+section exec $lock
+
+    # Switch monitor mode (enter presentation mode)
+    $mod+p exec $HOME/scripts/monitor_mode.sh
+
+    # Screenshotting
+    $mod+Shift+s exec grim -g "$(slurp -d)" - | $screenshot_processing
+    Print exec grim -g "$(slurp -d)" - | $screenshot_processing
+    Shift+Print exec grim - | $screenshot_processing
+    $mod+Shift+Print exec grim -g $(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -o -r -d) - | swappy -f -
+}
+
+# Media controls
+bindsym --to-code {
+    XF86AudioPlay exec mpc toggle
+    XF86AudioPrev exec mpc prev
+    XF86AudioNext exec mpc next
+    XF86AudioStop exec mpc stop
+    XF86AudioRaiseVolume exec pamixer --increase 1
+    XF86AudioLowerVolume exec pamixer --decrease 1
+    XF86AudioMute exec pamixer --mute
+
+    # Brightness (broken piece of junk)
+    # TODO: Fix light
+    XF86MonBrightnessUp exec light -A 3 && light -G > $light_file
+    XF86MonBrightnessDown exec light -U 3 && light -G > $light_file
+
+    $mod+M exec bash ~/scripts/toggle_mic.sh
+}
+
+# Menus
+bindsym --to-code {
+    # Running a program
+    $mod+d exec $menu --show run -p "run program"
+    # Password to clipboard
+    $mod+shift+d exec /bin/find ~/.password-store -type f -not -path "*/\.git*" -not -path "*/\.gpg-id" -not -path "\.password-store" | /bin/sed -e "s/.*password-store\///" -e "s/\.gpg//" | $menu -d -p "copy password" | xargs pass show --clip >/dev/null
+}
+
+# Movement
+bindsym --to-code {
+    # vi-like movement
+    $mod+h focus left
+    $mod+j focus down
+    $mod+k focus up
+    $mod+l focus right
+
+    $mod+Shift+h move left
+    $mod+Shift+j move down
+    $mod+Shift+k move up
+    $mod+Shift+l move right
+
+    # Cursor key movement
+    $mod+Left focus left
+    $mod+Down focus down
+    $mod+Up focus up
+    $mod+Right focus right
+
+    $mod+Shift+Left move left
+    $mod+Shift+Down move down
+    $mod+Shift+Up move up
+    $mod+Shift+Right move right
+
+    # split in horizontal orientation
+    $mod+b split h;exec notify-send 'tile horizontally'
+    # split in vertical orientation
+    $mod+v split v;exec notify-send 'tile vertically'
+
+    $mod+f fullscreen
+
+    #bindsym --to-code $mod+s layout stacking
+    $mod+w layout tabbed
+    $mod+e layout toggle split
+
+    $mod+Shift+space floating toggle
+    $mod+space focus mode_toggle
+
+    $mod+1 workspace $ws1
+    $mod+2 workspace $ws2
+    $mod+3 workspace $ws3
+    $mod+4 workspace $ws4
+    $mod+5 workspace $ws5
+    $mod+6 workspace $ws6
+    $mod+7 workspace $ws7
+    $mod+8 workspace $ws8
+    $mod+9 workspace $ws9
+    $mod+0 workspace $ws0
+
+    $mod+Shift+1 move container to workspace $ws1
+    $mod+Shift+2 move container to workspace $ws2
+    $mod+Shift+3 move container to workspace $ws3
+    $mod+Shift+4 move container to workspace $ws4
+    $mod+Shift+5 move container to workspace $ws5
+    $mod+Shift+6 move container to workspace $ws6
+    $mod+Shift+7 move container to workspace $ws7
+    $mod+Shift+8 move container to workspace $ws8
+    $mod+Shift+9 move container to workspace $ws9
+    $mod+Shift+0 move container to workspace $ws0
+
+    $mod+Tab workspace back_and_forth
+
+    # Best feature
+    $mod+minus move scratchpad
+    $mod+plus scratchpad show
+}
+
+# Resize mode
+bindsym --to-code $mod+r mode "resize"
+mode "resize" {
+    bindsym --to-code {
+        h resize shrink width 4 px
+        j resize grow height 4 px
+        k resize shrink height 4 px
+        l resize grow width 4 px
+        Return mode "default"
+        Escape mode "default"
+    }
+}
