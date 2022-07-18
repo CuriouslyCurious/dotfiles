@@ -21,7 +21,7 @@ export XDG_CONFIG_DIR="$HOME/.config"
 
 # Set (and create) the XDG_RUNTIME_DIR if it does not exist
 if test -z $XDG_RUNTIME_DIR
-    set -x XDG_RUNTIME_DIR "/run/user/$USER"
+    set -x XDG_RUNTIME_DIR "/run/user/$(id -u $USER)"
     if not test -d $XDG_RUNTIME_DIR
         mkdir -p $XDG_RUNTIME_DIR -m 0700
     end
