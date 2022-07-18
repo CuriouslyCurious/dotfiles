@@ -1,0 +1,5 @@
+type = process
+command = /usr/bin/greetd
+logfile = /var/log/greetd.log
+restart = false
+depends-on = seatd

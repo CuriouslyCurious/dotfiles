@@ -1,0 +1,4 @@
+type = scripted
+command = /etc/dinit.d/scripts/xdg-runtime-dir.sh
+restart = false
+waits-for = pseudofs
