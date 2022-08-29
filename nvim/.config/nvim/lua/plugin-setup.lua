@@ -64,10 +64,28 @@ require('gitsigns').setup {
 }
 
 -- Lualine
+-- Get count of search matches
+vim.o.shortmess = vim.o.shortmess .. "S"
+
+local function search_count()
+	if vim.api.nvim_get_vvar("hlsearch") == 1 then
+		local res = vim.fn.searchcount({ maxcount = 999, timeout = 500 })
+
+		if res.total > 0 then
+			return string.format("%d/%d", res.current, res.total)
+		end
+	end
+
+	return ""
+end
+
 require('lualine').setup {
     options = {
         theme = 'ayu_mirage',
     },
+	sections = {
+		lualine_b = { { search_count, type = "lua_expr" } },
+	},
 }
 
 -- nvim-tree
@@ -92,7 +110,6 @@ require('which-key').setup()
 require('rust-tools').setup {
     tools = { -- rust tools options
         autoSetHints = true,
-        hover_with_actions = true,
         inlay_hints = {
             show_parameter_hints = false,
             parameter_hints_prefix = "",
