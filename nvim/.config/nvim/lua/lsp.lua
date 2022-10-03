@@ -1,16 +1,3 @@
--- LSP
-local nvim_lsp = require('lspconfig')
-local lsp_status = require('lsp-status')
-
--- lspconfig
-vim.diagnostic.config {
-    virtual_text = true,
-    signs = true,
-    underline = false,
-    update_in_insert = true,
-    severity_sort = false,
-}
-
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
@@ -20,10 +7,62 @@ local lspflags = {
     debounce_text_changes = 150,
 }
 
+-- lspconfig
+local nvim_lsp = require('lspconfig')
+
+vim.diagnostic.config {
+    virtual_text = false,
+    signs = true,
+    underline = false,
+    update_in_insert = false,
+    severity_sort = true
+}
+
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+-- lsp status
+--local lsp_status = require('lsp-status')
+
+--lsp_status.config {
+    --kind_labels = {},
+   -- • `current_function`: Boolean, `true` if the current function
+   --   should be updated and displayed in the default statusline
+   --   component. Shows the current function, method, class,
+   --   struct, interface, enum, module, or namespace.
+   --current_function = true,
+   -- • `show_filename`: Boolean, `true` if the filename should be
+   --   displayed in the progress text.
+   --show_filename = true
+   -- • `indicator_errors` : Symbol to place next to the error count
+   --   in `status` . Default: '',
+   -- • `indicator_warnings` : Symbol to place next to the warning
+   --   count in `status` . Default: '',
+   -- • `indicator_info` : Symbol to place next to the info count in
+   --   `status` . Default: '🛈',
+   -- • `indicator_hint` : Symbol to place next to the hint count in
+   --   `status` . Default: '❗',
+   -- • `indicator_ok` : Symbol to show in `status` if there are no
+   --   diagnostics. Default: '',
+   -- • `spinner_frames` : Animation frames for progress spinner in
+   --   `status` . Default: { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'
+   --   },
+   -- • `status_symbol` : Symbol to start the statusline segment in
+   --   `status` . Default: ' 🇻',
+   -- • `diagnostics` : Boolean, `true` by default. If `false`, the
+   --   default statusline component does not include LSP diagnostic
+   --   counts.
+--}
+
+--lsp_status.register_progress()
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    lsp_status.on_attach(client)
+    --lsp_status.on_attach(client)
 
     --Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -60,8 +99,8 @@ local on_attach = function(client, bufnr)
                 close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
                 border = 'rounded',
                 source = 'always',
-                prefix = ' ',
-                scope = 'cursor',
+                --prefix = ' ',
+                --scope = '',
             }
             vim.diagnostic.open_float(nil, opts)
         end
@@ -87,51 +126,49 @@ local on_attach = function(client, bufnr)
     end
 end
 
--- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {
-    {
-        name = "clangd",
-        settings = {},
-    },
-    {
-        name = "pyright",
-        settings = {},
-
-    },
-    {
-        name = "rust_analyzer",
-        settings = {
-            assist = {
-                importGranularity = "module",
-                importPrefix = "self",
-            },
-            cargo = {
-                loadOutDirsFromCheck = true,
-            },
-            procMacro = {
-                enable = true,
-            },
-            checkOnSave = {
-                command = "clippy",
-            },
-        }
-    },
-    {
-        name = "texlab",
-        settings = {},
-    }
+nvim_lsp['clangd'].setup{
+    cmd = {'clangd'},
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags,
 }
 
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp["name"]].setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags,
-        settings = {
-            [lsp["name"]:gsub("_", "-")] = lsp["settings"]
+nvim_lsp['pyright'].setup{
+    cmd = {'pyright'},
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags,
+}
+
+nvim_lsp['texlab'].setup{
+    cmd = {'texlab'},
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags,
+}
+
+nvim_lsp['rust_analyzer'].setup{
+    cmd = {'rust-analyzer'},
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags,
+    settings = {
+        assist = {
+            importGranularity = "module",
+            importPrefix = "self",
+        },
+        cargo = {
+            loadOutDirsFromCheck = true,
+        },
+        procMacro = {
+            enable = true,
+        },
+        checkOnSave = {
+            command = "clippy",
+
         }
     }
-end
+}
 
 -- Completion
 vim.o.completeopt = 'menu,menuone,noinsert'
@@ -228,19 +265,3 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     })
 })
-
-lsp_status.config {
-    current_function = true,
-    show_filename = true,
-}
-
--- nvim-autopairs
-require('nvim-autopairs').setup{
-    disable_filetype = { "TelescopePrompt" },
-    enable_check_bracket_line = false,
-    check_ts = true,
-}
-
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
-
