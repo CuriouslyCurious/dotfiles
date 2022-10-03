@@ -23,6 +23,11 @@ set GPG_TTY (tty)
 
 set PATH "$HOME/.local/bin:$PATH"
 
+# Export flatpaks to $PATH
+if test -e $HOME/.local/share/flatpak/app
+    set PATH "$HOME/.local/share/flatpak/app:$PATH"
+end
+
 # Export rustup to $PATH if it exists
 if test -e $HOME/.cargo/bin
     set PATH "$HOME/.cargo/bin:$PATH"
