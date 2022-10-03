@@ -81,17 +81,6 @@ require('colorizer').setup()
 -- Todo comments
 require("todo-comments").setup()
 
--- nvim-autopairs
---require('nvim-autopairs').setup{
---    disable_filetype = { "TelescopePrompt" },
---    enable_check_bracket_line = false,
---    check_ts = true,
---}
---
---local cmp_autopairs = require('nvim-autopairs.completion.cmp')
---cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
-
-
 -- Gitsigns
 require('gitsigns').setup {
     signs = {
@@ -124,41 +113,11 @@ require('inlay-hints').setup {
 }
 
 -- Trouble
---require('trouble').setup {
---    auto_open = true,
---    auto_fold = false,
---    use_diagnostic_signs = true,
---}
+require('trouble').setup {
+   auto_open = true,
+   auto_fold = false,
+   use_diagnostic_signs = true,
+}
 
 -- Cargo.toml fancying
 require('crates').setup()
-
--- Lualine
---require('lualine').setup {
---    options = {
---        theme = 'ayu_mirage',
---    },
---	sections = {
---		lualine_b = { { search_count, type = "lua_expr" } },
---	},
---}
-
--- which-key
---require('which-key').setup()
-
--- Rust
---require('rust-tools').setup {
---    tools = { -- rust tools options
---        autoSetHints = true,
---        inlay_hints = {
---            show_parameter_hints = false,
---            parameter_hints_prefix = "",
---            other_hints_prefix = "",
---        },
---    },
---}
-
--- Hop
---require'hop'.setup()
---vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_words()<cr>", {})
-
