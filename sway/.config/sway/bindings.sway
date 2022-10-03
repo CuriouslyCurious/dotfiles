@@ -80,7 +80,7 @@ bindsym --to-code {
     # Running a program
     $mod+d exec $menu --show run -p "run program"
     # Password to clipboard
-    $mod+shift+d exec /bin/find ~/.password-store -type f -not -path "*/\.git*" -not -path "*/\.gpg-id" -not -path "\.password-store" | /bin/sed -e "s/.*password-store\///" -e "s/\.gpg//" | $menu -d -p "copy password" | xargs pass show --clip >/dev/null
+    $mod+shift+d exec find ~/.password-store -type f -not -path "*/\.git*" -not -path "*/\.gpg-id" -not -path "\.password-store" | sed -e "s/.*password-store\///" -e "s/\.gpg//" | $menu -d -p "copy password" | xargs pass show --clip >/dev/null
 }
 
 # Movement

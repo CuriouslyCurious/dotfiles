@@ -43,12 +43,9 @@ bar {
     # Tray customization
     #tray_bindcode
     #tray_bindsym
-
-    tray_padding 2
-
-    tray_output *
-
-    icon_theme hicolor
+    #tray_padding 2
+    #tray_output *
+    #icon_theme hicolor
 
     colors {
         # RRGGBBAA

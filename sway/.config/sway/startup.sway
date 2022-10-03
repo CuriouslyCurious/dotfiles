@@ -24,7 +24,7 @@ exec {
     #mpd
 
     # Dampen blue-light
-    wlsunset -T 6500 -t 3000 -S 08:00 -s 18:00 -d 5
+    wlsunset -T 4500 -t 2500 -S 08:00 -s 18:00 -d 5
 
     # Start-up layout
     # FIXME: This is not behaving properly
