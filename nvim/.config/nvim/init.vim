@@ -11,13 +11,13 @@ au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, o
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldtext=getline(v:foldstart).'...'.trim(getline(v:foldend))
-set fillchars=fold:\\
+"set fillchars=fold:\\
 set foldnestmax=3
 set foldminlines=1
-set foldlevel=99
+set foldlevel=2
+set foldcolumn=auto:9
 set indentexpr=nvim_treesitter#indent()
 
-" TODO: Statusline indicator
 " echo nvim_treesitter#statusline(90)
 " module->expression_statement->call->identifier
 
@@ -192,8 +192,8 @@ cnoremap <C-BS> <C-W>
 
 " Visual movement
 " https://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
-"jnnoremap <expr> k v:count == 0 ? 'gk' : 'k'
-"jnnoremap <expr> j v:count == 0 ? 'gj' : 'j'
+nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
+nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
 " Map key chord `jk` to <Esc>.
 " https://www.reddit.com/r/vim/comments/ufgrl8/journey_to_the_ultimate_imap_jk_esc/
@@ -215,11 +215,11 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Open buffer navigation
-nnoremap <C-W> :bd<CR>
+nnoremap <C-W> :bdel<CR>
 nnoremap <left> :bp<CR>
 nnoremap <right> :bn<CR>
-nnoremap <leader>l :bprevious<CR>
-nnoremap <leader>h :bnext<CR>
+nnoremap <leader>h :bp<CR>
+nnoremap <leader>l :bn<CR>
 
 " Ctrl+h to stop search highlight
 " vnoremap <C-h> :nohlsearch<cr>
@@ -229,10 +229,6 @@ nnoremap <leader>h :bnext<CR>
 "nnoremap <C-]> :tag<CR>
 " nnoremap <C-[> :pop<CR>
 
-" Gundo
-nnoremap <C-g> :GundoToggle<CR>
-
-""
 " Misc.
 ""
 " Make .tex files run faster
@@ -401,17 +397,22 @@ if has ("autocmd")
 endif
 
 " Auto-format"
-if has ("autocomd")
+if has ("autocmd")
     augroup formats
         autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
         autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 200)
     augroup END
 endif
 
+" Launch mini.map on launch
+if has ("autocmd")
+    autocmd VimEnter * lua MiniMap.open()
+endif
+
 lua <<EOF
 require('plugins')
 require('lsp')
-require('plugin-setup')
+require('setup')
 EOF
 
 colorscheme material-monokai

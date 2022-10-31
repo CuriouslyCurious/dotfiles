@@ -19,7 +19,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     -- Colorize hex codes
     Plug 'norcalli/nvim-colorizer.lua'
     -- Highlight Todo comments
-    Plug 'folke/todo-comments.nvim'
+    Plug('folke/todo-comments.nvim', {branch = 'neovim-pre-0.8.0'})
     -- Theme
     Plug('https://gitlab.com/CuriouslyCurious/material-monokai.nvim', {branch = 'dev'})
         vim.g['colorscheme'] = 'material-monokai'

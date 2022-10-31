@@ -34,14 +34,39 @@ require('mini.align').setup()
 --require('mini.base16').setup()
 --require('mini.bufremove').setup()
 require('mini.comment').setup()
-require('mini.completion').setup()
-require('mini.cursorword').setup()
+--require('mini.completion').setup()
+require('mini.cursorword').setup {
+    delay = 50,
+}
 --require('mini.doc').setup()
 --require('mini.fuzzy').setup()
-require('mini.indentscope').setup()
+local indentscope = require('mini.indentscope')
+indentscope.setup {
+    draw = {
+        delay = 0,
+        animation = indentscope.gen_animation('linear', {
+            duration = 10,
+            unit = 'step',
+        }),
+    }
+}
 require('mini.jump').setup()
 --require('mini.jump2d').setup()
 --require('mini.misc').setup()
+local map = require('mini.map')
+map.setup {
+    integrations = {
+        map.gen_integration.builtin_search(),
+        map.gen_integration.gitsigns(),
+        map.gen_integration.diagnostic(),
+    },
+    symbols = {
+        encode = map.gen_encode_symbols.dot('4x2'),
+    },
+    window = {
+        show_integration_count = false,
+    }
+}
 require('mini.pairs').setup()
 require('mini.sessions').setup()
 require('mini.starter').setup()
