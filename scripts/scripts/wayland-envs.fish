@@ -81,3 +81,5 @@ export (dbus-launch)
 
 # Disgusting, to make screensharing on Wayland work (xdg-desktop-portal-wlr)
 #systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+source ~/.profile
