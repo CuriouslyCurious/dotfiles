@@ -32,7 +32,7 @@ require('nvim-treesitter.configs').setup {
 --require('mini.ai').setup()
 require('mini.align').setup()
 --require('mini.base16').setup()
---require('mini.bufremove').setup()
+require('mini.bufremove').setup()
 require('mini.comment').setup()
 --require('mini.completion').setup()
 require('mini.cursorword').setup {
