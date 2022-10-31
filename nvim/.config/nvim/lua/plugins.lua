@@ -21,7 +21,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     -- Highlight Todo comments
     Plug('folke/todo-comments.nvim', {branch = 'neovim-pre-0.8.0'})
     -- Theme
-    Plug('https://gitlab.com/CuriouslyCurious/material-monokai.nvim', {branch = 'dev'})
+    Plug('https://git.sr.ht/~curious/material-monokai.nvim', {branch = 'dev'})
         vim.g['colorscheme'] = 'material-monokai'
     -- Icons
     Plug 'ryanoasis/vim-devicons'
