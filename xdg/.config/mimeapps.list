@@ -1,0 +1,18 @@
+[Default Applications]
+x-scheme-handler/http=librewolf-bin.desktop
+x-scheme-handler/https=librewolf-bin.desktop
+x-scheme-handler/ftp=librewolf-bin.desktop
+x-scheme-handler/chrome=librewolf-bin.desktop
+text/html=librewolf-bin.desktop
+application/x-extension-htm=librewolf-bin.desktop
+application/x-extension-html=librewolf-bin.desktop
+application/x-extension-shtml=librewolf-bin.desktop
+application/xhtml+xml=librewolf-bin.desktop
+application/x-extension-xhtml=librewolf-bin.desktop
+application/x-extension-xht=librewolf-bin.desktop
+application/pdf=zathura.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-5E3Y60.desktop
+
+[Added Associations]
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-GLHBW0.desktop;userapp-Telegram Desktop-5E3Y60.desktop;
