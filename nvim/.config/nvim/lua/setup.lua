@@ -164,11 +164,12 @@ require('inlay-hints').setup {
 }
 
 -- Trouble
-require('trouble').setup {
-   auto_open = true,
-   auto_fold = false,
-   use_diagnostic_signs = true,
-}
+-- require('trouble').setup {
+--    auto_open = true,
+--    auto_close = true,
+--    auto_fold = false,
+--    use_diagnostic_signs = true,
+-- }
 
 -- Cargo.toml fancying
 require('crates').setup()
