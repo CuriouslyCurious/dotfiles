@@ -22,6 +22,9 @@ panic = "abort"
 #    "-C target-cpu=native",
 #]
 
+[registries.crates-io]
+protocol = "sparse"
+
 # [target.thumbv7em-none-eabihf]
 # runner = 'arm-none-eabi-gdb'
 #rustflags = [
