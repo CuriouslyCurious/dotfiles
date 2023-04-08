@@ -1,0 +1,15 @@
+#!/sbin/openrc-run
+# Copyright 2007-2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+command=${RC_PREFIX}/usr/bin/greetd
+pidfile=${RC_PREFIX}/var/run/greetd/pid
+command_args=
+name="greetd"
+
+depend()
+{
+	provide greetd
+	need seatd
+	after xdg-runtime-dir
+}

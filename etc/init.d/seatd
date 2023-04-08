@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+# Copyright 2007-2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+command=${RC_PREFIX}/usr/bin/seatd
+pidfile=${RC_PREFIX}/var/run/seatd/pid
+command_args=
+name="seatd"
+
+depend()
+{
+	provide seatd
+	after xdg-runtime-dir
+}
