@@ -18,6 +18,8 @@ zoxide init --cmd cd fish | source
 # Load prompt
 starship init fish | source
 
+env ~/.profile
+
 # Autostart X at login
 #if status is-login
 #    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
