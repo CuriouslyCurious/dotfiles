@@ -106,7 +106,7 @@ local on_attach = function(client, bufnr)
         end
     })
 
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.document_highlight then
         vim.cmd [[
         hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
         hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow

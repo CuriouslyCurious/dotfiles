@@ -399,8 +399,8 @@ endif
 " Auto-format"
 if has ("autocmd")
     augroup formats
-        autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)
-        autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 200)
+        autocmd BufWritePre *.rs lua vim.lsp.buf.format(nil, 200)
+        autocmd BufWritePre *.py lua vim.lsp.buf.format(nil, 200)
     augroup END
 endif
 
