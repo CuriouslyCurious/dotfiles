@@ -1,17 +1,11 @@
 #!/bin/bash
-# by Paul Colby (http://colby.id.au), no rights reserved ;)
 
-CPU=(`cat /proc/stat | grep '^cpu '`) # Get the total CPU statistics.
-unset CPU[0]                          # Discard the "cpu" prefix.
-IDLE=${CPU[4]}                        # Get the idle CPU time.
-
-# Calculate the total CPU time.
+CPU=(`procs --no-header --only cpu | awk '{print $1 * 10}'`)
 TOTAL=0
+NUM_CPUS=4
 
-for VALUE in "${CPU[@]:0:4}"; do
-let "TOTAL=$TOTAL+$VALUE"
+for VALUE in "${CPU[@]}"; do
+    let "TOTAL=$TOTAL+$VALUE"
 done
 
-# Calculate the CPU usage since we last checked.
-let "DIFF_USAGE=(1000*($TOTAL-$IDLE)/$TOTAL+5)/10"
-echo -e "$DIFF_USAGE%"
+echo -e "$(( $TOTAL/10/$NUM_CPUS ))%"
