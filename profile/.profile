@@ -23,10 +23,6 @@ if test -d "$HOME/.local/bin"; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Export rustup to $PATH if it exists
-if test -d "$HOME/.cargo/bin"; then
-    export PATH="$HOME/.cargo/bin:$PATH"
-fi
 
 # Export go/bin to $GOPATH if it exists and then export -U to $PATH
 if test -d "$HOME/go/bin"; then
@@ -48,4 +44,8 @@ fi
 if test -d "$HOME/.cargo/bin"; then
     export PATH="$HOME/.cargo/bin:$PATH"
 fi
-. "$HOME/.cargo/env"
+
+# Export rustup (mostly for rust-analyzer)
+if test -d "$HOME/.rustup/toolchains"; then
+    export PATH="$HOME/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin:$PATH"
+fi
