@@ -5,8 +5,8 @@ set $monC DP-1
 set $monL HDMI-A-1
 
 # Monitor arrangement
-output HDMI-A-1 pos -1921 0
-output DP-1 pos 0 0
+#output HDMI-A-1 pos -1921 0
+#output DP-1 pos 0 0
 
 # Set workspaces default monitors
 workspace $ws1 output $monC

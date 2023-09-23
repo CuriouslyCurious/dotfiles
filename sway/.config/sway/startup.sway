@@ -1,7 +1,10 @@
 # Disable xwayland
-xwayland disable
+xwayland enable
 
 exec {
+    # Bar
+    yambar
+
     # Notifications
     mako
 
@@ -21,7 +24,7 @@ exec {
     wireplumber
 
     # Music
-    #mpd
+    mpd
 
     # Dampen blue-light
     wlsunset -T 4500 -t 2500 -S 08:00 -s 18:00 -d 5

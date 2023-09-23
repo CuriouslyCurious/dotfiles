@@ -20,7 +20,7 @@ set $ws0 "0"
 set $term foot
 set $browser firefox
 set $editor nvim
-set $menu wofi -t $term
+set $menu fuzzel
 set $bindsym --to-code bindsym --to-code --to-code
 set $lock swaylock -f -c 000000
 set $screenshot_processing wl-copy
@@ -69,8 +69,8 @@ bindsym --to-code {
 
     # Brightness (broken piece of junk)
     # TODO: Fix light
-    XF86MonBrightnessUp exec light -A 3 && light -G > $light_file
-    XF86MonBrightnessDown exec light -U 3 && light -G > $light_file
+    XF86MonBrightnessUp exec light -A 1 && light -G > $light_file
+    XF86MonBrightnessDown exec light -U 1 && light -G > $light_file
 
     $mod+M exec bash ~/scripts/toggle_mic.sh
 }
@@ -78,9 +78,13 @@ bindsym --to-code {
 # Menus
 bindsym --to-code {
     # Running a program
-    $mod+d exec $menu --show run -p "run program"
+    $mod+d exec $menu --show run -p "> "
+    #$mod+d exec fd -t x --search-path="$PATH" 2>/dev/null | $menu show run -p "run program"
+    #$mod+d exec fd -t x --search-path=$(echo "$PATH" | awk 'gsub(":", "\n")') 2>/dev/null | wofi -d -p "run program"
+   # $mod+d exec fd -t x . $PATH 2>/dev/null | $menu -d -p "run program"
+
     # Password to clipboard
-    $mod+shift+d exec find ~/.password-store -type f -not -path "*/\.git*" -not -path "*/\.gpg-id" -not -path "\.password-store" | sed -e "s/.*password-store\///" -e "s/\.gpg//" | $menu -d -p "copy password" | xargs pass show --clip >/dev/null
+    $mod+shift+d exec find ~/.password-store -type f -not -path "*/\.git*" -not -path "*/\.gpg-id" -not -path "\.password-store" | sed -e "s/.*password-store\///" -e "s/\.gpg//" | $menu -d -p "copy password: " | xargs pass show --clip >/dev/null
 }
 
 # Movement
