@@ -1,12 +1,15 @@
-eval "$(dircolors ~/.dircolors)"
+#!/usr/bin/sh
+# eval "$(dircolors ~/.dircolors)"
+
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 # Set default editor
 if which nvim > /dev/null 2>&1; then
-	export EDITOR nvim
+    export EDITOR=nvim
 elif which vim > /dev/null 2>&1; then
-	export EDITOR vim
+    export EDITOR=vim
 else
-	export EDITOR=vi
+    export EDITOR=vi
 fi
 
 # Run ssh-agent
@@ -42,7 +45,7 @@ fi
 
 # Export cargo bin
 if test -d "$HOME/.cargo/bin"; then
-    export PATH="$HOME/.cargo/bin:$PATH"
+   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 # Export rustup (mostly for rust-analyzer)
