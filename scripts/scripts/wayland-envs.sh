@@ -1,4 +1,4 @@
-#!/usr/bin/env fish
+#!/usr/bin/env sh
 # Export the terminal
 export TERM=foot
 
@@ -20,12 +20,12 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CONFIG_DIR="$HOME/.config"
 
 # Set (and create) the XDG_RUNTIME_DIR if it does not exist
-if test -z $XDG_RUNTIME_DIR
+if test -z $XDG_RUNTIME_DIR; then
     export XDG_RUNTIME_DIR="/run/user/$(id -u $USER)"
-    if not test -d $XDG_RUNTIME_DIR
+    if ! test -d $XDG_RUNTIME_DIR; then
         mkdir -p $XDG_RUNTIME_DIR -m 0700
-    end
-end
+    fi
+fi
 
 # Ensure we can find objects we've built by hand and not into debs
 # export LD_LIBRARY_PATH=/usr/local/lib/x86_64-linux-gnu/
@@ -45,7 +45,7 @@ export MOZ_WAYLAND_USE_VAAPI=1
 export MOZ_DBUS_REMOTE=1
 
 # GPG
-export GPG_TTY=(tty)
+export GPG_TTY=$(tty)
 
 # QT
 export QT_QPA_PLATFORM=wayland-egl
@@ -78,9 +78,11 @@ export MESA_LOADER_DRIVER_OVERRIDE=crocus
 #end
 
 # Create a Dbus session for stupid stuff that needs one
-export (dbus-launch)
+#export (dbus-launch)
 
 #dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 
 # Disgusting, to make screensharing on Wayland work (xdg-desktop-portal-wlr)
 #systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+source ~/.profile
