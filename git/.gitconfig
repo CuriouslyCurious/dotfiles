@@ -1,6 +1,6 @@
 [user]
-	email = thecuriouslycurious@protonmail.com
-	name = CuriouslyCurious
+    email = thecuriouslycurious@protonmail.com
+    name = CuriouslyCurious
     signingkey = CC3CEF3D24339E232CFC47E65C1280AAD1EFE605
 [diff]
     tool = nvimdiff
@@ -15,14 +15,14 @@
 [mergetool "nvimdiff"]
     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
 [color]
-	ui = auto
+    ui = auto
 [core]
-	autocrlf = input
-	editor = /usr/bin/nvim
+    autocrlf = input
+    editor = /usr/bin/nvim
 [init]
-	templatedir = ~/.git_template
-	defaultBranch = master
+    templatedir = ~/.git_template
+    defaultBranch = master
 [commit]
     gpgsign = true
 [pull]
-	rebase = true
+    rebase = true
