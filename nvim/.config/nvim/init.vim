@@ -8,20 +8,27 @@ au TextYankPost * lua vim.highlight.on_yank {higroup="IncSearch", timeout=150, o
 
 " Make folding be based on treesitter
 " Sexy Folds by u/Rafat913
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-set foldtext=getline(v:foldstart).'...'.trim(getline(v:foldend))
+set foldcolumn=0
+set foldlevel=99
+set foldlevelstart=99
+"set foldexpr=nvim_treesitter#foldexpr()
+" set foldtext=getline(v:foldstart).'...'.trim(getline(v:foldend))
+nnoremap zR :lua require('ufo').openAllFolds()<CR>
+nnoremap zM :lua require('ufo').closeAllFolds()<CR>
+
+""set foldmethod=expr
+" set foldminlines=1
 "set fillchars=fold:\\
-set foldnestmax=3
-set foldminlines=1
-set foldlevel=2
-set foldcolumn=auto:9
+""set foldnestmax=3
 set indentexpr=nvim_treesitter#indent()
 
 " echo nvim_treesitter#statusline(90)
 " module->expression_statement->call->identifier
 
-set shell=/bin/bash
+set shell=/bin/fish
+
+" Change CWD automatically
+set autochdir
 
 " Leader
 let mapleader   = "\<space>"
@@ -52,6 +59,8 @@ set encoding=utf8
 set mouse=a
 " set autoindent
 ""set colorcolumn=100
+
+let g:python3_host_prog = "/usr/bin/python"
 
 set list
 set listchars=tab:\┊\ ,nbsp:¬,extends:»,precedes:«,trail:•
@@ -405,7 +414,7 @@ if has ("autocmd")
 endif
 
 " Launch mini.map on launch
-if has ("autocmd")
+if has ("autocmd") && has ("mini.map")
     autocmd VimEnter * lua MiniMap.open()
 endif
 
@@ -414,5 +423,3 @@ require('plugins')
 require('lsp')
 require('setup')
 EOF
-
-colorscheme material-monokai

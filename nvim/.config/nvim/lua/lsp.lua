@@ -11,7 +11,7 @@ local lspflags = {
 local nvim_lsp = require('lspconfig')
 
 vim.diagnostic.config {
-    virtual_text = false,
+    virtual_text = true,
     signs = true,
     underline = false,
     update_in_insert = false,
@@ -59,72 +59,99 @@ end
 
 --lsp_status.register_progress()
 
--- Use an on_attach function to only map the following keys
+
+-- Global mappings
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+-- vim.keymap.set('n', '<space>q', vim.diagnostic.set_loclist, opts)
+
+-- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-    --lsp_status.on_attach(client)
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("user_lsp_config", {}),
+    callback = function(args)
+        local bufnr = args.buf
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        --Enable completion triggered by <c-x><c-o>
+        vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    --Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        -- Buffer local Mappings.
+        -- See `:help vim.lsp.*` for documentation on any of the below functions
+        local opts = { buffer = bufnr }
+        -- , noremap=true, silent=true }
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+        vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+        vim.keymap.set('n', '<space>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, opts)
+        vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+        vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+        vim.keymap.set({'n', 'v'}, '<space>ca', vim.lsp.buf.code_action, opts)
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+        vim.keymap.set('n', '<space>f', function()
+            vim.lsp.buf.format { async = true }
+        end, opts)
+        -- vim.keymap.set('n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
 
-    -- Mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap=true, silent=true }
-    vim.keymap.set('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    vim.keymap.set('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    vim.keymap.set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    vim.keymap.set('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    vim.keymap.set('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    vim.keymap.set('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    vim.keymap.set('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    vim.keymap.set('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    vim.keymap.set('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.keymap.set('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    vim.keymap.set('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    vim.keymap.set('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    vim.keymap.set('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    vim.keymap.set("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    vim.keymap.set('n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-    vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
-
-    -- lspstatus - Show line diagnostics automatically in hover window
-    vim.api.nvim_create_autocmd("CursorHold", {
-        buffer = bufnr,
-        callback = function()
-            local opts = {
+        -- Function to check if a floating dialog exists and if not
+        -- then check for diagnostics under the cursor
+        -- https://neovim.discourse.group/t/how-to-show-diagnostics-on-hover/3830
+        function OpenDiagnosticIfNoFloat()
+            for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+                if vim.api.nvim_win_get_config(winid).zindex then
+                    return
+                end
+            end
+            -- THIS IS FOR BUILTIN LSP
+            vim.diagnostic.open_float(0, {
                 focusable = false,
-                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
                 border = 'rounded',
-                source = 'always',
-                --prefix = ' ',
-                --scope = '',
-            }
-            vim.diagnostic.open_float(nil, opts)
+                scope = "cursor",
+                close_events = {
+                    "BufLeave",
+                    "BufHidden",
+                    "CursorMoved",
+                    "CursorMovedI",
+                    "FocusLost",
+                    "InsertEnter",
+                    "InsertCharPre",
+                    "WinLeave",
+                },
+            })
         end
-    })
-
-    if client.server_capabilities.document_highlight then
-        vim.cmd [[
-        hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-        hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-        hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-        ]]
-        vim.api.nvim_create_augroup('lsp_document_highlight', {})
-        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-            group = 'lsp_document_highlight',
-            buffer = 0,
-            callback = vim.lsp.buf.document_highlight,
+        -- Show diagnostics under the cursor when holding position
+        -- FIXME
+        vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
+        vim.api.nvim_create_autocmd({ "CursorHold" }, {
+            group = "lsp_diagnostics_hold",
+            callback = OpenDiagnosticIfNoFloat,
         })
-        vim.api.nvim_create_autocmd('CursorMoved', {
-            group = 'lsp_document_highlight',
-            buffer = 0,
-            callback = vim.lsp.buf.clear_references,
-        })
-    end
-end
+        if client.server_capabilities.document_highlight then
+            vim.api.nvim_create_augroup('lsp_document_highlight', {})
+            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+                group = 'lsp_document_highlight',
+                buffer = 0,
+                callback = vim.lsp.buf.document_highlight,
+            })
+            vim.api.nvim_create_autocmd('CursorMoved', {
+                group = 'lsp_document_highlight',
+                buffer = 0,
+                callback = vim.lsp.buf.clear_references,
+            })
+        -- Enable inlay hints
+        -- https://vinnymeller.com/posts/neovim_nightly_inlay_hints/
+        -- TODO: Requires >0.10
+        elseif client.server_capabilities.inlayHintProvider then
+            -- vim.lsp.inlay_hint(bufnr, true)
+        end
+    end,
+})
 
 nvim_lsp['clangd'].setup{
     cmd = {'clangd'},
@@ -165,7 +192,6 @@ nvim_lsp['rust_analyzer'].setup{
         },
         checkOnSave = {
             command = "clippy",
-
         }
     }
 }
@@ -265,3 +291,4 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     })
 })
+

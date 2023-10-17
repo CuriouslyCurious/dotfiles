@@ -8,6 +8,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug 'nvim-lua/plenary.nvim'
 
     -- Syntax highlighting (treesitter)
+    Plug('nvim-tree/nvim-web-devicons')
     Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 
     -- Collection of a bunch of cool stuff
@@ -17,12 +18,11 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug 'mbbill/undotree'
     -- Plug 'nvim-treesitter/playground'
     -- Colorize hex codes
-    Plug 'norcalli/nvim-colorizer.lua'
+    --Plug 'norcalli/nvim-colorizer.lua'
     -- Highlight Todo comments
-    Plug('folke/todo-comments.nvim', {branch = 'neovim-pre-0.8.0'})
     -- Theme
     Plug('https://git.sr.ht/~curious/material-monokai.nvim', {branch = 'dev'})
-        vim.g['colorscheme'] = 'material-monokai'
+    -- Plug('catppuccin/nvim', {['as'] = 'c]atppuccin'})
     -- Icons
     Plug 'ryanoasis/vim-devicons'
 
@@ -30,28 +30,38 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug('lewis6991/gitsigns.nvim', {tag = '*'})
 
     -- file explorer
-    Plug 'kyazdani42/nvim-web-devicons' -- for file icons
-    Plug 'kyazdani42/nvim-tree.lua'
-        vim.keymap.set('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
+    -- Plug 'kyazdani42/nvim-web-devicons' -- for file icons
+    -- Plug 'kyazdani42/nvim-tree.lua'
+    --     vim.keymap.set('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
 
     -- skim/fzf
-    Plug('lotabout/skim', { dir = '~/.skim', ['do'] = './install' })
-    Plug('lotabout/skim.vim')
-        -- Requires neovim > 0.7
-        vim.api.nvim_create_user_command('Ag',
-            "call fzf#vim#ag_interactive(<q-args>, fzf#vim#with_preview('right:50%', 'alt-h'))",
-            { nargs = '*' }
-        )
-        vim.api.nvim_create_user_command('Rg',
-            "call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%', 'alt-h'))",
-            { nargs = '*' }
-        )
-        vim.api.nvim_create_user_command('Files',
-            "call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', 'alt-h'))",
-            { nargs = '*', complete = 'dir' }
-        )
-        vim.keymap.set('n', '<C-o>', '<cmd>Files<cr>')
+    Plug('nvim-telescope/telescope.nvim', {tag = '0.1.1'})
 
+    --Plug('junegunn/fzf', { ['do'] = { fzf#install() } })
+    -- Plug 'junegunn/fzf.vim'
+    --     vim.g.fzf_preview_window = {{'right:50%', 'alt-h'}}
+    --     vim.api.nvim_create_user_command('Files',
+    --         "call fzf#vim#files(<q-args>, <bang>0)",
+    --         { nargs = '*', complete = 'dir' }
+    --     )
+    --     vim.keymap.set('n', '<C-o>', '<cmd>Files<cr>')
+    -- Plug('lotabout/skim', { dir = '~/.skim', ['do'] = './install' })
+    -- Plug('lotabout/skim.vim')
+    --     -- Requires neovim > 0.7
+    --     vim.api.nvim_create_user_command('Ag',
+    --         "call fzf#vim#ag_interactive(<q-args>, fzf#vim#with_preview('right:50%', 'alt-h'))",
+    --         { nargs = '*' }
+    --     )
+    --     vim.api.nvim_create_user_command('Rg',
+    --         "call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%', 'alt-h'))",
+    --         { nargs = '*' }
+    --     )
+    --     vim.api.nvim_create_user_command('Files',
+    --         "call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', 'alt-h'))",
+    --         { nargs = '*', complete = 'dir' }
+    --     )
+    --     vim.keymap.set('n', '<C-o>', '<cmd>Files<cr>')
+    --
     -- LSP
     Plug 'neovim/nvim-lspconfig'
     -- Autocompletion
@@ -68,21 +78,22 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
     Plug 'nvim-lua/lsp-status.nvim'
 
     -- In-line hints
-    Plug 'simrat39/inlay-hints.nvim'
+    -- Plug 'simrat39/inlay-hints.nvim'
 
     -- Pretty debugging
-    Plug 'folke/trouble.nvim'
-        vim.keymap.set('n', '<C-t>', '<cmd>TroubleToggle<cr>')
-        vim.keymap.set('n', '<leader>tq', '<cmd>TroubleToggle quickfix<cr>')
-        vim.keymap.set('n', '<leader>tl', '<cmd>TroubleToggle loclist<cr>')
-        vim.keymap.set('n', '<leader>xw', '<cmd>TroubleToggle lsp_workspace_diagnostics<cr>')
-        vim.keymap.set('n', '<leader>xd', '<cmd>TroubleToggle lsp_document_diagnostics<cr>')
+    -- Plug 'folke/trouble.nvim'
+        -- vim.keymap.set('n', '<C-t>', '<cmd>TroubleToggle<cr>')
+        -- vim.keymap.set('n', '<leader>tq', '<cmd>TroubleToggle quickfix<cr>')
+        -- vim.keymap.set('n', '<leader>tl', '<cmd>TroubleToggle loclist<cr>')
+        -- vim.keymap.set('n', '<leader>xw', '<cmd>TroubleToggle lsp_workspace_diagnostics<cr>')
+        -- vim.keymap.set('n', '<leader>xd', '<cmd>TroubleToggle lsp_document_diagnostics<cr>')
         --nnoremap gR <cmd>TroubleToggle lsp_references<cr>
     Plug 'mfussenegger/nvim-dap'
         vim.keymap.set('n', '<leader>db', "<cmd>lua require'dap'.toggle_breakpoint()<cr>")
         vim.keymap.set('n', '<leader>dc', "<cmd>lua require'dap'.continue()<cr>")
         vim.keymap.set('n', '<leader>dso', "<cmd>lua require'dap'.step_over()<cr>")
         vim.keymap.set('n', '<leader>dsi', "<cmd>lua require'dap'.step_into()<cr>")
+    Plug 'rcarriga/nvim-dap-ui'
 
     -- Markdown
     Plug 'davidgranstrom/nvim-markdown-preview'
@@ -103,9 +114,17 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
         }
     }
 
+    -- Folding
+    Plug 'kevinhwang91/nvim-ufo'
+    Plug 'kevinhwang91/promise-async'
+
     -- Rust
     Plug('saecki/crates.nvim', {tag = '*'})
 
     -- Mail
     --Plug('soywod/himalaya', {rtp = 'vim'})
+
+    -- Note-taking
+    Plug 'vimwiki/vimwiki'
+    Plug 'tools-life/taskwiki'
 vim.call('plug#end')
